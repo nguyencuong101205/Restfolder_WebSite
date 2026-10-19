@@ -32,14 +32,14 @@ export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
             <button
               type="button"
               onClick={onOpenReserve}
-              className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-950 font-black uppercase tracking-wider text-xs rounded-sm transition-all shadow-md active:scale-95"
+              className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-950 font-black uppercase tracking-wider text-xs rounded-xl transition-all shadow-md active:scale-95"
             >
               Đặt Bàn Tiệc Ngay
             </button>
             <button
               type="button"
               onClick={scrollToTop}
-              className="p-2.5 rounded-sm bg-[#1c0a0c] border border-stone-700 hover:border-amber-400 text-amber-300 hover:text-white transition-colors"
+              className="p-2.5 rounded-xl bg-[#1c0a0c] border border-stone-700 hover:border-amber-400 text-amber-300 hover:text-white transition-colors"
               title="Về đầu trang"
             >
               <ArrowUp className="w-4 h-4" />

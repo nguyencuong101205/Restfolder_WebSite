@@ -52,7 +52,7 @@ export const DishDetailModal = ({ dish, onClose }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-[#18080a] border border-amber-500/50 rounded-sm shadow-2xl overflow-hidden animate-fade-scale flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-lg bg-[#18080a] border border-amber-500/40 rounded-2xl shadow-2xl overflow-hidden animate-fade-scale flex flex-col max-h-[90vh]"
       >
         
         {/* Header Close Button */}
@@ -76,12 +76,12 @@ export const DishDetailModal = ({ dish, onClose }) => {
           {/* Top Badges */}
           <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
             {dish.isBestSeller && (
-              <span className="shopee-btn shopee-btn--gold text-[10px] h-6 px-2.5 font-bold">
+              <span className="px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-stone-950 text-[10px] font-black shadow-md flex items-center gap-1">
                 ⭐ Bán Chạy
               </span>
             )}
             {dish.isChefSpecial && (
-              <span className="shopee-btn shopee-btn--primary text-[10px] h-6 px-2.5 font-bold">
+              <span className="px-2.5 py-1 rounded-full bg-gradient-to-r from-red-600 to-red-800 text-white border border-amber-400/60 text-[10px] font-bold shadow-md flex items-center gap-1">
                 👨‍🍳 Đặc Sản Quán
               </span>
             )}
@@ -253,7 +253,7 @@ export const DishDetailModal = ({ dish, onClose }) => {
           <button
             type="button"
             onClick={handleAdd}
-            className="flex items-center gap-2 px-6 py-2.5 shopee-btn shopee-btn--primary text-xs sm:text-sm font-bold shadow-lg h-10"
+            className="hl-hero-btn-primary flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-lg h-10 active:scale-95"
           >
             <Utensils className="w-4 h-4 text-white" />
             <span>Thêm Vào Bàn Ăn</span>

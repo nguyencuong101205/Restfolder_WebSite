@@ -139,7 +139,7 @@ export const CustomerMenuPage = ({
         </div>
 
         {/* Filter Bar Container */}
-        <div className="bg-[#140608] border border-[#3b1216] rounded-sm p-4 sm:p-5 shadow-lg mb-6">
+        <div className="bg-[#140608] border border-[#3b1216] rounded-2xl p-4 sm:p-5 shadow-lg mb-6">
           <CategoryTabs
             activeCategory={activeCategory}
             onSelectCategory={setActiveCategory}
@@ -175,7 +175,7 @@ export const CustomerMenuPage = ({
             <button
               type="button"
               onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-              className="shopee-btn gap-1 text-xs py-1 h-8"
+              className="hl-btn-action flex items-center gap-1.5 text-xs font-semibold py-1.5 px-3 rounded-xl"
               title="Chuyển chế độ xem"
             >
               {viewMode === 'grid' ? (

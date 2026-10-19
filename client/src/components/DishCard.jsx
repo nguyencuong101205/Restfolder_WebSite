@@ -11,20 +11,20 @@ export const DishCard = ({ dish, onOpenDetail }) => {
   return (
     <div
       onClick={() => onOpenDetail(dish)}
-      className="group flex flex-col justify-between bg-[#19090b] rounded-sm border border-[#3d1519] hover:border-amber-400 shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden cursor-pointer relative w-full"
+      className="group flex flex-col justify-between bg-gradient-to-b from-[#1a080b] to-[#120507] rounded-2xl border border-amber-500/30 hover:border-amber-400/80 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer relative w-full hover:-translate-y-1"
       style={{ willChange: 'transform', width: '100%' }}
     >
-      {/* Shopee Style 3D Ribbon: "Yêu Thích" on top-left */}
-      <div className="shopee-favourite-badge flex items-center gap-1">
-        <Check className="w-2.5 h-2.5 stroke-[3]" />
+      {/* Luxury Chinese Badge: "Yêu Thích" on top-left */}
+      <div className="absolute top-2.5 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-red-700/90 border border-amber-400/60 text-white text-[10px] font-bold shadow-md flex items-center gap-1 backdrop-blur-sm">
+        <Check className="w-2.5 h-2.5 stroke-[3] text-amber-300" />
         <span>Yêu thích</span>
       </div>
 
-      {/* Shopee Style Sale / Chef Special Tag on top-right */}
+      {/* Luxury Chef Special Tag on top-right */}
       {(dish.isChefSpecial || dish.isBestSeller) && (
-        <div className="shopee-sale-off">
-          <span className="text-[10px] font-black text-red-700 leading-tight">ĐẶC</span>
-          <span className="text-[9px] font-bold text-stone-900 leading-none">SẢN</span>
+        <div className="absolute top-2.5 right-2.5 z-10 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-stone-950 text-[10px] font-black shadow-md flex items-center gap-1">
+          <span>⭐</span>
+          <span>ĐẶC SẢN</span>
         </div>
       )}
 
@@ -41,11 +41,11 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a080b] via-transparent to-black/20 pointer-events-none"></div>
           
           {/* Chinese Hanzi & Pinyin on bottom-left of photo */}
           <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2">
-            <span className="font-calligraphy text-amber-300 text-xs sm:text-sm drop-shadow">
+            <span className="font-calligraphy text-amber-300 text-xs sm:text-sm drop-shadow-md">
               {dish.hanzi}
             </span>
             {dish.pinyin && (
@@ -116,7 +116,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             </div>
 
             {/* Origin / Category */}
-            <div className="text-[10px] text-stone-400 flex justify-between items-center pt-0.5 border-t border-[#2d1114]">
+            <div className="text-[10px] text-stone-400 flex justify-between items-center pt-1 border-t border-[#2d1114]">
               <span>{dish.isSpicy ? '🌶️ Vị Cay Tê' : '🥟 Vị Thanh Đạm'}</span>
               <span className="text-amber-400 font-medium">Hoàng Long Quán</span>
             </div>
@@ -124,7 +124,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
         </div>
       </div>
 
-      {/* Button: Shopee Style Rectangular .shopee-btn */}
+      {/* Button: Imperial Chinese Styled CTA */}
       <div className="p-3 sm:p-4 pt-0 mt-auto">
         <button
           type="button"
@@ -132,7 +132,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             e.stopPropagation();
             onOpenDetail(dish);
           }}
-          className="shopee-btn shopee-btn--primary w-full gap-1.5 text-xs font-bold h-9"
+          className="hl-hero-btn-primary w-full text-xs font-bold py-2 sm:py-2.5 rounded-xl shadow-md active:scale-95"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           <span>Đặt Món Ngay</span>
