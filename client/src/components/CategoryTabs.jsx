@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ChevronDown, Flame, Star, X, QrCode } from 'lucide-react';
+import { Search, ChevronDown, ChevronLeft, ChevronRight, Flame, Star, X, QrCode } from 'lucide-react';
 import { useTable } from '../context/TableContext';
 
 export const CATEGORIES = [
@@ -21,7 +21,10 @@ export const CategoryTabs = ({
   onlyBestSeller,
   onToggleBestSeller,
   sortByPrice,
-  onSortChange
+  onSortChange,
+  currentPage = 1,
+  totalPages = 1,
+  onPageChange
 }) => {
   const { tableNumber, setIsQRModalOpen } = useTable();
 
@@ -123,6 +126,35 @@ export const CategoryTabs = ({
             <span>Cay Tứ Xuyên</span>
           </button>
         </div>
+
+        {/* Shopee Style Mini Page Controller (.home-filter__page) */}
+        {totalPages > 1 && (
+          <div className="home-filter__page ml-auto flex items-center">
+            <span className="home-filter__page-num text-xs sm:text-sm">
+              <span className="home-filter__page-current">{currentPage}</span>/{totalPages}
+            </span>
+            <div className="home-filter__page-control">
+              <button
+                type="button"
+                onClick={() => onPageChange && onPageChange(currentPage - 1)}
+                disabled={currentPage <= 1}
+                className="home-filter__page-btn"
+                title="Trang trước"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onPageChange && onPageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                className="home-filter__page-btn"
+                title="Trang kế tiếp"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

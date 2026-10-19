@@ -46,43 +46,95 @@ export const DishDetailModal = ({ dish, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur">
-      <div className="relative w-full max-w-lg bg-[#1a0b0d] border border-amber-500/40 rounded-2xl shadow-2xl overflow-hidden animate-fade-scale flex flex-col max-h-[90vh]">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-lg bg-[#18080a] border border-amber-500/50 rounded-sm shadow-2xl overflow-hidden animate-fade-scale flex flex-col max-h-[90vh]"
+      >
         
         {/* Header Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-stone-300 hover:text-white flex items-center justify-center transition-all border border-amber-500/20"
+          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-red-700 text-stone-200 hover:text-white flex items-center justify-center transition-all border border-amber-500/30 shadow-lg"
+          title="Đóng"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 stroke-[2.5]" />
         </button>
 
-        {/* Modal Image */}
-        <div className="relative h-52 sm:h-56 w-full flex-shrink-0 bg-stone-900">
+        {/* Modal Image & Title Banner */}
+        <div className="relative h-56 sm:h-64 w-full flex-shrink-0 bg-stone-900 overflow-hidden">
           <img
             src={dish.image}
             alt={dish.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a0b0d] via-transparent to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#18080a] via-black/40 to-black/30"></div>
           
-          <div className="absolute bottom-3 left-4 right-4">
-            <span className="font-calligraphy text-amber-300 text-lg sm:text-xl drop-shadow">
-              {dish.hanzi}
-            </span>
-            <h2 className="text-lg sm:text-xl font-bold text-white leading-tight">
+          {/* Top Badges */}
+          <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+            {dish.isBestSeller && (
+              <span className="shopee-btn shopee-btn--gold text-[10px] h-6 px-2.5 font-bold">
+                ⭐ Bán Chạy
+              </span>
+            )}
+            {dish.isChefSpecial && (
+              <span className="shopee-btn shopee-btn--primary text-[10px] h-6 px-2.5 font-bold">
+                👨‍🍳 Đặc Sản Quán
+              </span>
+            )}
+          </div>
+
+          {/* Dish Names Overlay on Image */}
+          <div className="absolute bottom-3 left-4 right-4 z-10">
+            <div className="flex items-baseline gap-2">
+              <span className="font-calligraphy text-amber-300 text-xl sm:text-2xl drop-shadow-md">
+                {dish.hanzi}
+              </span>
+              {dish.pinyin && (
+                <span className="text-xs text-amber-200/80 italic font-mono">
+                  ({dish.pinyin})
+                </span>
+              )}
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-white leading-tight drop-shadow mt-0.5">
               {dish.name}
             </h2>
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className="text-lg sm:text-xl font-black text-red-500">
+                {formatVND(dish.price)}
+              </span>
+              <span className="text-xs text-stone-400 line-through">
+                {formatVND(Math.round(dish.price * 1.15 / 1000) * 1000)}
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-900/70 text-red-200 font-bold ml-1 border border-red-700/50">
+                Ưu đãi -15%
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Scrollable Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-stone-200">
+        {/* Scrollable Body: Full Dish Information */}
+        <div className="p-4 sm:p-5 overflow-y-auto space-y-4 text-stone-200">
           
-          {/* Description */}
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed bg-[#240e11] p-3 rounded-xl border border-[#44181c]">
-            {dish.description}
-          </p>
+          {/* Detailed Description */}
+          <div className="bg-[#200a0d] p-3.5 rounded-sm border border-[#44181c] shadow-inner space-y-1.5">
+            <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block">
+              📖 Thông Tin & Hương Vị Món Ăn
+            </span>
+            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+              {dish.description}
+            </p>
+            <div className="flex items-center gap-3 pt-2 text-[11px] text-stone-400 border-t border-[#3b1216]">
+              <span>🥢 Phục vụ nóng tại bàn</span>
+              <span>•</span>
+              <span>{dish.inStock ? '🟢 Còn hàng' : '🔴 Tạm hết'}</span>
+              <span>•</span>
+              <span>Hoàng Long Quán</span>
+            </div>
+          </div>
 
           {/* Spice Level Selection */}
           <div>
@@ -201,10 +253,10 @@ export const DishDetailModal = ({ dish, onClose }) => {
           <button
             type="button"
             onClick={handleAdd}
-            className="flex items-center gap-2 px-5 py-2.5 btn-chinese-primary rounded-xl text-sm font-bold shadow-lg"
+            className="flex items-center gap-2 px-6 py-2.5 shopee-btn shopee-btn--primary text-xs sm:text-sm font-bold shadow-lg h-10"
           >
-            <Utensils className="w-4 h-4 text-amber-300" />
-            <span>Thêm Vào Thực Đơn</span>
+            <Utensils className="w-4 h-4 text-white" />
+            <span>Thêm Vào Bàn Ăn</span>
           </button>
         </div>
 

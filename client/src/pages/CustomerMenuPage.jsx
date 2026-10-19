@@ -6,7 +6,9 @@ import { CategoryTabs } from '../components/CategoryTabs';
 import { DishCard } from '../components/DishCard';
 import { DishListItem } from '../components/DishListItem';
 import { DishDetailModal } from '../components/DishDetailModal';
-import { ChevronRight, LayoutGrid, LayoutList } from 'lucide-react';
+import { ChevronRight, ChevronLeft, LayoutGrid, LayoutList } from 'lucide-react';
+
+const ITEMS_PER_PAGE = 8; // Exactly 4 dishes per row x 2 rows per page
 
 export const CustomerMenuPage = () => {
   const { tableNumber } = useTable();
@@ -21,10 +23,12 @@ export const CustomerMenuPage = () => {
   const [sortByPrice, setSortByPrice] = useState('default'); // 'default' | 'asc' | 'desc'
   const [selectedDish, setSelectedDish] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // Default to grid
+  const [currentPage, setCurrentPage] = useState(1);
 
   const formatVND = (num) => new Intl.NumberFormat('vi-VN').format(num) + ' đ';
 
   useEffect(() => {
+    setCurrentPage(1); // Reset to page 1 on filter changes
     fetchDishes();
   }, [activeCategory, searchQuery, onlySpicy, onlyBestSeller]);
 
@@ -55,6 +59,7 @@ export const CustomerMenuPage = () => {
 
   const handleSortChange = (sortType) => {
     setSortByPrice(sortType);
+    setCurrentPage(1);
     let list = [...dishes];
     if (sortType === 'asc') {
       list.sort((a, b) => a.price - b.price);
@@ -65,6 +70,21 @@ export const CustomerMenuPage = () => {
       return;
     }
     setDishes(list);
+  };
+
+  // Pagination Calculations
+  const totalPages = Math.max(1, Math.ceil(dishes.length / ITEMS_PER_PAGE));
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedDishes = dishes.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      const menuSection = document.getElementById('menu-dish-list');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   };
 
   return (
@@ -84,12 +104,15 @@ export const CustomerMenuPage = () => {
             onToggleBestSeller={() => setOnlyBestSeller(!onlyBestSeller)}
             sortByPrice={sortByPrice}
             onSortChange={handleSortChange}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
           />
         </div>
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-28">
+      <main id="menu-dish-list" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-28">
         
         {/* Counter & View Switcher Bar */}
         <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#3b1216]">
@@ -98,11 +121,14 @@ export const CustomerMenuPage = () => {
               Thực Đơn Hoàng Long Quán ({dishes.length} món)
             </span>
             <span className="text-xs text-stone-400 hidden sm:inline">
+              · Trang {currentPage}/{totalPages}
+            </span>
+            <span className="text-xs text-stone-400 hidden sm:inline">
               · Bàn {tableNumber}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
               className="shopee-btn gap-1 text-xs py-1 h-8"
@@ -116,7 +142,7 @@ export const CustomerMenuPage = () => {
               ) : (
                 <>
                   <LayoutGrid className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Dạng Lưới</span>
+                  <span>Dạng Lưới (4 món/hàng)</span>
                 </>
               )}
             </button>
@@ -125,7 +151,7 @@ export const CustomerMenuPage = () => {
 
         {/* Product Grid / List */}
         {loading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="aspect-[3/4] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
             ))}
@@ -139,9 +165,9 @@ export const CustomerMenuPage = () => {
             </p>
           </div>
         ) : viewMode === 'grid' ? (
-          /* SHOPEE STYLE PRODUCT GRID */
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5">
-            {dishes.map((dish) => (
+          /* SHOPEE STYLE PRODUCT GRID: STRICTLY 4 DISHES PER ROW */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-5">
+            {paginatedDishes.map((dish) => (
               <DishCard
                 key={dish.id}
                 dish={dish}
@@ -152,13 +178,60 @@ export const CustomerMenuPage = () => {
         ) : (
           /* LIST VIEW */
           <div className="space-y-3">
-            {dishes.map((dish) => (
+            {paginatedDishes.map((dish) => (
               <DishListItem
                 key={dish.id}
                 dish={dish}
                 onOpenDetail={(dishToView) => setSelectedDish(dishToView)}
               />
             ))}
+          </div>
+        )}
+
+        {/* Shopee Style Bottom Pagination */}
+        {totalPages > 1 && (
+          <div className="flex flex-col items-center justify-center mt-10 space-y-2.5">
+            <div className="shopee-pagination">
+              {/* Previous page button */}
+              <button
+                type="button"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage <= 1}
+                className="shopee-pagination-btn"
+                title="Trang trước"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              {/* Page Number Buttons */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <button
+                  key={pageNum}
+                  type="button"
+                  onClick={() => handlePageChange(pageNum)}
+                  className={`shopee-pagination-btn ${
+                    currentPage === pageNum ? 'shopee-pagination-btn--active' : ''
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
+
+              {/* Next page button */}
+              <button
+                type="button"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                className="shopee-pagination-btn"
+                title="Trang kế tiếp"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <span className="text-xs text-stone-400 font-medium">
+              Đang hiển thị {startIndex + 1} - {Math.min(startIndex + ITEMS_PER_PAGE, dishes.length)} trong tổng số {dishes.length} món ăn
+            </span>
           </div>
         )}
 
