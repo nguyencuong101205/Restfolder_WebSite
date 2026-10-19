@@ -132,7 +132,7 @@ export const DishDetailModal = ({ dish, onClose }) => {
               <span>•</span>
               <span>{dish.inStock ? '🟢 Còn hàng' : '🔴 Tạm hết'}</span>
               <span>•</span>
-              <span>Hoàng Long Quán</span>
+              <span className="text-[#c5a880]">Man Ho Chinese Restaurant</span>
             </div>
           </div>
 

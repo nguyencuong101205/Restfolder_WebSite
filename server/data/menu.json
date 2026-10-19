@@ -303,5 +303,125 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": []
+  },
+  {
+    "id": "dish-manho-01",
+    "name": "Sứa Biển Dầu Mè & Xốt X.O Thượng Hạng (Jelly Fish With Sesame Oil And X.O Sauce)",
+    "hanzi": "XO酱麻油海蜇丝",
+    "pinyin": "XO Jiàng Máyóu Hǎizhésī",
+    "category": "chef_special",
+    "price": 280000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/jelly-fish-with-sesame-oil-and-x.jpg?width=1000&height=500",
+    "description": "Sứa biển hoa giòn sần sật ướp dầu mè thơm phức kết hợp xốt X.O thượng hạng từ sò điệp khô, tôm nõn và ớt sừng đặc trưng ẩm thực Quảng Đông truyền thống.",
+    "isSpicy": true,
+    "spiceLevel": 1,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm xốt X.O sò điệp thượng hạng", "price": 45000 }
+    ]
+  },
+  {
+    "id": "dish-manho-02",
+    "name": "Hải Sâm Kanto Hầm Xốt Bào Ngư (Braised Kanto Sea Cucumber In Superior Abalone Sauce)",
+    "hanzi": "鲍汁关东辽参",
+    "pinyin": "Bàozhī Guāndōng Liáocān",
+    "category": "soup_abalone",
+    "price": 1250000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/braised-kanto-sea-cucumber-in-superior-abalone-sauce.jpg?width=1000&height=500",
+    "description": "Hải sâm Kanto Nhật Bản quý hiếm om liu riu cùng xốt bào ngư hảo hạng cô đặc trong 36 giờ, giàu dưỡng chất và đậm đà phong vị yến tiệc cung đình.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm lát bào ngư Nam Phi", "price": 250000 }
+    ]
+  },
+  {
+    "id": "dish-manho-03",
+    "name": "Xá Xíu Heo Iberico Mật Ong Thượng Hạng (Honey Glazed Premium Barbeque Iberico Pork)",
+    "hanzi": "蜜汁顶级黑豚叉烧",
+    "pinyin": "Mìzhī Dǐngjí Hēitún Chāshāo",
+    "category": "roast",
+    "price": 420000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/honey-glazed-premium-barbeque-iberico-pork.jpg?width=1000&height=500",
+    "description": "Thịt heo Iberico Tây Ban Nha nướng than củi mọng nước, áo lớp mật ong hoa rừng vàng óng thơm nức và ngọt thanh tao đặc trưng của bếp trưởng Man Ho.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Bánh bao chiên ăn kèm (4 cái)", "price": 35000 }
+    ]
+  },
+  {
+    "id": "dish-manho-04",
+    "name": "Phật Nhảy Tường Yến Sào Thượng Hạng (Bird’s Nest Buddha Jumps Over The Wall)",
+    "hanzi": "官燕佛跳墙",
+    "pinyin": "Guānyàn Fótiàoqiáng",
+    "category": "soup_abalone",
+    "price": 1680000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/bird-s-nest-buddha-jumps-over-the-wall.jpg?width=1000&height=500",
+    "description": "Tuyệt phẩm ẩm thực Quảng Đông: tổ yến thượng hạng chưng cùng bào ngư nguyên con, hải sâm Kanto, sò điệp khô và nấm tùng nhung trong nước dùng hầm 48 giờ.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-manho-05",
+    "name": "Gà Quý Phi Hấp Thảo Mộc Man Ho (Man Ho Poached Noble Consort Chicken)",
+    "hanzi": "万豪贵妃浸走地鸡",
+    "pinyin": "Wànháo Guìfēi Jìn Zǒudìjī",
+    "category": "meat",
+    "price": 450000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/man-ho-poached-noble-consort-chicken.jpg?width=1000&height=500",
+    "description": "Gà thảo mộc thả vườn da căng mọng vàng óng, ngâm ủ trong nước dùng bí truyền giữ trọn từng thớ thịt mềm ngọt thanh tao, chấm dầu gừng hành tươi.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-manho-06",
+    "name": "Chân Giò Phúc Sơn Ướp Lạnh (Chilled Sliced Fu Shan Pork Knuckle)",
+    "hanzi": "冰镇佛山扎蹄",
+    "pinyin": "Bīngzhèn Fóshān Zhātí",
+    "category": "chef_special",
+    "price": 320000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/chilled-sliced-fu-shan-pork-knuckle.jpg?width=1000&height=500",
+    "description": "Món ăn khai vị lừng danh Quảng Đông: chân giò rút xương cuộn gân giòn sần sật, ướp ngũ vị hương và ủ đá lạnh, thái lát mỏng chấm giấm tỏi ớt.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": false,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-manho-07",
+    "name": "Gà Da Giòn Đặc Biệt Man Ho (Man Ho Special Crispy Chicken)",
+    "hanzi": "万豪招牌当红炸子鸡",
+    "pinyin": "Wànháo Zhāopái Dānghóng Zhàzǐjī",
+    "category": "meat",
+    "price": 420000,
+    "image": "https://mds-assets.marriott.com/cdn-cgi/image/f=auto/cms-platform-for-marriott/hanjw-chinese-restaurant-wong-chi-ming/site-images/migrated-images/man-ho-special-crispy-chicken.jpg?width=1000&height=500",
+    "description": "Kỹ thuật dội dầu đỉnh cao của bếp trưởng Man Ho tạo nên lớp da gà giòn rụm màu cánh gián như thủy tinh, thịt bên trong mềm mọng thơm ngọt khó quên.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Bánh phồng tôm giòn ăn kèm", "price": 20000 }
+    ]
   }
 ]

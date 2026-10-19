@@ -3,12 +3,15 @@ import { Search, ChevronDown, ChevronLeft, ChevronRight, Flame, Star, X, QrCode 
 import { useTable } from '../context/TableContext';
 
 export const CATEGORIES = [
-  { id: 'all', label: 'Tất Cả Món' },
-  { id: 'dimsum', label: 'Dim Sum' },
-  { id: 'roast', label: 'Món Quay' },
-  { id: 'hotpot', label: 'Lẩu Tứ Xuyên' },
-  { id: 'noodles', label: 'Mì Kéo' },
-  { id: 'tea_dessert', label: 'Trà & Tráng Miệng' }
+  { id: 'all', label: 'All Menus / Tất Cả' },
+  { id: 'chef_special', label: 'Chef’s Recommendations' },
+  { id: 'dimsum', label: 'Handmade Dim Sum' },
+  { id: 'roast', label: 'BBQ & Roast (Vịt Quay)' },
+  { id: 'soup_abalone', label: 'Abalone & Bird’s Nest' },
+  { id: 'meat', label: 'Meat & Poultry' },
+  { id: 'hotpot', label: 'Hotpot & Broth' },
+  { id: 'noodles', label: 'Noodles & Congee' },
+  { id: 'tea_dessert', label: 'Desserts & Tea' }
 ];
 
 export const CategoryTabs = ({

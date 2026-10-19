@@ -442,3 +442,14 @@
     box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
   }
 }
+
+@keyframes subtleZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 25s ease-in-out infinite alternate;
+}
+

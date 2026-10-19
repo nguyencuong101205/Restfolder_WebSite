@@ -118,7 +118,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             {/* Origin / Category */}
             <div className="text-[10px] text-stone-400 flex justify-between items-center pt-0.5 border-t border-[#2d1114]">
               <span>{dish.isSpicy ? '🌶️ Vị Cay Tê' : '🥟 Vị Thanh Đạm'}</span>
-              <span className="text-amber-400 font-medium">Hoàng Long Quán</span>
+              <span className="text-[#c5a880] font-medium">Man Ho Hanoi</span>
             </div>
           </div>
         </div>
