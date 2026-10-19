@@ -908,5 +908,149 @@
   animation: hlPulseGlow 3s ease-in-out infinite !important;
 }
 
+/* ==========================================================================
+   THE BAND STYLE HERO SLIDER (AUTO CAROUSEL 3000ms)
+   ========================================================================== */
+.hl-band-slider {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: #0c0405;
+}
+
+@media (max-width: 768px) {
+  .hl-band-slider {
+    height: 460px;
+  }
+}
+
+.hl-band-slider-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hl-band-slider-item {
+  position: relative;
+  height: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.hl-band-slider-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hl-band-text-content {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  z-index: 10;
+}
+
+/* Arrows */
+.hl-band-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 64px;
+  background: rgba(18, 5, 7, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #f7d774;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.25s ease;
+  opacity: 0;
+}
+
+.hl-band-slider:hover .hl-band-arrow {
+  opacity: 1;
+}
+
+.hl-band-arrow:hover {
+  background: rgba(185, 28, 28, 0.9);
+  border-color: #ffd700;
+  color: #fff;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.hl-band-arrow--left {
+  left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.hl-band-arrow--right {
+  right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .hl-band-arrow {
+    opacity: 0.85;
+    width: 40px;
+    height: 50px;
+  }
+}
+
+/* Indicators (Chấm tròn vị trí chuẩn The Band) */
+.hl-band-indicator-container {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+}
+
+.hl-band-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hl-band-indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.hl-band-indicator--active {
+  background: #c8102e !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 10px rgba(200, 16, 46, 0.8), 0 0 6px #ffd700 !important;
+  transform: scale(1.25) !important;
+  width: 28px !important;
+  border-radius: 9999px !important;
+}
+
+
 
 
