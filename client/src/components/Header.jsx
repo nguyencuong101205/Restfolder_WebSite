@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTable } from '../context/TableContext';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { ChineseSeal } from './ChineseSeal';
-import { QrCode, ShoppingBag, Bell, ChefHat, LogIn, LogOut, Flame, Clock, CheckCircle, User, Menu, X } from 'lucide-react';
+import { QrCode, ShoppingBag, Bell, ChefHat, LogIn, LogOut, Flame, Clock, CheckCircle, User, Menu, X, MapPin } from 'lucide-react';
 
 export const Header = ({ onOpenAuth, onOpenKitchen, onOpenTableManager, currentView }) => {
   const { tableNumber, setIsQRModalOpen, activeOrder, setIsOrderTrackerOpen, setIsCallStaffModalOpen } = useTable();
   const { totalItemsCount, total, setIsCartOpen } = useCart();
   const { user, logout, isStaff, isAdmin } = useAuth();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const formatVND = (num) => new Intl.NumberFormat('vi-VN').format(num) + ' đ';
 
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 bg-[#140608]/95 backdrop-blur-md border-b border-[#3b1216] shadow-xl">
-      {/* Michelin Style Clean Top Bar */}
+    <header className="sticky top-0 z-40 bg-[#140608]/98 backdrop-blur-md border-b border-[#3b1216] shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 sm:h-20 flex items-center justify-between gap-4">
           
-          {/* Left: Michelin-style Brand Typography */}
+          {/* Left: Brand Logo (Michelin Guide style: HOÀNG LONG QUÁN 皇龍樓) */}
           <div className="flex items-center gap-3">
             <ChineseSeal text="皇龍" subtext="御膳" className="hidden sm:inline-flex" />
-            <div className="flex items-baseline cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <span className="text-red-500 font-extrabold tracking-tight text-xl sm:text-2xl font-sans uppercase">
+            <div
+              className="flex items-baseline cursor-pointer group"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <span className="text-red-500 font-extrabold tracking-tight text-xl sm:text-2xl font-sans uppercase group-hover:text-red-400 transition-colors">
                 HOÀNG LONG
               </span>
-              <span className="text-amber-400 font-bold tracking-widest text-lg sm:text-2xl ml-1.5 uppercase font-decorative">
+              <span className="text-amber-400 font-bold tracking-widest text-lg sm:text-2xl ml-1.5 uppercase font-decorative group-hover:text-amber-300 transition-colors">
                 QUÁN
               </span>
               <span className="font-calligraphy text-amber-300/80 text-sm sm:text-base ml-2 hidden md:inline">
@@ -35,55 +50,42 @@ export const Header = ({ onOpenAuth, onOpenKitchen, onOpenTableManager, currentV
             </div>
           </div>
 
-          {/* Right: Michelin-style Nav Tabs */}
-          <div className="hidden lg:flex items-center gap-2 text-xs sm:text-sm font-semibold">
+          {/* Right: Michelin-style Navigation links & User/Menu button */}
+          <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-semibold">
             
-            {/* Tab: Thực Đơn (Active Pill) */}
+            {/* Nav Pill 1: Restaurants -> Thực Đơn (Active rounded border pill) */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="px-4 py-2 rounded-full border border-amber-400/80 text-amber-200 bg-red-950/40 shadow-sm hover:bg-red-900/60 transition-all"
+              className="px-4 py-2 rounded-full border border-amber-400/90 text-amber-200 bg-red-950/50 hover:bg-red-900/60 transition-all font-bold shadow-sm"
             >
               Thực Đơn
             </button>
 
-            {/* Tab: Bàn Quét QR */}
+            {/* Nav Pill 2: Hotels -> Bàn Quét QR */}
             <button
               onClick={() => setIsQRModalOpen(true)}
-              className="px-3.5 py-2 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1.5"
+              className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all"
             >
               <QrCode className="w-4 h-4 text-amber-400" />
               <span>Bàn {tableNumber}</span>
             </button>
 
-            {/* Tab: Trạng thái đơn (nếu có đơn đang xử lý) */}
-            {activeOrder && (
-              <button
-                onClick={() => setIsOrderTrackerOpen(true)}
-                className="px-3.5 py-2 rounded-full bg-red-950/80 border border-red-500/60 text-red-200 hover:bg-red-900 transition-all flex items-center gap-1.5 live-pulse"
-              >
-                {activeOrder.status === 'pending' && <Clock className="w-3.5 h-3.5 text-amber-400 animate-spin" />}
-                {activeOrder.status === 'preparing' && <Flame className="w-3.5 h-3.5 text-red-400 animate-bounce" />}
-                {activeOrder.status === 'served' && <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />}
-                <span>Đơn Bếp (#{activeOrder.id.slice(-4)})</span>
-              </button>
-            )}
-
-            {/* Tab: Gọi Phục Vụ */}
+            {/* Nav Pill 3: Magazine -> Gọi Phục Vụ */}
             <button
               onClick={() => setIsCallStaffModalOpen(true)}
-              className="px-3.5 py-2 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1.5"
+              className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all"
             >
               <Bell className="w-4 h-4 text-amber-400" />
               <span>Gọi Bàn</span>
             </button>
 
-            {/* Tab: Giỏ Món (Badge count) */}
+            {/* Nav Pill 4: My Lists -> Giỏ Món */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-4 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-600 hover:to-red-800 border border-amber-400/60 text-white font-bold transition-all flex items-center gap-2 shadow-lg active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full bg-gradient-to-r from-red-700 to-red-900 hover:from-red-600 hover:to-red-800 border border-amber-400/60 text-white font-bold transition-all shadow-md active:scale-95"
             >
               <ShoppingBag className="w-4 h-4 text-amber-300" />
-              <span>Giỏ Món</span>
+              <span className="hidden sm:inline">Giỏ Món</span>
               {totalItemsCount > 0 && (
                 <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center">
                   {totalItemsCount}
@@ -91,126 +93,166 @@ export const Header = ({ onOpenAuth, onOpenKitchen, onOpenTableManager, currentV
               )}
             </button>
 
-            {/* User & Menu Dropdown Pill */}
-            <div className="flex items-center pl-2 ml-1 border-l border-stone-800">
-              {isStaff ? (
-                <div className="flex items-center gap-1.5 bg-[#250d10] p-1.5 rounded-full border border-amber-500/40">
-                  <button
-                    onClick={onOpenKitchen}
-                    className="flex items-center gap-1 px-3 py-1 bg-amber-500 text-stone-950 font-bold rounded-full text-xs"
-                    title="Màn hình Bếp KDS"
-                  >
-                    <ChefHat className="w-3.5 h-3.5" />
-                    <span>{isAdmin ? 'Quản Lý' : 'Bếp KDS'}</span>
-                  </button>
-                  <button
-                    onClick={logout}
-                    className="p-1.5 text-stone-400 hover:text-red-300 rounded-full"
-                    title="Đăng xuất"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                  </button>
+            {/* Rightmost: User Avatar + Hamburger Button [ 👤 ☰ ] (Michelin style) */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`flex items-center gap-2 p-2 sm:px-3 sm:py-2 rounded-full border transition-all ${
+                  isDropdownOpen
+                    ? 'bg-amber-400 text-stone-950 border-amber-300 shadow-lg'
+                    : 'bg-[#1c0a0c] hover:bg-[#280f12] border-stone-700/80 text-stone-300 hover:border-amber-400/60 hover:text-white'
+                }`}
+                title="Tài khoản & Tiện ích"
+              >
+                <div className="w-6 h-6 rounded-full bg-stone-800 flex items-center justify-center">
+                  <User className={`w-3.5 h-3.5 ${isDropdownOpen ? 'text-stone-950' : 'text-amber-400'}`} />
                 </div>
-              ) : (
-                <button
-                  onClick={onOpenAuth}
-                  className="flex items-center gap-1.5 p-2 rounded-full bg-[#1c0a0c] hover:bg-[#2b1013] border border-stone-700/60 text-stone-300 hover:text-amber-200 transition-all"
-                  title="Đăng nhập Bếp / Quản lý"
-                >
-                  <User className="w-4 h-4 text-amber-400" />
-                  <Menu className="w-4 h-4 text-stone-400" />
-                </button>
+                <Menu className="w-4 h-4" />
+              </button>
+
+              {/* Michelin Style Dropdown Menu (Ảnh 2) */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-3 w-64 sm:w-72 bg-[#1c0a0d] border border-amber-500/40 rounded-2xl shadow-2xl overflow-hidden py-2 z-50 text-left animate-fade-scale text-xs sm:text-sm">
+                  
+                  {/* Auth header */}
+                  <div className="px-4 py-3 border-b border-[#3b1519]">
+                    {isStaff ? (
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-bold text-white leading-tight">{user?.name}</p>
+                          <span className="text-[10px] text-amber-400 font-mono uppercase">{user?.role}</span>
+                        </div>
+                        <button
+                          onClick={() => {
+                            logout();
+                            setIsDropdownOpen(false);
+                          }}
+                          className="p-1.5 text-stone-400 hover:text-red-400 rounded-lg hover:bg-stone-900"
+                          title="Đăng xuất"
+                        >
+                          <LogOut className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 text-stone-300">
+                        <button
+                          onClick={() => {
+                            onOpenAuth();
+                            setIsDropdownOpen(false);
+                          }}
+                          className="font-bold text-amber-300 hover:underline"
+                        >
+                          Đăng Nhập
+                        </button>
+                        <span>|</span>
+                        <button
+                          onClick={() => {
+                            onOpenAuth();
+                            setIsDropdownOpen(false);
+                          }}
+                          className="hover:text-white hover:underline"
+                        >
+                          Quản Lý / Bếp
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Active Order status if any */}
+                  {activeOrder && (
+                    <div className="px-4 py-2 bg-red-950/60 border-b border-[#3b1519]">
+                      <button
+                        onClick={() => {
+                          setIsOrderTrackerOpen(true);
+                          setIsDropdownOpen(false);
+                        }}
+                        className="w-full text-left font-bold text-amber-200 flex items-center justify-between text-xs"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                          <span>Đơn Bếp #{activeOrder.id.slice(-4)}</span>
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-red-900 text-red-200">
+                          {activeOrder.status === 'pending' ? 'Chờ nhận' : 'Đang nấu'}
+                        </span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Menu Items (matching Ảnh 2 list) */}
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <span>Thực Đơn Nhà Hàng (Menu)</span>
+                      <span className="text-[10px] text-amber-400 font-calligraphy">点心</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setIsQRModalOpen(true);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <span>Đổi Số Bàn & Quét QR</span>
+                      <span className="text-[11px] font-bold text-amber-300">Bàn {tableNumber}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setIsCallStaffModalOpen(true);
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <span>Gọi Tiểu Nhị Phục Vụ</span>
+                      <Bell className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        if (isStaff) onOpenKitchen();
+                        else onOpenAuth();
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <span>Màn Hình Bếp KDS</span>
+                      <ChefHat className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+
+                    {isAdmin && (
+                      <button
+                        onClick={() => {
+                          onOpenTableManager();
+                          setIsDropdownOpen(false);
+                        }}
+                        className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                      >
+                        <span>In Mã QR Toàn Bộ Bàn</span>
+                        <QrCode className="w-3.5 h-3.5 text-amber-400" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Bottom Footer Item (matching Ảnh 2: Vietnam - English - USD) */}
+                  <div className="pt-2 px-4 py-2.5 border-t border-[#3b1519] flex items-center gap-1.5 text-[11px] text-stone-400">
+                    <MapPin className="w-3.5 h-3.5 text-red-500" />
+                    <span>Bàn {tableNumber} · Hoàng Long Quán (TP. HCM)</span>
+                  </div>
+
+                </div>
               )}
             </div>
 
-          </div>
-
-          {/* Right Mobile Icons */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button
-              onClick={() => setIsQRModalOpen(true)}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#240e11] border border-amber-500/40 text-xs text-amber-200"
-            >
-              <QrCode className="w-3.5 h-3.5 text-amber-400" />
-              <span>Bàn {tableNumber}</span>
-            </button>
-
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-2 rounded-full bg-red-800 text-white border border-amber-400/50"
-            >
-              <ShoppingBag className="w-4 h-4 text-amber-300" />
-              {totalItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-400 text-stone-950 text-[10px] font-black flex items-center justify-center">
-                  {totalItemsCount}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-full bg-[#200c0e] border border-stone-700 text-stone-300"
-            >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
           </div>
 
         </div>
-
-        {/* Mobile Dropdown Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden py-3 px-2 border-t border-[#331114] space-y-2 bg-[#170608]">
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <button
-                onClick={() => {
-                  setIsCallStaffModalOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="p-2 rounded-xl bg-[#240d10] border border-[#44181c] text-stone-200 flex items-center gap-2"
-              >
-                <Bell className="w-4 h-4 text-amber-400" />
-                <span>Gọi Phục Vụ</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsQRModalOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="p-2 rounded-xl bg-[#240d10] border border-[#44181c] text-stone-200 flex items-center gap-2"
-              >
-                <QrCode className="w-4 h-4 text-amber-400" />
-                <span>Đổi Số Bàn</span>
-              </button>
-            </div>
-
-            {activeOrder && (
-              <button
-                onClick={() => {
-                  setIsOrderTrackerOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full p-2 rounded-xl bg-red-950/80 border border-red-500/50 text-red-200 text-xs font-bold flex items-center justify-between"
-              >
-                <span>Xem Tiến Độ Đơn Bếp (#{activeOrder.id.slice(-4)})</span>
-                <Clock className="w-4 h-4 text-amber-400" />
-              </button>
-            )}
-
-            <button
-              onClick={() => {
-                if (isStaff) onOpenKitchen();
-                else onOpenAuth();
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full p-2.5 rounded-xl bg-stone-900 border border-stone-700 text-stone-300 text-xs font-semibold flex items-center justify-center gap-2"
-            >
-              <ChefHat className="w-4 h-4 text-amber-400" />
-              <span>{isStaff ? 'Vào Màn Hình Bếp KDS' : 'Đăng Nhập Quản Lý / Bếp'}</span>
-            </button>
-          </div>
-        )}
-
       </div>
     </header>
   );

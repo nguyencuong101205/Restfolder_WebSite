@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Plus, Check, Flame, Star, Award, Layers } from 'lucide-react';
+import { Heart, Plus, Check, Layers, Star, Award, Flame } from 'lucide-react';
 
 export const DishCard = ({ dish, onOpenDetail }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -8,10 +8,10 @@ export const DishCard = ({ dish, onOpenDetail }) => {
   return (
     <div
       onClick={() => onOpenDetail(dish)}
-      className="michelin-card group flex flex-col justify-between bg-[#19090b] rounded-2xl border border-stone-800 hover:border-amber-400/70 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
+      className="group flex flex-col justify-between bg-[#19090b] rounded-2xl border border-stone-800/90 hover:border-amber-400/80 shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer relative"
     >
       <div>
-        {/* Michelin Style Image Box */}
+        {/* Card Image Container (Ảnh 1) */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-950">
           <img
             src={dish.image}
@@ -21,7 +21,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
 
-          {/* Top-Right: Floating Circle Heart Button (Michelin style) */}
+          {/* Top-Right: Floating Circle Heart Button (Ảnh 1) */}
           <button
             type="button"
             onClick={(e) => {
@@ -38,18 +38,18 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             />
           </button>
 
-          {/* Bottom-Left: Michelin "Reserve a table" style pill */}
+          {/* Bottom-Left: White Pill "✓ Gọi món tại bàn" (Ảnh 1: Reserve a table) */}
           <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1 bg-white/95 text-stone-900 rounded-lg text-[11px] font-bold shadow-lg z-10">
             <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
             <span>Gọi món tại bàn</span>
           </div>
 
-          {/* Bottom-Right: Gallery Layers Icon */}
+          {/* Bottom-Right: Multiple Photos Layers Icon (Ảnh 1) */}
           <div className="absolute bottom-3 right-3 p-1.5 rounded-md bg-black/60 backdrop-blur-xs text-white/80 z-10">
             <Layers className="w-3.5 h-3.5" />
           </div>
 
-          {/* Spice or Special badge top-left if present */}
+          {/* Badges top-left if special or bestseller */}
           <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
             {dish.isChefSpecial && (
               <span className="flex items-center gap-1 px-2 py-0.5 bg-red-900/90 border border-amber-400/60 text-amber-200 text-[10px] font-bold rounded shadow">
@@ -66,12 +66,12 @@ export const DishCard = ({ dish, onOpenDetail }) => {
           </div>
         </div>
 
-        {/* Michelin Style Card Content */}
+        {/* Card Body below image (Ảnh 1) */}
         <div className="p-4 space-y-1.5">
           
           {/* Classification & Cuisine Type */}
           <div className="flex items-center justify-between text-xs text-stone-400 font-medium">
-            <span className="truncate">
+            <span className="truncate flex items-center gap-1">
               {dish.category === 'dimsum' && '🥟 Dim Sum · Quảng Đông'}
               {dish.category === 'roast' && '🦆 Món Quay · Bắc Kinh'}
               {dish.category === 'hotpot' && '🍲 Lẩu & Xào · Tứ Xuyên'}
@@ -81,7 +81,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             <span className="text-amber-400/80 font-mono text-[11px]">₫₫</span>
           </div>
 
-          {/* Dish Name (Michelin Headline) */}
+          {/* Dish Headline Title (Ảnh 1) */}
           <div className="flex items-baseline justify-between gap-2">
             <h3 className="font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors line-clamp-1">
               {dish.name}
@@ -91,15 +91,15 @@ export const DishCard = ({ dish, onOpenDetail }) => {
             </span>
           </div>
 
-          {/* Subtitle / Restaurant location like Michelin */}
+          {/* Subtitle / Restaurant info & Spice */}
           <p className="text-[11px] text-stone-400 flex items-center gap-1">
             <span>Hoàng Long Quán</span>
             <span>·</span>
-            <span>Quận 5, TP. HCM</span>
+            <span>TP. HCM</span>
             {dish.isSpicy && <span className="text-red-400 ml-1">· 🌶️ Cay tê</span>}
           </p>
 
-          {/* Description */}
+          {/* Short description */}
           <p className="text-xs text-stone-400 line-clamp-2 leading-relaxed pt-1">
             {dish.description}
           </p>
