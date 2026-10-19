@@ -31,6 +31,25 @@
       linear-gradient(to bottom, #0c0405 0%, #140809 50%, #0d0405 100%);
     background-attachment: fixed;
   }
+
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
 }
 
 /* Custom Scrollbars */
@@ -561,5 +580,242 @@
 .chinese-card:hover {
   border-color: rgba(212, 175, 55, 0.55);
   box-shadow: 0 12px 35px rgba(139, 17, 23, 0.25), 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* ==========================================================================
+   HOÀNG LONG QUÁN - BULLETPROOF COMPONENT STYLES (HEADER & HERO)
+   ========================================================================== */
+
+.hl-header-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+.hl-nav-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.hl-btn-nav {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #e5e5e5 !important;
+  background-color: #1a080a !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.hl-btn-nav:hover {
+  background-color: #2b0e12 !important;
+  border-color: #d4af37 !important;
+  color: #f7d774 !important;
+  transform: translateY(-1px) !important;
+}
+
+.hl-btn-nav-active {
+  background: linear-gradient(135deg, #7d0d15 0%, #4d0a0d 100%) !important;
+  border: 1px solid #ffd700 !important;
+  color: #fde68a !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.35) !important;
+}
+
+.hl-btn-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 6px 13px !important;
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #fff8ee !important;
+  background-color: #1c0a0c !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.hl-btn-action:hover {
+  background-color: #2d1115 !important;
+  border-color: #f7d774 !important;
+  color: #ffd700 !important;
+}
+
+.hl-btn-cart {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 6px 16px !important;
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%) !important;
+  border: 1px solid rgba(251, 191, 36, 0.7) !important;
+  box-shadow: 0 2px 10px rgba(185, 28, 28, 0.5) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.hl-btn-cart:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+  border-color: #fde68a !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.6) !important;
+  transform: translateY(-1px) !important;
+}
+
+.hl-btn-user {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 5px 12px 5px 6px !important;
+  border-radius: 9999px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #fff8ee !important;
+  background-color: #1c0a0c !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.hl-btn-user:hover {
+  background-color: #2d1115 !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35) !important;
+}
+
+.hl-btn-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 7px !important;
+  border-radius: 9999px !important;
+  background-color: #1c0a0c !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  color: #fbbf24 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.hl-btn-icon:hover {
+  background-color: #2d1115 !important;
+  border-color: #ffd700 !important;
+  color: #ffffff !important;
+}
+
+/* Hero CTA Buttons */
+.hl-hero-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 28px !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #c8102e 0%, #8b1117 50%, #521015 100%) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 4px 20px rgba(200, 16, 46, 0.5) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.hl-hero-btn-primary:hover {
+  background: linear-gradient(135deg, #e52545 0%, #a8131e 50%, #681219 100%) !important;
+  border-color: #f7d774 !important;
+  box-shadow: 0 6px 25px rgba(200, 16, 46, 0.7), 0 0 15px rgba(212, 175, 55, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hl-hero-btn-gold {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 28px !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #120406 !important;
+  background: linear-gradient(135deg, #f7d774 0%, #d4af37 50%, #aa841c 100%) !important;
+  border: 2px solid #ffd700 !important;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.45) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.hl-hero-btn-gold:hover {
+  background: linear-gradient(135deg, #fff0b3 0%, #f7d774 50%, #d4af37 100%) !important;
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.7) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hl-hero-btn-dark {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 24px !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #fff8ee !important;
+  background-color: #1c0a0c !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.hl-hero-btn-dark:hover {
+  background-color: #2b0e12 !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Feature highlight cards */
+.hl-feature-card {
+  padding: 14px !important;
+  background-color: #18080a !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.2s ease !important;
+}
+
+.hl-feature-card:hover {
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  transform: translateY(-2px) !important;
 }
 

@@ -79,12 +79,12 @@ export const Header = ({
   return (
     <header className="sticky top-0 z-50 bg-[#140608]/98 backdrop-blur-md border-b border-[#3b1216] shadow-2xl transition-all">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="h-16 sm:h-20 hl-header-bar flex items-center justify-between gap-2 sm:gap-4">
           
           {/* ========================================================
               LEFT: BRAND LOGO + MAIN BUTTONS + 1 ICON MENU (XEM THÊM)
              ======================================================== */}
-          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <div className="hl-nav-group flex items-center gap-2 sm:gap-4 min-w-0">
             {/* Brand Logo */}
             <div
               className="flex items-center gap-2 cursor-pointer select-none group flex-shrink-0"
@@ -93,13 +93,22 @@ export const Header = ({
             >
               <ChineseSeal text="皇龍" subtext="御膳" className="hidden sm:inline-flex" />
               <div className="flex items-baseline">
-                <span className="text-red-500 font-extrabold tracking-tight text-lg sm:text-2xl font-sans uppercase group-hover:text-red-400 transition-colors">
+                <span
+                  className="font-extrabold tracking-tight text-lg sm:text-2xl font-sans uppercase transition-colors"
+                  style={{ color: '#ef4444' }}
+                >
                   HOÀNG LONG
                 </span>
-                <span className="text-amber-400 font-bold tracking-widest text-base sm:text-2xl ml-1 uppercase font-decorative group-hover:text-amber-300 transition-colors">
+                <span
+                  className="font-bold tracking-widest text-base sm:text-2xl ml-1.5 uppercase font-decorative transition-colors"
+                  style={{ color: '#fbbf24' }}
+                >
                   QUÁN
                 </span>
-                <span className="font-calligraphy text-amber-300/80 text-xs sm:text-base ml-1.5 hidden lg:inline">
+                <span
+                  className="font-calligraphy text-xs sm:text-base ml-2 hidden lg:inline"
+                  style={{ color: 'rgba(252, 211, 77, 0.8)' }}
+                >
                   皇龍樓
                 </span>
               </div>
@@ -110,14 +119,14 @@ export const Header = ({
               <button
                 type="button"
                 onClick={onExploreMenu}
-                className="px-3.5 py-1.5 rounded-full border border-amber-400/80 text-amber-200 bg-red-950/60 hover:bg-red-900/70 transition-all font-bold shadow-sm whitespace-nowrap"
+                className="hl-btn-nav hl-btn-nav-active"
               >
                 Thực Đơn
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('khuyen-mai')}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1 whitespace-nowrap"
+                className="hl-btn-nav"
               >
                 <Gift className="w-3.5 h-3.5 text-amber-400" />
                 <span>Ưu Đãi</span>
@@ -125,7 +134,7 @@ export const Header = ({
               <button
                 type="button"
                 onClick={onOpenReserve}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1 whitespace-nowrap"
+                className="hl-btn-nav"
               >
                 <Calendar className="w-3.5 h-3.5 text-amber-400" />
                 <span>Đặt Bàn Tiệc</span>
@@ -133,7 +142,7 @@ export const Header = ({
               <button
                 type="button"
                 onClick={onOpenAbout}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all whitespace-nowrap"
+                className="hl-btn-nav"
               >
                 Giới Thiệu
               </button>
@@ -147,10 +156,8 @@ export const Header = ({
                   setIsMoreMenuOpen(!isMoreMenuOpen);
                   setIsUserDropdownOpen(false);
                 }}
-                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border transition-all text-xs font-semibold ${
-                  isMoreMenuOpen
-                    ? 'bg-amber-400 text-stone-950 border-amber-300 shadow-md font-bold'
-                    : 'bg-[#1c0a0c] hover:bg-[#280f12] border-amber-500/30 text-stone-300 hover:border-amber-400/60 hover:text-white'
+                className={`hl-btn-action flex items-center gap-1.5 text-xs font-semibold ${
+                  isMoreMenuOpen ? 'hl-btn-nav-active' : ''
                 }`}
                 title="Xem thêm các nút & chức năng bị ẩn"
               >
@@ -329,19 +336,18 @@ export const Header = ({
             <button
               type="button"
               onClick={() => setIsQRModalOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-amber-500/30 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs sm:text-sm font-semibold active:scale-95 whitespace-nowrap"
+              className="hl-btn-action flex items-center gap-1.5 text-xs font-semibold"
               title="Đổi số bàn hoặc quét mã QR"
             >
-              <QrCode className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 flex-shrink-0" />
-              <span className="hidden sm:inline">Bàn {tableNumber}</span>
-              <span className="sm:hidden font-mono font-bold">B{tableNumber}</span>
+              <QrCode className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <span>Bàn {tableNumber}</span>
             </button>
 
-            {/* Gọi Bàn (md+) */}
+            {/* Gọi Bàn */}
             <button
               type="button"
               onClick={() => setIsCallStaffModalOpen(true)}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-amber-500/30 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs font-semibold active:scale-95 whitespace-nowrap"
+              className="hl-btn-action hidden md:flex items-center gap-1.5 text-xs font-semibold"
               title="Gọi phục vụ / tiểu nhị"
             >
               <Bell className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
@@ -352,11 +358,11 @@ export const Header = ({
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-red-700 via-red-800 to-red-900 hover:from-red-600 hover:to-red-800 border border-amber-400/60 text-white font-bold transition-all shadow-md active:scale-95 text-xs sm:text-sm whitespace-nowrap"
+              className="hl-btn-cart flex items-center gap-1.5 text-xs"
               title="Xem giỏ món của bàn"
             >
-              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 flex-shrink-0" />
-              <span className="hidden sm:inline">Giỏ Món</span>
+              <ShoppingBag className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
+              <span>Giỏ Món</span>
               {totalItemsCount > 0 && (
                 <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center shadow">
                   {totalItemsCount}
@@ -374,19 +380,17 @@ export const Header = ({
                   setIsUserDropdownOpen(!isUserDropdownOpen);
                   setIsMoreMenuOpen(false);
                 }}
-                className={`flex items-center gap-2 p-1.5 sm:px-3 sm:py-2 rounded-full border transition-all ${
-                  isUserDropdownOpen
-                    ? 'bg-amber-400 text-stone-950 border-amber-300 shadow-lg scale-105'
-                    : 'bg-[#1c0a0c] hover:bg-[#280f12] border-stone-700/80 text-stone-300 hover:border-amber-400/60 hover:text-white'
+                className={`hl-btn-user flex items-center gap-2 ${
+                  isUserDropdownOpen ? 'ring-2 ring-amber-400' : ''
                 }`}
                 title={user ? `Tài khoản: ${user.name}` : 'Đăng nhập / Đăng ký thành viên'}
               >
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
                   user ? 'bg-amber-500 text-stone-950 shadow-inner' : 'bg-stone-800 text-amber-400'
                 }`}>
-                  <User className="w-4 h-4" />
+                  <User className="w-3.5 h-3.5" />
                 </div>
-                <span className="hidden sm:inline text-xs font-bold">
+                <span className="hidden sm:inline text-xs font-bold whitespace-nowrap">
                   {user ? (user.name || user.username) : 'Tài Khoản'}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform hidden sm:inline ${isUserDropdownOpen ? 'rotate-180' : ''}`} />
