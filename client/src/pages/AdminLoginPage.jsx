@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ChineseSeal } from '../components/ChineseSeal';
-import { Lock, User, KeyRound, ShieldCheck, ArrowRight, ChefHat, Crown, Sparkles, AlertCircle } from 'lucide-react';
+import { Lock, User, KeyRound, ShieldCheck, ArrowRight, ChefHat, Crown, Sparkles, AlertCircle, X } from 'lucide-react';
 
 export const AdminLoginPage = ({ onSuccess, onCancel, initialMode = 'login' }) => {
   const { login } = useAuth();
@@ -89,17 +89,24 @@ export const AdminLoginPage = ({ onSuccess, onCancel, initialMode = 'login' }) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur">
-      <div className="relative w-full max-w-md bg-[#18090b] border-2 border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden animate-fade-scale flex flex-col">
+    <div
+      onClick={onCancel}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur animate-fade-in"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md bg-[#18080a] border-2 border-amber-500/70 rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden animate-fade-in flex flex-col"
+      >
         
         {/* Chinese decorative top banner */}
         <div className="p-5 sm:p-6 bg-gradient-to-b from-[#2d1115] to-[#1e0a0d] border-b border-[#4d161a] text-center relative">
           {onCancel && (
             <button
               onClick={onCancel}
-              className="absolute top-4 right-4 text-stone-400 hover:text-white text-xs bg-stone-900/60 hover:bg-red-800 px-2 py-1 rounded-lg transition-colors"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-red-700 text-stone-200 hover:text-white flex items-center justify-center transition-all border border-amber-500/30 shadow-lg"
+              title="Đóng cửa sổ"
             >
-              Đóng ✕
+              <X className="w-4 h-4 stroke-[2.5]" />
             </button>
           )}
 

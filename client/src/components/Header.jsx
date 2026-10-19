@@ -78,7 +78,18 @@ export const Header = ({
 
   return (
     <header className="sticky top-0 z-50 bg-[#140608]/98 backdrop-blur-md border-b border-[#3b1216] shadow-2xl transition-all">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      {/* Full-screen backdrop to blur and dim the background when Menu or User dropdown is open */}
+      {(isMoreMenuOpen || isUserDropdownOpen) && (
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 animate-fade-in"
+          onClick={() => {
+            setIsMoreMenuOpen(false);
+            setIsUserDropdownOpen(false);
+          }}
+        />
+      )}
+
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-50">
         <div className="h-16 sm:h-20 hl-header-bar flex items-center justify-between gap-2 sm:gap-4">
           
           {/* ========================================================
@@ -167,7 +178,7 @@ export const Header = ({
 
               {/* Dropdown Menu chứa các button bị ẩn */}
               {isMoreMenuOpen && (
-                <div className="absolute left-0 mt-3 w-64 sm:w-72 bg-[#1c0a0d] border border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden py-2 z-50 text-left animate-fade-scale text-xs sm:text-sm">
+                <div className="absolute left-0 mt-3 w-64 sm:w-72 bg-[#18080a] border-2 border-amber-500/70 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-hidden py-2 z-50 text-left animate-fade-in text-xs sm:text-sm">
                   
                   {/* Active Order banner if cooking */}
                   {activeOrder && (
@@ -399,7 +410,7 @@ export const Header = ({
 
               {/* User Dropdown */}
               {isUserDropdownOpen && (
-                <div className="absolute right-0 mt-3 w-72 sm:w-80 bg-[#1c0a0d] border border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden py-3 px-3.5 z-50 text-left animate-fade-scale text-xs sm:text-sm">
+                <div className="absolute right-0 mt-3 w-72 sm:w-80 bg-[#18080a] border-2 border-amber-500/70 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] overflow-hidden py-3 px-3.5 z-50 text-left animate-fade-in text-xs sm:text-sm">
                   {user ? (
                     <div>
                       <div className="flex items-center gap-3 pb-3 border-b border-[#3b1519]">

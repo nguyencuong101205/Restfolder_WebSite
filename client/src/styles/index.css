@@ -287,11 +287,12 @@
   color: #f7d774;
 }
 
-/* Modal Overlay Backdrop Blur */
+/* Modal Overlay Backdrop Blur - Dims & blurs background so opened modal pops out crystal clear */
 .modal-overlay-blur {
-  background-color: rgba(5, 2, 3, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(4, 1, 2, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.2s ease-out;
 }
 
 /* Chinese Imperial 2-Column Dish Grid (Bắt buộc 2 món 1 hàng) */
@@ -416,20 +417,19 @@
   border-color: #260c0e;
 }
 
-/* Animations */
-@keyframes fadeInScale {
+/* Animations - Pure smooth fade in (no zoom in / no scale up) */
+@keyframes fadeInSimple {
   from {
     opacity: 0;
-    transform: scale(0.96) translateY(8px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
   }
 }
 
-.animate-fade-scale {
-  animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-fade-scale,
+.animate-fade-in {
+  animation: fadeInSimple 0.18s ease-out forwards;
 }
 
 .live-pulse {
