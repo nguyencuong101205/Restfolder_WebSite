@@ -10,7 +10,6 @@ import { OrderTracker } from './components/OrderTracker';
 import { CallStaffModal } from './components/CallStaffModal';
 import { ReservationModal } from './components/ReservationModal';
 import { AboutModal } from './components/AboutModal';
-import { PrivateDiningModal } from './components/PrivateDiningModal';
 import { CustomerMenuPage } from './pages/CustomerMenuPage';
 import { KitchenDashboard } from './pages/KitchenDashboard';
 import { TableManagerPage } from './pages/TableManagerPage';
@@ -21,10 +20,9 @@ const MainLayout = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
   
-  // Man Ho modals
+  // Imperial Modals
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-  const [isPrivateDiningModalOpen, setIsPrivateDiningModalOpen] = useState(false);
 
   const { isStaff, isAdmin } = useAuth();
 
@@ -42,9 +40,9 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between selection:bg-[#c5a880]/30 selection:text-[#f5f0ea]">
+    <div className="min-h-screen flex flex-col justify-between selection:bg-red-900 selection:text-amber-200">
       
-      {/* Top Header - Man Ho Chinese Restaurant (JW Marriott Hanoi) */}
+      {/* Top Header - Hoàng Long Quán (皇龍樓) */}
       <Header
         onOpenAuth={(mode = 'login') => {
           setAuthModalMode(mode);
@@ -54,7 +52,6 @@ const MainLayout = () => {
         onOpenTableManager={() => setCurrentView('tables')}
         onOpenReserve={() => setIsReservationModalOpen(true)}
         onOpenAbout={() => setIsAboutModalOpen(true)}
-        onOpenPrivateDining={() => setIsPrivateDiningModalOpen(true)}
         onExploreMenu={scrollToMenu}
         currentView={currentView}
       />
@@ -65,7 +62,6 @@ const MainLayout = () => {
           <CustomerMenuPage
             onOpenReserve={() => setIsReservationModalOpen(true)}
             onOpenAbout={() => setIsAboutModalOpen(true)}
-            onOpenPrivateDining={() => setIsPrivateDiningModalOpen(true)}
           />
         )}
 
@@ -88,7 +84,6 @@ const MainLayout = () => {
         <Footer
           onOpenAbout={() => setIsAboutModalOpen(true)}
           onExploreMenu={scrollToMenu}
-          onOpenPrivateDining={() => setIsPrivateDiningModalOpen(true)}
           onOpenReserve={() => setIsReservationModalOpen(true)}
         />
       )}
@@ -99,7 +94,7 @@ const MainLayout = () => {
       <OrderTracker />
       <CallStaffModal />
 
-      {/* Man Ho Hanoi Modals */}
+      {/* Hoàng Long Quán Modals */}
       <ReservationModal
         isOpen={isReservationModalOpen}
         onClose={() => setIsReservationModalOpen(false)}
@@ -108,12 +103,6 @@ const MainLayout = () => {
       <AboutModal
         isOpen={isAboutModalOpen}
         onClose={() => setIsAboutModalOpen(false)}
-        onOpenReserve={() => setIsReservationModalOpen(true)}
-      />
-
-      <PrivateDiningModal
-        isOpen={isPrivateDiningModalOpen}
-        onClose={() => setIsPrivateDiningModalOpen(false)}
         onOpenReserve={() => setIsReservationModalOpen(true)}
       />
 

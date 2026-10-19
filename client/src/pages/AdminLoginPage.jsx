@@ -104,14 +104,14 @@ export const AdminLoginPage = ({ onSuccess, onCancel, initialMode = 'login' }) =
           )}
 
           <div className="flex justify-center mb-1.5">
-            <ChineseSeal text="萬豪" subtext="令牌" />
+            <ChineseSeal text="皇龍" subtext="令牌" />
           </div>
 
           <h2 className="font-decorative text-xl font-bold text-amber-200">
-            {authMode === 'login' ? 'ĐĂNG NHẬP MAN HO HANOI' : 'ĐĂNG KÝ THÀNH VIÊN MAN HO'}
+            {authMode === 'login' ? 'ĐĂNG NHẬP HOÀNG LONG QUÁN' : 'ĐĂNG KÝ THÀNH VIÊN HOÀNG GIA'}
           </h2>
           <p className="font-calligraphy text-amber-400 text-xs sm:text-sm mt-0.5">
-            JSON Web Token (JWT) · Man Ho Chinese Restaurant · JW Marriott Hanoi
+            JSON Web Token (JWT) · Ẩm Thực Trung Hoa Cung Đình Đệ Nhất
           </p>
 
           {/* Mode Switch Tabs: Đăng Nhập vs Đăng Ký */}
@@ -330,7 +330,7 @@ export const AdminLoginPage = ({ onSuccess, onCancel, initialMode = 'login' }) =
               </button>
 
               <p className="text-[10px] text-stone-400 text-center pt-1">
-                🎁 Tặng ngay voucher giảm giá 10% cho thành viên mới của Man Ho Chinese Restaurant (JW Marriott Hanoi)
+                🎁 Tặng ngay voucher giảm giá 10% cho thành viên mới của Hoàng Long Quán (皇龍樓)
               </p>
             </form>
           )}

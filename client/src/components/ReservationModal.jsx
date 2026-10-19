@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, Phone, Mail, User, MapPin } from 'lucide-react';
+import { ChineseSeal } from './ChineseSeal';
 
 export const ReservationModal = ({ isOpen, onClose }) => {
   const [step, setStep] = useState('form'); // 'form' | 'success'
@@ -8,10 +9,10 @@ export const ReservationModal = ({ isOpen, onClose }) => {
     phone: '',
     email: '',
     date: new Date().toISOString().split('T')[0],
-    time: '18:00',
-    guests: '2',
-    area: 'main', // 'main' | 'private'
-    privateRoom: 'Lotus Suite',
+    time: '18:30',
+    guests: '4',
+    area: 'main', // 'main' | 'vip'
+    vipRoom: 'Phòng Long Phụng (VIP 1)',
     specialRequests: ''
   });
   const [reservationCode, setReservationCode] = useState('');
@@ -20,7 +21,7 @@ export const ReservationModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const code = 'MH-' + Math.floor(100000 + Math.random() * 900000);
+    const code = 'HL-' + Math.floor(100000 + Math.random() * 900000);
     setReservationCode(code);
     setStep('success');
   };
@@ -31,249 +32,234 @@ export const ReservationModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-xl bg-[#14110f] border border-[#c5a880]/50 rounded-2xl shadow-2xl overflow-hidden my-8 text-stone-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-overlay-blur overflow-y-auto">
+      <div className="relative w-full max-w-lg bg-[#18090b] border-2 border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden my-8 text-stone-200 animate-fade-scale">
         
-        {/* Top Gold Stripe */}
-        <div className="h-1 bg-gradient-to-r from-[#9e7010] via-[#c5a880] to-[#9e7010]" />
+        {/* Chinese Top Banner */}
+        <div className="p-5 sm:p-6 bg-gradient-to-b from-[#2d1115] to-[#1e0a0d] border-b border-[#4d161a] text-center relative">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-stone-400 hover:text-white text-xs bg-stone-900/60 hover:bg-red-800 px-2 py-1 rounded-lg transition-colors"
+            title="Đóng"
+          >
+            Đóng ✕
+          </button>
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-stone-900/80 text-stone-400 hover:text-white hover:bg-red-900/60 transition-colors"
-          title="Đóng"
-        >
-          <X className="w-4 h-4" />
-        </button>
+          <div className="flex justify-center mb-1.5">
+            <ChineseSeal text="皇龍" subtext="訂座" />
+          </div>
+
+          <h2 className="text-xl sm:text-2xl font-bold font-decorative text-amber-200 uppercase">
+            ĐẶT BÀN TIỆC HOÀNG LONG
+          </h2>
+          <p className="font-calligraphy text-amber-400 text-xs sm:text-sm mt-0.5">
+            Phục Vụ Yến Tiệc Cung Đình · Trải Nghiệm Thượng Hạng
+          </p>
+        </div>
 
         {step === 'form' ? (
-          <div>
-            {/* Header */}
-            <div className="p-6 sm:p-8 pb-4 text-center border-b border-[#2b2420]">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2a221b] border border-[#c5a880]/40 text-[#c5a880] text-[11px] font-bold tracking-widest uppercase mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>JW Marriott Hotel Hanoi</span>
+          <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-3.5 text-xs sm:text-sm">
+            
+            {/* Date & Time Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Ngày dùng bữa:</span>
+                </label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  min={new Date().toISOString().split('T')[0]}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  required
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 focus:outline-none focus:border-amber-400"
+                />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#f5f0ea] tracking-wider uppercase font-semibold">
-                Table Reservation
-              </h2>
-              <p className="font-serif text-[#c5a880] text-sm mt-1 tracking-widest uppercase">
-                Nhà Hàng Quảng Đông Man Ho · 萬豪
-              </p>
-              <p className="text-xs text-stone-400 mt-2 max-w-md mx-auto">
-                Trải nghiệm ẩm thực Quảng Đông thượng hạng chuẩn 1 sao MICHELIN. Đặt bàn trực tiếp để được phục vụ chu đáo nhất.
+
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Khung giờ đến:</span>
+                </label>
+                <select
+                  value={formData.time}
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 focus:outline-none focus:border-amber-400"
+                >
+                  <optgroup label="Buổi Trưa (10:30 - 14:00)">
+                    <option value="11:00">11:00 Sáng</option>
+                    <option value="11:30">11:30 Sáng</option>
+                    <option value="12:00">12:00 Trưa</option>
+                    <option value="12:30">12:30 Trưa</option>
+                    <option value="13:00">13:00 Chiều</option>
+                  </optgroup>
+                  <optgroup label="Buổi Tối (17:00 - 22:30)">
+                    <option value="17:30">17:30 Chiều</option>
+                    <option value="18:00">18:00 Tối</option>
+                    <option value="18:30">18:30 Tối</option>
+                    <option value="19:00">19:00 Tối</option>
+                    <option value="19:30">19:30 Tối</option>
+                    <option value="20:00">20:00 Tối</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            {/* Guests & Area */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                  <Users className="w-3.5 h-3.5" />
+                  <span>Số lượng khách:</span>
+                </label>
+                <select
+                  value={formData.guests}
+                  onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 focus:outline-none focus:border-amber-400"
+                >
+                  {[1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 30].map((num) => (
+                    <option key={num} value={num}>
+                      {num} Khách {num >= 6 ? '(Ưu đãi phòng VIP)' : ''}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Khu vực bàn:</span>
+                </label>
+                <select
+                  value={formData.area}
+                  onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 focus:outline-none focus:border-amber-400"
+                >
+                  <option value="main">Sảnh Cung Đình (Nhộn nhịp)</option>
+                  <option value="vip">Phòng Riêng VIP (Yên tĩnh, riêng tư)</option>
+                </select>
+              </div>
+            </div>
+
+            {/* VIP Room Selection */}
+            {formData.area === 'vip' && (
+              <div className="p-3 bg-[#240e11] border border-amber-500/40 rounded-xl space-y-1 animate-fade-in">
+                <span className="text-xs text-amber-300 font-bold block">Chọn Phòng VIP:</span>
+                <select
+                  value={formData.vipRoom}
+                  onChange={(e) => setFormData({ ...formData, vipRoom: e.target.value })}
+                  className="w-full px-3 py-1.5 bg-[#140608] border border-[#44181c] rounded-lg text-stone-200 text-xs focus:border-amber-400"
+                >
+                  <option value="Phòng Long Phụng (VIP 1)">Phòng Long Phụng (VIP 1 - Sức chứa 8-12 khách)</option>
+                  <option value="Phòng Tứ Quý (VIP 2)">Phòng Tứ Quý (VIP 2 - Sức chứa 10-16 khách)</option>
+                  <option value="Phòng Cát Tường (VIP 3)">Phòng Cát Tường (VIP 3 - Sức chứa 6-8 khách)</option>
+                  <option value="Đại Tiệc Hoàng Triều">Đại Tiệc Hoàng Triều (20-30 khách)</option>
+                </select>
+              </div>
+            )}
+
+            {/* Contact Details */}
+            <div className="space-y-2.5 pt-1">
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5" />
+                  <span>Họ & Tên quý khách:</span>
+                </label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Ví dụ: Nguyễn Văn A"
+                  required
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5" />
+                    <span>Số điện thoại:</span>
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    placeholder="09xx xxx xxx"
+                    required
+                    className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-amber-300 mb-1 flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Email (tùy chọn):</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="email@example.com"
+                    className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-amber-300 mb-1">
+                  Ghi chú tiệc (Sinh nhật, kỷ niệm, chuẩn bị món trước...):
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.specialRequests}
+                  onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
+                  placeholder="Quý khách cần chuẩn bị bánh kem, hoa tươi hay yêu cầu riêng xin ghi tại đây..."
+                  className="w-full px-3 py-2 bg-[#120507] border border-[#44181c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-400 resize-none text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full py-3 bg-gradient-to-r from-red-700 via-red-800 to-red-900 hover:from-red-600 hover:to-red-800 text-white font-bold uppercase tracking-wider rounded-xl transition-all shadow-xl active:scale-98 flex items-center justify-center gap-2 border border-amber-400/80"
+              >
+                <Sparkles className="w-4 h-4 text-amber-300" />
+                <span>XÁC NHẬN ĐẶT BÀN TIỆC HOÀNG LONG</span>
+              </button>
+              <p className="text-[10px] text-stone-400 text-center mt-2">
+                Hotline hỗ trợ đặt bàn trực tiếp: <a href="tel:02838889999" className="text-amber-400 font-bold underline">(028) 3888 9999</a>
               </p>
             </div>
 
-            {/* Form Body */}
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 pt-6 space-y-4 text-xs sm:text-sm">
-              
-              {/* Date & Time Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>Ngày Đặt Bàn</span>
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.date}
-                    min={new Date().toISOString().split('T')[0]}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    required
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 focus:outline-none focus:border-[#c5a880]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>Giờ Dùng Bữa</span>
-                  </label>
-                  <select
-                    value={formData.time}
-                    onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 focus:outline-none focus:border-[#c5a880]"
-                  >
-                    <optgroup label="Buổi Trưa (Lunch)">
-                      <option value="11:30">11:30 A.M.</option>
-                      <option value="12:00">12:00 P.M.</option>
-                      <option value="12:30">12:30 P.M.</option>
-                      <option value="13:00">01:00 P.M.</option>
-                      <option value="13:30">01:30 P.M.</option>
-                    </optgroup>
-                    <optgroup label="Buổi Tối (Dinner)">
-                      <option value="17:30">05:30 P.M.</option>
-                      <option value="18:00">06:00 P.M.</option>
-                      <option value="18:30">06:30 P.M.</option>
-                      <option value="19:00">07:00 P.M.</option>
-                      <option value="19:30">07:30 P.M.</option>
-                      <option value="20:00">08:00 P.M.</option>
-                    </optgroup>
-                  </select>
-                </div>
-              </div>
-
-              {/* Guests & Dining Area */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5" />
-                    <span>Số Lượng Khách</span>
-                  </label>
-                  <select
-                    value={formData.guests}
-                    onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 focus:outline-none focus:border-[#c5a880]"
-                  >
-                    {[1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20].map((num) => (
-                      <option key={num} value={num}>
-                        {num} Khách {num >= 8 ? '(Ưu tiên phòng VIP)' : ''}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5" />
-                    <span>Khu Vực Bàn</span>
-                  </label>
-                  <select
-                    value={formData.area}
-                    onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 focus:outline-none focus:border-[#c5a880]"
-                  >
-                    <option value="main">Sảnh Chính (Main Dining Hall)</option>
-                    <option value="private">Phòng Ăn Riêng VIP (Private Suite)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Private Room Selection if private */}
-              {formData.area === 'private' && (
-                <div className="p-3 bg-[#1e1814] border border-[#c5a880]/30 rounded-xl space-y-1.5 animate-fade-in">
-                  <span className="text-xs text-[#c5a880] font-semibold block">Chọn Phòng VIP Man Ho:</span>
-                  <select
-                    value={formData.privateRoom}
-                    onChange={(e) => setFormData({ ...formData, privateRoom: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#14100e] border border-[#3d322c] rounded-lg text-stone-200 text-xs focus:border-[#c5a880]"
-                  >
-                    <option value="Lotus Suite">Phòng Hoa Sen (Lotus Suite - 8-12 khách)</option>
-                    <option value="Dragon Room">Phòng Hoàng Long (Imperial Dragon - 12-18 khách)</option>
-                    <option value="Phoenix Salon">Phòng Phượng Hoàng (Phoenix Salon - 10-14 khách)</option>
-                    <option value="Peony Suite">Phòng Mẫu Đơn (Peony Suite - 6-8 khách)</option>
-                    <option value="Jade Room">Phòng Ngọc Bích (Jade Room - 8-10 khách)</option>
-                    <option value="Grand Banquet">Đại Tiệc Cung Đình (Grand Banquet - 30-80 khách)</option>
-                  </select>
-                  <p className="text-[11px] text-stone-400">
-                    * Phòng VIP có quản gia riêng và thực đơn thiết kế cá nhân hóa.
-                  </p>
-                </div>
-              )}
-
-              {/* Guest Details */}
-              <div className="space-y-3 pt-1">
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5" />
-                    <span>Họ & Tên Quý Khách</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Ví dụ: Nguyễn Văn A"
-                    required
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-[#c5a880]"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  <div>
-                    <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5" />
-                      <span>Số Điện Thoại</span>
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="0903 xxx xxx"
-                      required
-                      className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-[#c5a880]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                      <Mail className="w-3.5 h-3.5" />
-                      <span>Email Nhận Xác Nhận</span>
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="email@example.com"
-                      className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-[#c5a880]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#c5a880] uppercase tracking-wider mb-1.5">
-                    Ghi Chú Đặc Biệt (Dị ứng, kỷ niệm ngày cưới, sinh nhật...)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={formData.specialRequests}
-                    onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
-                    placeholder="Quý khách có yêu cầu đặc biệt về vị trí ngồi, trà hay chế độ ăn xin ghi tại đây..."
-                    className="w-full px-3.5 py-2.5 bg-[#1e1916] border border-[#3d322c] rounded-xl text-stone-200 placeholder-stone-600 focus:outline-none focus:border-[#c5a880] resize-none"
-                  />
-                </div>
-              </div>
-
-              {/* Submit CTA */}
-              <div className="pt-3">
-                <button
-                  type="submit"
-                  className="w-full py-3.5 px-6 bg-gradient-to-r from-[#b89358] via-[#c5a880] to-[#b89358] hover:from-[#c5a880] hover:to-[#d8bc94] text-stone-950 font-bold uppercase tracking-widest rounded-xl transition-all shadow-xl active:scale-98 flex items-center justify-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4 fill-stone-950" />
-                  <span>XÁC NHẬN ĐẶT BÀN MAN HO</span>
-                </button>
-                <p className="text-[11px] text-stone-400 text-center mt-2.5">
-                  Hotline hỗ trợ 24/7: <a href="tel:0903290998" className="text-[#c5a880] font-bold underline">0903 290 998</a> · JW Marriott Hotel Hanoi
-                </p>
-              </div>
-
-            </form>
-          </div>
+          </form>
         ) : (
           /* Confirmation Success View */
-          <div className="p-8 sm:p-10 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#2a221b] border-2 border-[#c5a880] text-[#c5a880] flex items-center justify-center mx-auto shadow-xl">
+          <div className="p-6 sm:p-8 text-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-emerald-950/80 border-2 border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto shadow-xl">
               <CheckCircle2 className="w-9 h-9 stroke-[2.5]" />
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs uppercase tracking-widest text-[#c5a880] font-bold">
-                XÁC NHẬN ĐẶT BÀN THÀNH CÔNG
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold font-mono">
+                TIẾP NHẬN ĐẶT BÀN THÀNH CÔNG
               </span>
-              <h3 className="text-2xl font-serif font-bold text-white uppercase">
-                Cảm Ơn Quý Khách {formData.name}
+              <h3 className="text-xl sm:text-2xl font-bold font-decorative text-white">
+                Kính Chào Quý Khách {formData.name}
               </h3>
-              <p className="text-xs text-stone-400 max-w-md mx-auto">
-                Nhà hàng Man Ho tại JW Marriott Hotel Hanoi đã tiếp nhận thông tin đặt bàn của quý khách. Nhân viên sẽ liên hệ qua số {formData.phone} để hoàn tất xác nhận.
+              <p className="text-xs text-stone-300 max-w-md mx-auto">
+                Hoàng Long Quán đã nhận thông tin đặt bàn của quý khách. Quản lý sẽ liên hệ số <strong>{formData.phone}</strong> trong vòng 10 phút để xác nhận chu đáo nhất.
               </p>
             </div>
 
             {/* Booking Details Card */}
-            <div className="bg-[#1b1613] border border-[#c5a880]/30 rounded-xl p-4 text-left max-w-sm mx-auto space-y-2 text-xs">
-              <div className="flex justify-between border-b border-[#2e2520] pb-2">
+            <div className="bg-[#120507] border border-amber-500/30 rounded-xl p-4 text-left max-w-sm mx-auto space-y-2 text-xs">
+              <div className="flex justify-between border-b border-[#3b1519] pb-2">
                 <span className="text-stone-400">Mã đặt bàn:</span>
-                <span className="font-mono font-bold text-[#c5a880] text-sm">{reservationCode}</span>
+                <span className="font-mono font-bold text-amber-400 text-sm">{reservationCode}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-stone-400">Thời gian:</span>
@@ -286,20 +272,20 @@ export const ReservationModal = ({ isOpen, onClose }) => {
               <div className="flex justify-between">
                 <span className="text-stone-400">Khu vực:</span>
                 <span className="text-stone-200 font-semibold">
-                  {formData.area === 'private' ? formData.privateRoom : 'Sảnh Chính'}
+                  {formData.area === 'vip' ? formData.vipRoom : 'Sảnh Cung Đình'}
                 </span>
               </div>
-              <div className="flex justify-between border-t border-[#2e2520] pt-2">
-                <span className="text-stone-400">Địa điểm:</span>
-                <span className="text-[#c5a880] font-medium text-right text-[11px]">
-                  JW Marriott Hanoi, Số 08 Đỗ Đức Dục, Mễ Trì, Hà Nội
+              <div className="flex justify-between border-t border-[#3b1519] pt-2">
+                <span className="text-stone-400">Địa chỉ:</span>
+                <span className="text-amber-300 font-medium text-right text-[11px]">
+                  Số 88 Đại Lộ Hoàng Long, Quận 5 (Chợ Lớn), TP.HCM
                 </span>
               </div>
             </div>
 
             <button
               onClick={handleReset}
-              className="px-8 py-3 bg-[#c5a880] text-stone-950 font-bold uppercase tracking-wider rounded-xl hover:bg-[#d8bc94] transition-colors text-xs"
+              className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 font-black uppercase tracking-wider rounded-xl hover:from-amber-400 hover:to-yellow-400 transition-colors text-xs shadow-md"
             >
               Hoàn Tất & Khám Phá Thực Đơn
             </button>
