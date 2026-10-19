@@ -4,6 +4,7 @@
 
 /* ==========================================================================
    HOÀNG LONG QUÁN - 皇龍樓 | IMPERIAL CHINESE RESTAURANT AESTHETICS
+   Shopee & F8 Styled UI Component System
    ========================================================================== */
 
 @layer base {
@@ -74,147 +75,197 @@
   transform: rotate(0deg) scale(1.05);
 }
 
-/* Hanging Lantern Animations */
-@keyframes sway-lantern-left {
-  0%, 100% {
-    transform: rotate(-3.5deg);
-  }
-  50% {
-    transform: rotate(4.5deg);
-  }
+/* ==========================================================================
+   SHOPEE & F8 STYLE BUTTONS & COMPONENTS
+   ========================================================================== */
+
+.shopee-btn {
+  min-width: 90px;
+  height: 36px;
+  text-decoration: none;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+  font-size: 13px;
+  padding: 0 14px;
+  outline: none;
+  cursor: pointer;
+  color: #e5e5e5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.6;
+  background-color: #220d10;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  user-select: none;
 }
 
-@keyframes sway-lantern-right {
-  0%, 100% {
-    transform: rotate(4deg);
-  }
-  50% {
-    transform: rotate(-3.5deg);
-  }
-}
-
-.lantern-sway-left {
-  transform-origin: top center;
-  animation: sway-lantern-left 4.8s ease-in-out infinite;
-}
-
-.lantern-sway-right {
-  transform-origin: top center;
-  animation: sway-lantern-right 5.4s ease-in-out infinite;
-}
-
-/* Shimmer Gold Effect */
-@keyframes gold-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.text-gold-shimmer {
-  background: linear-gradient(90deg, #f3d987 0%, #ffffff 50%, #d4af37 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: gold-shimmer 4s linear infinite;
-}
-
-/* Chinese Luxury Card Container */
-.chinese-card {
-  background: linear-gradient(160deg, rgba(34, 14, 17, 0.96) 0%, rgba(18, 7, 9, 0.98) 100%);
-  border: 1px solid rgba(110, 20, 27, 0.7);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(212, 175, 55, 0.2);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.chinese-card:hover {
-  border-color: rgba(212, 175, 55, 0.6);
-  transform: translateY(-5px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.25);
-}
-
-/* Traditional Lattice Corner Ornaments (Hồi Văn Cung Đình) */
-.corner-ornament-tl,
-.corner-ornament-tr,
-.corner-ornament-bl,
-.corner-ornament-br {
-  position: absolute;
-  width: 14px;
-  height: 14px;
+.shopee-btn:hover {
+  background-color: #331418;
   border-color: #d4af37;
-  opacity: 0.55;
-  pointer-events: none;
-  transition: opacity 0.3s ease, border-color 0.3s ease;
+  color: #fff;
+  transform: translateY(-1px);
 }
 
-.chinese-card:hover .corner-ornament-tl,
-.chinese-card:hover .corner-ornament-tr,
-.chinese-card:hover .corner-ornament-bl,
-.chinese-card:hover .corner-ornament-br {
-  opacity: 0.9;
-  border-color: #faebb8;
-}
-
-.corner-ornament-tl { top: 7px; left: 7px; border-top: 2px solid; border-left: 2px solid; }
-.corner-ornament-tr { top: 7px; right: 7px; border-top: 2px solid; border-right: 2px solid; }
-.corner-ornament-bl { bottom: 7px; left: 7px; border-bottom: 2px solid; border-left: 2px solid; }
-.corner-ornament-br { bottom: 7px; right: 7px; border-bottom: 2px solid; border-right: 2px solid; }
-
-/* Chinese Styled Buttons */
-.btn-chinese-primary {
-  background: linear-gradient(135deg, #a9151e 0%, #6e0c12 100%);
-  color: #fff9eb;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  box-shadow: 0 4px 15px rgba(110, 12, 18, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+.shopee-btn--primary {
+  color: #fff !important;
+  background-color: #c8102e !important;
+  border-color: #e53e3e !important;
   font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(200, 16, 46, 0.4);
 }
 
-.btn-chinese-primary:hover {
-  background: linear-gradient(135deg, #c41b25 0%, #8b1117 100%);
-  border-color: #f7d774;
-  box-shadow: 0 6px 25px rgba(200, 16, 46, 0.6), 0 0 15px rgba(212, 175, 55, 0.45);
-  transform: translateY(-2px);
+.shopee-btn--primary:hover {
+  background-color: #d91c3b !important;
+  box-shadow: 0 3px 12px rgba(200, 16, 46, 0.6);
 }
 
-.btn-chinese-primary:active {
-  transform: translateY(0);
-}
-
-.btn-chinese-gold {
-  background: linear-gradient(135deg, #d4af37 0%, #9e7010 100%);
-  color: #120406;
-  border: 1px solid #fce38a;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+.shopee-btn--gold {
+  color: #120406 !important;
+  background: linear-gradient(135deg, #d4af37 0%, #aa841c 100%) !important;
+  border-color: #f7d774 !important;
   font-weight: 800;
+}
+
+.shopee-btn--gold:hover {
+  background: linear-gradient(135deg, #f7d774 0%, #d4af37 100%) !important;
+}
+
+/* Shopee Ribbon "Yêu Thích" with classic 3D folded corner */
+.shopee-favourite-badge {
+  position: absolute;
+  top: 10px;
+  left: -4px;
+  color: #c8102e;
+  background-color: currentColor;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 16px;
+  padding: 0 6px 0 4px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.shopee-favourite-badge::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  border-top: 3px solid currentColor;
+  border-left: 3px solid transparent;
+  filter: brightness(60%);
+}
+
+.shopee-favourite-badge span {
+  color: #fff;
+}
+
+/* Shopee Sale / Special Ribbon top-right */
+.shopee-sale-off {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 44px;
+  height: 40px;
+  text-align: center;
+  background-color: rgba(212, 175, 55, 0.95);
+  border-top-right-radius: 2px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #140507;
+  font-weight: 900;
+  font-size: 10px;
+  line-height: 1.1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.shopee-sale-off::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  border-width: 0 22px 5px;
+  border-style: solid;
+  color: rgba(212, 175, 55, 0.95);
+  border-color: transparent currentColor transparent currentColor;
+}
+
+/* Shopee Home Filter Bar */
+.shopee-filter-bar {
+  background-color: #1a080a;
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 4px;
+  border: 1px solid #3b1216;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.shopee-filter__label {
+  font-size: 13px;
+  color: #a8a29e;
+  font-weight: 600;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+/* Shopee Select Input Dropdown */
+.shopee-select-input {
+  position: relative;
+  min-width: 160px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 2px;
+  background-color: #220d10;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
-  transition: all 0.25s ease;
+  color: #e5e5e5;
+  font-size: 13px;
 }
 
-.btn-chinese-gold:hover {
-  background: linear-gradient(135deg, #f7d774 0%, #d4af37 100%);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.65);
-  transform: translateY(-2px);
+.shopee-select-input:hover {
+  border-color: #d4af37;
 }
 
-.btn-chinese-gold:active {
-  transform: translateY(0);
+.shopee-select-input:hover .shopee-select-input__list {
+  display: block;
 }
 
-/* Modals & Backdrop Blur */
-.modal-overlay-blur {
-  background: rgba(8, 3, 4, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.shopee-select-input__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 1px);
+  border-radius: 2px;
+  background-color: #1c0a0d;
+  border: 1px solid #4a181c;
+  padding: 6px 0;
+  list-style: none;
+  display: none;
+  z-index: 20;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.shopee-select-input__item {
+  padding: 8px 14px;
+  color: #d1d5db;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.shopee-select-input__item:hover {
+  background-color: #311115;
+  color: #f7d774;
 }
 
 /* Animations */
@@ -233,7 +284,6 @@
   animation: fadeInScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Glowing Pulse Rings */
 .live-pulse {
   position: relative;
 }
@@ -262,12 +312,4 @@
     transform: scale(0.97);
     box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
   }
-}
-
-/* Traditional Cloud Border Accent */
-.chinese-pattern-stripe {
-  background-color: #8b1117;
-  background-image: radial-gradient(#d4af37 1px, transparent 1px), radial-gradient(#d4af37 1px, #8b1117 1px);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px;
 }

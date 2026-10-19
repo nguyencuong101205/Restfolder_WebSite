@@ -6,7 +6,7 @@ import { CategoryTabs } from '../components/CategoryTabs';
 import { DishCard } from '../components/DishCard';
 import { DishListItem } from '../components/DishListItem';
 import { DishDetailModal } from '../components/DishDetailModal';
-import { ChevronRight, ChevronLeft, LayoutGrid, LayoutList } from 'lucide-react';
+import { ChevronRight, LayoutGrid, LayoutList } from 'lucide-react';
 
 export const CustomerMenuPage = () => {
   const { tableNumber } = useTable();
@@ -18,8 +18,9 @@ export const CustomerMenuPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [onlySpicy, setOnlySpicy] = useState(false);
   const [onlyBestSeller, setOnlyBestSeller] = useState(false);
+  const [sortByPrice, setSortByPrice] = useState('default'); // 'default' | 'asc' | 'desc'
   const [selectedDish, setSelectedDish] = useState(null);
-  const [viewMode, setViewMode] = useState('grid'); // Default to Michelin Grid layout
+  const [viewMode, setViewMode] = useState('grid'); // Default to grid
 
   const formatVND = (num) => new Intl.NumberFormat('vi-VN').format(num) + ' đ';
 
@@ -37,7 +38,13 @@ export const CustomerMenuPage = () => {
         bestSellerOnly: onlyBestSeller
       });
       if (res.success && Array.isArray(res.data)) {
-        setDishes(res.data);
+        let list = [...res.data];
+        if (sortByPrice === 'asc') {
+          list.sort((a, b) => a.price - b.price);
+        } else if (sortByPrice === 'desc') {
+          list.sort((a, b) => b.price - a.price);
+        }
+        setDishes(list);
       }
     } catch (err) {
       console.warn('Lỗi tải danh mục món ăn:', err.message);
@@ -46,12 +53,26 @@ export const CustomerMenuPage = () => {
     }
   };
 
+  const handleSortChange = (sortType) => {
+    setSortByPrice(sortType);
+    let list = [...dishes];
+    if (sortType === 'asc') {
+      list.sort((a, b) => a.price - b.price);
+    } else if (sortType === 'desc') {
+      list.sort((a, b) => b.price - a.price);
+    } else {
+      fetchDishes();
+      return;
+    }
+    setDishes(list);
+  };
+
   return (
     <div className="min-h-screen bg-[#0e0405] text-stone-200">
       
-      {/* Search & Filter Header Container (Michelin Guide style) */}
-      <section className="bg-[#140608] border-b border-stone-800/80 pt-6 pb-5 px-4 sm:px-6 lg:px-8 shadow-md">
-        <div className="max-w-7xl mx-auto space-y-4">
+      {/* Shopee Style Filter Bar Container */}
+      <section className="bg-[#140608] border-b border-[#3b1216] pt-4 pb-4 px-4 sm:px-6 lg:px-8 shadow-md">
+        <div className="max-w-7xl mx-auto space-y-3">
           <CategoryTabs
             activeCategory={activeCategory}
             onSelectCategory={setActiveCategory}
@@ -61,62 +82,56 @@ export const CustomerMenuPage = () => {
             onToggleSpicy={() => setOnlySpicy(!onlySpicy)}
             onlyBestSeller={onlyBestSeller}
             onToggleBestSeller={() => setOnlyBestSeller(!onlyBestSeller)}
+            sortByPrice={sortByPrice}
+            onSortChange={handleSortChange}
           />
         </div>
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-28">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-28">
         
-        {/* Michelin Guide Counter Bar */}
-        <div className="flex items-center justify-between mb-6 pb-3 border-b border-stone-800">
-          <div>
-            <h2 className="text-base sm:text-xl font-bold text-white tracking-tight">
-              Hoàng Long Quán: 1-{dishes.length} trong số {dishes.length} món ăn
-            </h2>
-            <p className="text-xs text-stone-400 mt-0.5">
-              Đang phục vụ trực tiếp tại <strong>Bàn {tableNumber}</strong> · Ẩm thực cung đình & Dim Sum
-            </p>
+        {/* Counter & View Switcher Bar */}
+        <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#3b1216]">
+          <div className="flex items-center gap-2">
+            <span className="text-xs sm:text-sm font-bold text-amber-200">
+              Thực Đơn Hoàng Long Quán ({dishes.length} món)
+            </span>
+            <span className="text-xs text-stone-400 hidden sm:inline">
+              · Bàn {tableNumber}
+            </span>
           </div>
 
-          {/* Right Controls: View Switcher & Pagination Arrow (Michelin style) */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-              className="p-2 rounded-xl bg-[#1c0a0c] border border-stone-700 hover:border-amber-400 text-stone-300 hover:text-amber-200 transition-all text-xs font-semibold flex items-center gap-1.5"
-              title="Chuyển chế độ xem Lưới / Danh sách"
+              className="shopee-btn gap-1 text-xs py-1 h-8"
+              title="Chuyển chế độ xem"
             >
               {viewMode === 'grid' ? (
                 <>
-                  <LayoutList className="w-4 h-4 text-amber-400" />
-                  <span className="hidden sm:inline">Dạng List</span>
+                  <LayoutList className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Dạng List</span>
                 </>
               ) : (
                 <>
-                  <LayoutGrid className="w-4 h-4 text-amber-400" />
-                  <span className="hidden sm:inline">Dạng Lưới</span>
+                  <LayoutGrid className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Dạng Lưới</span>
                 </>
               )}
-            </button>
-
-            <button
-              className="p-2 rounded-xl bg-[#1c0a0c] border border-stone-700 text-stone-400 hover:text-white"
-              title="Trang sau"
-            >
-              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Product Cards: Michelin Guide 4-Column Grid */}
+        {/* Product Grid / List */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[4/5] bg-[#1a0a0c] rounded-2xl border border-stone-800 animate-pulse"></div>
+              <div key={i} className="aspect-[3/4] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
             ))}
           </div>
         ) : dishes.length === 0 ? (
-          <div className="py-24 text-center bg-[#160709] border border-stone-800 rounded-3xl p-8 max-w-md mx-auto shadow-xl">
+          <div className="py-24 text-center bg-[#160709] border border-[#3b1216] rounded-sm p-8 max-w-md mx-auto shadow-xl">
             <span className="text-4xl block mb-3">🥟</span>
             <h3 className="font-bold text-lg text-white">Không tìm thấy món ăn phù hợp</h3>
             <p className="text-xs text-stone-400 mt-1.5">
@@ -124,8 +139,8 @@ export const CustomerMenuPage = () => {
             </p>
           </div>
         ) : viewMode === 'grid' ? (
-          /* MICHELIN GUIDE 4-COLUMN CARDS */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          /* SHOPEE STYLE PRODUCT GRID */
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5">
             {dishes.map((dish) => (
               <DishCard
                 key={dish.id}
@@ -135,7 +150,7 @@ export const CustomerMenuPage = () => {
             ))}
           </div>
         ) : (
-          /* COMPACT LIST VIEW */
+          /* LIST VIEW */
           <div className="space-y-3">
             {dishes.map((dish) => (
               <DishListItem
@@ -154,15 +169,15 @@ export const CustomerMenuPage = () => {
         <div className="fixed bottom-4 left-4 right-4 z-40 sm:hidden">
           <button
             onClick={() => setIsCartOpen(true)}
-            className="w-full py-3.5 px-5 bg-gradient-to-r from-red-700 via-red-800 to-amber-700 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-between border-2 border-amber-400 animate-pulse active:scale-95"
+            className="w-full py-3 px-4 bg-gradient-to-r from-red-700 via-red-800 to-amber-700 text-white font-bold rounded-sm shadow-2xl flex items-center justify-between border border-amber-400 animate-pulse active:scale-95"
           >
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-full bg-amber-400 text-stone-950 font-black text-xs flex items-center justify-center shadow">
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 font-black text-xs flex items-center justify-center shadow">
                 {totalItemsCount}
               </span>
-              <span className="text-sm font-bold">Xem Giỏ Món Bàn {tableNumber}</span>
+              <span className="text-xs font-bold">Xem Giỏ Món Bàn {tableNumber}</span>
             </div>
-            <div className="text-sm font-black text-amber-200 flex items-center gap-1">
+            <div className="text-xs font-black text-amber-200 flex items-center gap-1">
               <span>{formatVND(total)}</span>
               <ChevronRight className="w-4 h-4" />
             </div>
