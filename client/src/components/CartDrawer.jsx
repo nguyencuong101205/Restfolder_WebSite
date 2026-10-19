@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useTable } from '../context/TableContext';
 import { orderApi } from '../api/orderApi';
 import confetti from 'canvas-confetti';
-import { X, Trash2, Plus, Minus, ShoppingBag, UtensilsCrossed, AlertCircle, Sparkles, Send } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, UtensilsCrossed, AlertCircle, Sparkles, Send, Tag, Check, CreditCard, Banknote, QrCode } from 'lucide-react';
 
 export const CartDrawer = () => {
   const {
@@ -14,6 +14,12 @@ export const CartDrawer = () => {
     removeFromCart,
     clearCart,
     subtotal,
+    appliedVoucher,
+    applyVoucher,
+    removeVoucher,
+    paymentMethod,
+    setPaymentMethod,
+    discountAmount,
     vat,
     total,
     totalItemsCount
@@ -21,12 +27,27 @@ export const CartDrawer = () => {
 
   const { tableNumber, setActiveOrder, setIsOrderTrackerOpen } = useTable();
   const [orderNote, setOrderNote] = useState('');
+  const [voucherInput, setVoucherInput] = useState('');
+  const [voucherMsg, setVoucherMsg] = useState(null); // { type: 'success' | 'error', text: '' }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   if (!isCartOpen) return null;
 
   const formatVND = (num) => new Intl.NumberFormat('vi-VN').format(num) + ' đ';
+
+  const handleApplyVoucherCode = (e) => {
+    if (e) e.preventDefault();
+    if (!voucherInput.trim()) return;
+    const result = applyVoucher(voucherInput.trim());
+    if (result.success) {
+      setVoucherMsg({ type: 'success', text: result.message });
+      setVoucherInput('');
+    } else {
+      setVoucherMsg({ type: 'error', text: result.message });
+    }
+    setTimeout(() => setVoucherMsg(null), 3500);
+  };
 
   const handleSendOrder = async () => {
     if (cartItems.length === 0) return;
@@ -47,7 +68,10 @@ export const CartDrawer = () => {
           note: item.note
         })),
         note: orderNote,
-        customerName: `Khách Bàn ${tableNumber}`
+        customerName: `Khách Bàn ${tableNumber}`,
+        voucher: appliedVoucher ? appliedVoucher.code : null,
+        discount: discountAmount,
+        paymentMethod
       };
 
       const res = await orderApi.createOrder(orderPayload);
@@ -205,6 +229,125 @@ export const CartDrawer = () => {
               })
             )}
 
+            {/* Voucher & Coupon Box */}
+            {cartItems.length > 0 && (
+              <div className="pt-2 border-t border-[#3b1519]">
+                <label className="text-xs text-amber-300 font-semibold block mb-1.5 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Mã Ưu Đãi Hoàng Long:</span>
+                  </span>
+                  <span className="text-[10px] text-stone-400 font-normal">
+                    (HOANGLONG10, DIMSUM50...)
+                  </span>
+                </label>
+
+                {appliedVoucher ? (
+                  <div className="p-2.5 bg-gradient-to-r from-red-950 to-[#220c10] border border-amber-500/50 rounded-xl flex items-center justify-between shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-md bg-amber-400 text-stone-950 flex items-center justify-center font-black text-xs">
+                        %
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-mono font-bold text-amber-300 text-xs">
+                            {appliedVoucher.code}
+                          </span>
+                          <span className="text-[10px] text-emerald-400 font-bold">
+                            (Đã áp dụng)
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-stone-300 line-clamp-1">
+                          {appliedVoucher.title}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={removeVoucher}
+                      className="text-stone-400 hover:text-red-400 text-xs p-1"
+                      title="Gỡ bỏ mã này"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleApplyVoucherCode} className="flex gap-2">
+                    <input
+                      type="text"
+                      value={voucherInput}
+                      onChange={(e) => setVoucherInput(e.target.value.toUpperCase())}
+                      placeholder="Nhập mã voucher..."
+                      className="flex-1 px-3 py-1.5 bg-[#120507] border border-[#44181c] rounded-xl text-xs text-stone-200 uppercase placeholder-stone-500 focus:outline-none focus:border-amber-400 font-mono"
+                    />
+                    <button
+                      type="submit"
+                      className="px-3 py-1.5 shopee-btn shopee-btn--gold text-xs font-bold rounded-xl whitespace-nowrap"
+                    >
+                      Áp Dụng
+                    </button>
+                  </form>
+                )}
+
+                {voucherMsg && (
+                  <p className={`text-[11px] mt-1.5 ${voucherMsg.type === 'success' ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {voucherMsg.text}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Payment Method Selector */}
+            {cartItems.length > 0 && (
+              <div className="pt-2 border-t border-[#3b1519]">
+                <label className="text-xs text-amber-300 font-semibold block mb-1.5 flex items-center gap-1.5">
+                  <CreditCard className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Hình thức thanh toán tại bàn:</span>
+                </label>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('cash')}
+                    className={`p-2 rounded-xl border text-center transition-all ${
+                      paymentMethod === 'cash'
+                        ? 'bg-amber-400/20 border-amber-400 text-amber-200 font-bold'
+                        : 'bg-[#18080a] border-[#3b1519] text-stone-400 hover:text-white'
+                    }`}
+                  >
+                    <Banknote className="w-4 h-4 mx-auto mb-1 text-amber-400" />
+                    <span className="text-[11px] block">Tiền mặt</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('transfer')}
+                    className={`p-2 rounded-xl border text-center transition-all ${
+                      paymentMethod === 'transfer'
+                        ? 'bg-amber-400/20 border-amber-400 text-amber-200 font-bold'
+                        : 'bg-[#18080a] border-[#3b1519] text-stone-400 hover:text-white'
+                    }`}
+                  >
+                    <QrCode className="w-4 h-4 mx-auto mb-1 text-amber-400" />
+                    <span className="text-[11px] block">Chuyển QR</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('card')}
+                    className={`p-2 rounded-xl border text-center transition-all ${
+                      paymentMethod === 'card'
+                        ? 'bg-amber-400/20 border-amber-400 text-amber-200 font-bold'
+                        : 'bg-[#18080a] border-[#3b1519] text-stone-400 hover:text-white'
+                    }`}
+                  >
+                    <CreditCard className="w-4 h-4 mx-auto mb-1 text-amber-400" />
+                    <span className="text-[11px] block">Thẻ POS</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Note for the overall order */}
             {cartItems.length > 0 && (
               <div className="pt-2">
@@ -230,6 +373,12 @@ export const CartDrawer = () => {
                   <span>Tạm tính ({totalItemsCount} món):</span>
                   <span>{formatVND(subtotal)}</span>
                 </div>
+                {discountAmount > 0 && (
+                  <div className="flex justify-between text-emerald-400 font-semibold">
+                    <span>Ưu đãi Voucher ({appliedVoucher?.code}):</span>
+                    <span>-{formatVND(discountAmount)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-stone-400">
                   <span>Thuế VAT (8%):</span>
                   <span>{formatVND(vat)}</span>

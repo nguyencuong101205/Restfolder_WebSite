@@ -38,11 +38,20 @@ export const Header = ({
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [latestReservation, setLatestReservation] = useState(null);
 
   const userDropdownRef = useRef(null);
   const moreMenuRef = useRef(null);
 
   const formatVND = (num) => new Intl.NumberFormat('vi-VN').format(num) + ' đ';
+
+  // Check saved reservation
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('hoanglong_reservation');
+      if (saved) setLatestReservation(JSON.parse(saved));
+    } catch {}
+  }, [isUserDropdownOpen]);
 
   // Close dropdowns on outside click
   useEffect(() => {
@@ -428,6 +437,24 @@ export const Header = ({
                           Đăng nhập hoặc đăng ký thành viên Hoàng Long Quán
                         </p>
                       </div>
+
+                      {/* Display reservation ticket if customer booked a table */}
+                      {latestReservation && (
+                        <div className="my-2.5 p-2.5 bg-gradient-to-r from-[#2c0e12] to-[#1c080b] border border-amber-500/50 rounded-xl space-y-1">
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-amber-300 text-xs flex items-center gap-1.5">
+                              <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                              <span>Bàn Đã Đặt: {latestReservation.code}</span>
+                            </span>
+                            <span className="text-[9px] bg-red-950 text-amber-200 border border-amber-500/40 px-1.5 py-0.5 rounded font-mono">
+                              {latestReservation.time}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-stone-300">
+                            {latestReservation.date} · {latestReservation.guests} khách ({latestReservation.area === 'vip' ? latestReservation.vipRoom : 'Sảnh Cung Đình'})
+                          </p>
+                        </div>
+                      )}
 
                       <div className="py-3 space-y-2.5">
                         <button

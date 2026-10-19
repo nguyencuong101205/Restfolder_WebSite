@@ -13,12 +13,83 @@ export const CartProvider = ({ children }) => {
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [appliedVoucher, setAppliedVoucher] = useState(() => {
+    try {
+      const saved = localStorage.getItem('hoanglong_voucher');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [paymentMethod, setPaymentMethod] = useState('cash'); // 'cash' | 'transfer' | 'card'
 
   useEffect(() => {
     try {
       localStorage.setItem('hoanglong_cart', JSON.stringify(cartItems));
     } catch (e) {}
   }, [cartItems]);
+
+  useEffect(() => {
+    try {
+      if (appliedVoucher) {
+        localStorage.setItem('hoanglong_voucher', JSON.stringify(appliedVoucher));
+      } else {
+        localStorage.removeItem('hoanglong_voucher');
+      }
+    } catch (e) {}
+  }, [appliedVoucher]);
+
+  /**
+   * Apply a voucher code
+   */
+  const applyVoucher = (code) => {
+    const normalized = (code || '').trim().toUpperCase();
+    if (!normalized) {
+      return { success: false, message: 'Vui lòng nhập mã giảm giá!' };
+    }
+
+    if (normalized === 'HOANGLONG10') {
+      const voucher = {
+        code: 'HOANGLONG10',
+        title: 'Giảm 10% Hóa Đơn Bàn',
+        discountType: 'percent',
+        discountValue: 10,
+        minOrder: 0
+      };
+      setAppliedVoucher(voucher);
+      return { success: true, message: 'Áp dụng mã HOANGLONG10 thành công! Giảm 10% tổng đơn.' };
+    }
+
+    if (normalized === 'DIMSUM50') {
+      const voucher = {
+        code: 'DIMSUM50',
+        title: 'Tặng Xửng Há Cảo Thủy Tinh (Giảm 50.000đ)',
+        discountType: 'fixed',
+        discountValue: 50000,
+        minOrder: 150000
+      };
+      setAppliedVoucher(voucher);
+      return { success: true, message: 'Áp dụng mã DIMSUM50 thành công! Giảm trực tiếp 50.000 đ.' };
+    }
+
+    if (normalized === 'LONGTINH') {
+      const voucher = {
+        code: 'LONGTINH',
+        title: 'Tặng Ấm Trà Long Tỉnh Tây Hồ (Giảm 45.000đ)',
+        discountType: 'fixed',
+        discountValue: 45000,
+        minOrder: 100000
+      };
+      setAppliedVoucher(voucher);
+      return { success: true, message: 'Áp dụng mã LONGTINH thành công! Miễn phí 45.000 đ danh trà.' };
+    }
+
+    return { success: false, message: `Mã ưu đãi "${normalized}" không hợp lệ hoặc đã hết hạn.` };
+  };
+
+  const removeVoucher = () => {
+    setAppliedVoucher(null);
+  };
 
   /**
    * Add item to cart with options (spiceLevel, toppings, note)
@@ -86,8 +157,19 @@ export const CartProvider = ({ children }) => {
     return sum + unitPrice * item.quantity;
   }, 0);
 
-  const vat = Math.round(subtotal * 0.08); // 8% VAT
-  const total = subtotal + vat;
+  // Discount calculation
+  let discountAmount = 0;
+  if (appliedVoucher && subtotal > 0) {
+    if (appliedVoucher.discountType === 'percent') {
+      discountAmount = Math.round(subtotal * (appliedVoucher.discountValue / 100));
+    } else if (appliedVoucher.discountType === 'fixed') {
+      discountAmount = Math.min(subtotal, appliedVoucher.discountValue);
+    }
+  }
+
+  const taxableSubtotal = Math.max(0, subtotal - discountAmount);
+  const vat = Math.round(taxableSubtotal * 0.08); // 8% VAT
+  const total = taxableSubtotal + vat;
   const totalItemsCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (
@@ -100,7 +182,13 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         removeFromCart,
         clearCart,
+        appliedVoucher,
+        applyVoucher,
+        removeVoucher,
+        paymentMethod,
+        setPaymentMethod,
         subtotal,
+        discountAmount,
         vat,
         total,
         totalItemsCount

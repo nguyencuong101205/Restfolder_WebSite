@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import confetti from 'canvas-confetti';
 import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, Phone, Mail, User, MapPin } from 'lucide-react';
 import { ChineseSeal } from './ChineseSeal';
 
@@ -23,6 +24,23 @@ export const ReservationModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     const code = 'HL-' + Math.floor(100000 + Math.random() * 900000);
     setReservationCode(code);
+    
+    try {
+      const reservationData = {
+        ...formData,
+        code,
+        createdAt: new Date().toISOString()
+      };
+      localStorage.setItem('hoanglong_reservation', JSON.stringify(reservationData));
+      
+      confetti({
+        particleCount: 70,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#c8102e', '#ffd700', '#d4af37', '#ffffff']
+      });
+    } catch (e) {}
+
     setStep('success');
   };
 

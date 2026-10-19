@@ -8,7 +8,7 @@ import { CategoryTabs } from '../components/CategoryTabs';
 import { DishCard } from '../components/DishCard';
 import { DishListItem } from '../components/DishListItem';
 import { DishDetailModal } from '../components/DishDetailModal';
-import { ChevronRight, ChevronLeft, LayoutGrid, LayoutList, Sparkles, Utensils } from 'lucide-react';
+import { ChevronRight, ChevronLeft, LayoutGrid, LayoutList, Sparkles, Utensils, Bell, Clock, ArrowUp, ShoppingBag, QrCode } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 8; // Strictly 2 dishes per row x 4 rows per page
 
@@ -16,8 +16,17 @@ export const CustomerMenuPage = ({
   onOpenReserve,
   onOpenAbout
 }) => {
-  const { tableNumber, setIsQRModalOpen } = useTable();
+  const { tableNumber, setIsQRModalOpen, setIsCallStaffModalOpen, setIsOrderTrackerOpen, activeOrder } = useTable();
   const { totalItemsCount, total, setIsCartOpen } = useCart();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 350);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -287,6 +296,61 @@ export const CustomerMenuPage = ({
         )}
 
       </main>
+
+      {/* Floating Quick Action Dock (Desktop & Tablet) */}
+      <aside aria-label="Phím tắt nhanh" className="fixed bottom-6 right-6 z-40 hidden sm:flex flex-col items-end gap-2.5">
+        {/* Back to top button */}
+        {showScrollTop && (
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="w-11 h-11 rounded-full bg-[#1c0a0d] hover:bg-[#2e1015] border border-amber-500/50 hover:border-amber-400 text-amber-300 hover:text-white flex items-center justify-center shadow-xl transition-all duration-200 active:scale-95 group"
+            title="Cuộn về đầu trang"
+          >
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
+        )}
+
+        {/* Call Staff Button */}
+        <button
+          type="button"
+          onClick={() => setIsCallStaffModalOpen(true)}
+          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#1f0a0d] hover:bg-[#2e0f14] border border-amber-500/50 hover:border-amber-400 text-stone-200 hover:text-amber-200 shadow-xl transition-all text-xs font-bold active:scale-95"
+          title="Gọi tiểu nhị hỗ trợ tại bàn"
+        >
+          <Bell className="w-4 h-4 text-amber-400" />
+          <span>Gọi Bàn {tableNumber}</span>
+        </button>
+
+        {/* Order Tracker Button (if active order) */}
+        {activeOrder && (
+          <button
+            type="button"
+            onClick={() => setIsOrderTrackerOpen(true)}
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-gradient-to-r from-red-900 to-amber-950 border border-amber-400 text-amber-200 shadow-xl transition-all text-xs font-bold animate-pulse active:scale-95"
+            title="Xem tiến độ món ăn đang nấu"
+          >
+            <Clock className="w-4 h-4 text-amber-300" />
+            <span>Tiến Độ Bếp #{activeOrder.id.slice(-4)}</span>
+          </button>
+        )}
+
+        {/* Cart Button */}
+        <button
+          type="button"
+          onClick={() => setIsCartOpen(true)}
+          className="flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-red-700 via-red-800 to-red-900 hover:from-red-600 hover:to-red-800 border-2 border-amber-400 text-white shadow-2xl transition-all font-bold text-xs active:scale-95 group"
+          title="Mở giỏ món bàn ăn"
+        >
+          <ShoppingBag className="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform" />
+          <span>Giỏ Món Bàn {tableNumber}</span>
+          {totalItemsCount > 0 && (
+            <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center shadow">
+              {totalItemsCount}
+            </span>
+          )}
+        </button>
+      </aside>
 
       {/* Floating Bottom Bar for Mobile Table Ordering */}
       {totalItemsCount > 0 && (

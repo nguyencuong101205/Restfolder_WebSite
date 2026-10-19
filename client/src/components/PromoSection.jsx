@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCart } from '../context/CartContext';
 import { Tag, Sparkles, Copy, Check, Gift } from 'lucide-react';
 
 export const PromoSection = () => {
@@ -28,10 +29,18 @@ export const PromoSection = () => {
     }
   ];
 
+  const { applyVoucher, setIsCartOpen } = useCart();
+
   const handleCopy = (code) => {
     navigator.clipboard.writeText(code);
     setCopiedCode(code);
     setTimeout(() => setCopiedCode(null), 2500);
+  };
+
+  const handleApplyNow = (code) => {
+    handleCopy(code);
+    applyVoucher(code);
+    setIsCartOpen(true);
   };
 
   return (
@@ -52,7 +61,7 @@ export const PromoSection = () => {
             </h2>
           </div>
           <span className="text-xs text-stone-400">
-            * Nhấp vào mã để sao chép và áp dụng khi thanh toán tại bàn
+            * Chọn "Dùng Ngay" để tự động áp dụng mã vào bàn ăn của bạn
           </span>
         </div>
 
@@ -84,36 +93,49 @@ export const PromoSection = () => {
                   </p>
                 </div>
 
-                {/* Code Copy Button */}
+                {/* Code Actions */}
                 <div className="pt-3 border-t border-[#3b1519] flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#120507] border border-dashed border-amber-500/60 rounded-sm">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#120507] border border-dashed border-amber-500/60 rounded-sm">
                     <Tag className="w-3.5 h-3.5 text-amber-400" />
                     <span className="font-mono font-black text-amber-300 text-xs tracking-wider">
                       {p.code}
                     </span>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => handleCopy(p.code)}
-                    className={`px-3 py-1.5 text-xs font-bold rounded-sm transition-all flex items-center gap-1.5 ${
-                      isCopied
-                        ? 'bg-emerald-600 text-white'
-                        : 'shopee-btn shopee-btn--gold h-8'
-                    }`}
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Đã lưu mã!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5 text-stone-950" />
-                        <span>Lưu Mã</span>
-                      </>
-                    )}
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(p.code)}
+                      className={`px-2.5 py-1.5 text-xs font-bold rounded-sm transition-all flex items-center gap-1 ${
+                        isCopied
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-[#2b1014] hover:bg-[#3d161c] border border-amber-500/30 text-amber-200'
+                      }`}
+                      title="Sao chép mã"
+                    >
+                      {isCopied ? (
+                        <>
+                          <Check className="w-3 h-3" />
+                          <span>Đã chép</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3 text-amber-400" />
+                          <span>Sao chép</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleApplyNow(p.code)}
+                      className="shopee-btn shopee-btn--gold h-8 px-2.5 text-xs font-bold"
+                      title="Áp dụng mã vào giỏ hàng ngay lập tức"
+                    >
+                      <Sparkles className="w-3 h-3 text-stone-950" />
+                      <span>Dùng Ngay</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             );
