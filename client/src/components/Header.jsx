@@ -37,7 +37,6 @@ export const Header = ({
 
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [latestReservation, setLatestReservation] = useState(null);
 
   const userDropdownRef = useRef(null);
@@ -68,7 +67,7 @@ export const Header = ({
   }, []);
 
   const scrollToSection = (id) => {
-    setIsMobileMenuOpen(false);
+    setIsMoreMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -83,139 +82,85 @@ export const Header = ({
         <div className="h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* ========================================================
-              LEFT: BRAND LOGO + MAIN NAVIGATION PILLS
+              LEFT: BRAND LOGO + MAIN BUTTONS + 1 ICON MENU (XEM THÊM)
              ======================================================== */}
-          <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             {/* Brand Logo */}
             <div
-              className="flex items-center gap-2.5 cursor-pointer select-none group flex-shrink-0"
+              className="flex items-center gap-2 cursor-pointer select-none group flex-shrink-0"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               title="Về đầu trang Hoàng Long Quán"
             >
               <ChineseSeal text="皇龍" subtext="御膳" className="hidden sm:inline-flex" />
               <div className="flex items-baseline">
-                <span className="text-red-500 font-extrabold tracking-tight text-xl sm:text-2xl font-sans uppercase group-hover:text-red-400 transition-colors">
+                <span className="text-red-500 font-extrabold tracking-tight text-lg sm:text-2xl font-sans uppercase group-hover:text-red-400 transition-colors">
                   HOÀNG LONG
                 </span>
-                <span className="text-amber-400 font-bold tracking-widest text-lg sm:text-2xl ml-1.5 uppercase font-decorative group-hover:text-amber-300 transition-colors">
+                <span className="text-amber-400 font-bold tracking-widest text-base sm:text-2xl ml-1 uppercase font-decorative group-hover:text-amber-300 transition-colors">
                   QUÁN
                 </span>
-                <span className="font-calligraphy text-amber-300/80 text-sm sm:text-base ml-2 hidden md:inline">
+                <span className="font-calligraphy text-amber-300/80 text-xs sm:text-base ml-1.5 hidden lg:inline">
                   皇龍樓
                 </span>
               </div>
             </div>
 
-            {/* Main Navigation Links (Desktop) */}
-            <nav className="hidden lg:flex items-center gap-1.5 text-xs sm:text-sm font-semibold">
+            {/* Main Navigation Buttons (Desktop >= 1280px) */}
+            <nav className="hidden xl:flex items-center gap-1.5 text-xs sm:text-sm font-semibold flex-shrink-0">
               <button
                 type="button"
                 onClick={onExploreMenu}
-                className="px-3.5 py-1.5 rounded-full border border-amber-400/80 text-amber-200 bg-red-950/60 hover:bg-red-900/70 transition-all font-bold shadow-sm"
+                className="px-3.5 py-1.5 rounded-full border border-amber-400/80 text-amber-200 bg-red-950/60 hover:bg-red-900/70 transition-all font-bold shadow-sm whitespace-nowrap"
               >
                 Thực Đơn
               </button>
               <button
                 type="button"
                 onClick={() => scrollToSection('khuyen-mai')}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1"
+                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1 whitespace-nowrap"
               >
                 <Gift className="w-3.5 h-3.5 text-amber-400" />
                 <span>Ưu Đãi</span>
               </button>
               <button
                 type="button"
-                onClick={onOpenAbout}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all"
-              >
-                Giới Thiệu
-              </button>
-              <button
-                type="button"
                 onClick={onOpenReserve}
-                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1"
+                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all flex items-center gap-1 whitespace-nowrap"
               >
                 <Calendar className="w-3.5 h-3.5 text-amber-400" />
                 <span>Đặt Bàn Tiệc</span>
               </button>
+              <button
+                type="button"
+                onClick={onOpenAbout}
+                className="px-3 py-1.5 rounded-full text-stone-300 hover:text-amber-200 hover:bg-[#240e11] transition-all whitespace-nowrap"
+              >
+                Giới Thiệu
+              </button>
             </nav>
-          </div>
 
-          {/* ========================================================
-              RIGHT: ACTIONS & UTILITIES (BÀN, GỌI BÀN, GIỎ, USER)
-             ======================================================== */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
-            
-            {/* Button: Đặt Bàn Nhanh (Mobile/Desktop) */}
-            <button
-              type="button"
-              onClick={onOpenReserve}
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-950 font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
-            >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Đặt Bàn</span>
-            </button>
-
-            {/* Bàn {tableNumber} (QR Ordering) */}
-            <button
-              type="button"
-              onClick={() => setIsQRModalOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-stone-700/80 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs sm:text-sm font-semibold active:scale-95"
-              title="Đổi số bàn hoặc quét mã QR"
-            >
-              <QrCode className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
-              <span className="hidden sm:inline">Bàn {tableNumber}</span>
-              <span className="sm:hidden">{tableNumber}</span>
-            </button>
-
-            {/* Gọi Bàn */}
-            <button
-              type="button"
-              onClick={() => setIsCallStaffModalOpen(true)}
-              className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-stone-700/80 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs font-semibold active:scale-95"
-              title="Gọi phục vụ / tiểu nhị"
-            >
-              <Bell className="w-3.5 h-3.5 text-amber-400" />
-              <span>Gọi Bàn</span>
-            </button>
-
-            {/* Giỏ Món */}
-            <button
-              type="button"
-              onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-red-700 via-red-800 to-red-900 hover:from-red-600 hover:to-red-800 border border-amber-400/60 text-white font-bold transition-all shadow-md active:scale-95 text-xs sm:text-sm"
-              title="Xem giỏ món của bàn"
-            >
-              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300" />
-              <span className="hidden lg:inline">Giỏ Món</span>
-              {totalItemsCount > 0 && (
-                <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center shadow">
-                  {totalItemsCount}
-                </span>
-              )}
-            </button>
-
-            {/* Menu Icon Button (Xem thêm chức năng bị ẩn) */}
-            <div className="relative" ref={moreMenuRef}>
+            {/* 1 Icon Menu Xem Thêm (Các button bị ẩn đi) */}
+            <div className="relative flex-shrink-0" ref={moreMenuRef}>
               <button
                 type="button"
                 onClick={() => {
                   setIsMoreMenuOpen(!isMoreMenuOpen);
                   setIsUserDropdownOpen(false);
                 }}
-                className={`p-2 rounded-full border transition-all text-xs ${
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border transition-all text-xs font-semibold ${
                   isMoreMenuOpen
                     ? 'bg-amber-400 text-stone-950 border-amber-300 shadow-md font-bold'
-                    : 'bg-[#1c0a0c] hover:bg-[#280f12] border-stone-700/80 text-stone-300 hover:border-amber-400/60 hover:text-white'
+                    : 'bg-[#1c0a0c] hover:bg-[#280f12] border-amber-500/30 text-stone-300 hover:border-amber-400/60 hover:text-white'
                 }`}
-                title="Xem thêm chức năng"
+                title="Xem thêm các nút & chức năng bị ẩn"
               >
-                <Menu className="w-4 h-4" />
+                <Menu className="w-4 h-4 text-amber-400" />
+                <span className="hidden md:inline">Menu</span>
               </button>
 
-              {/* Dropdown Menu */}
+              {/* Dropdown Menu chứa các button bị ẩn */}
               {isMoreMenuOpen && (
-                <div className="absolute right-0 mt-3 w-64 sm:w-72 bg-[#1c0a0d] border border-amber-500/40 rounded-2xl shadow-2xl overflow-hidden py-2 z-50 text-left animate-fade-scale text-xs sm:text-sm">
+                <div className="absolute left-0 mt-3 w-64 sm:w-72 bg-[#1c0a0d] border border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden py-2 z-50 text-left animate-fade-scale text-xs sm:text-sm">
                   
                   {/* Active Order banner if cooking */}
                   {activeOrder && (
@@ -239,15 +184,52 @@ export const Header = ({
                     </div>
                   )}
 
+                  {/* Section for Main Navigation on mobile / tablet */}
+                  <div className="xl:hidden py-1 border-b border-[#3b1519] space-y-0.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onExploreMenu();
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-amber-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center gap-2.5 font-bold"
+                    >
+                      <span className="w-4 text-center">🥟</span>
+                      <span>Thực Đơn Gọi Món</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        scrollToSection('khuyen-mai');
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-amber-200 hover:bg-[#291013] transition-colors flex items-center gap-2.5"
+                    >
+                      <Gift className="w-4 h-4 text-amber-400" />
+                      <span>Mã Giảm Giá & Ưu Đãi</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onOpenReserve();
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-amber-200 hover:bg-[#291013] transition-colors flex items-center gap-2.5"
+                    >
+                      <Calendar className="w-4 h-4 text-amber-400" />
+                      <span>Đặt Bàn Tiệc Trước</span>
+                    </button>
+                  </div>
+
+                  {/* Operational & Extra Buttons */}
                   <div className="py-1">
-                    {/* Giới thiệu */}
                     <button
                       type="button"
                       onClick={() => {
                         onOpenAbout();
                         setIsMoreMenuOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2.5">
                         <Sparkles className="w-4 h-4 text-amber-400" />
@@ -256,7 +238,36 @@ export const Header = ({
                       <span className="text-[10px] text-amber-400 font-calligraphy">皇龍</span>
                     </button>
 
-                    {/* Màn hình bếp KDS */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsCallStaffModalOpen(true);
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Bell className="w-4 h-4 text-amber-400" />
+                        <span>Gọi Phục Vụ / Tiểu Nhị</span>
+                      </div>
+                      <span className="text-[10px] text-stone-400">Bàn {tableNumber}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsOrderTrackerOpen(true);
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Clock className="w-4 h-4 text-amber-400" />
+                        <span>Theo Dõi Tiến Độ Đơn</span>
+                      </div>
+                      <span className="text-[10px] text-stone-400">Trực tiếp</span>
+                    </button>
+
                     <button
                       type="button"
                       onClick={() => {
@@ -264,7 +275,7 @@ export const Header = ({
                         else onOpenAuth('login');
                         setIsMoreMenuOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2.5">
                         <ChefHat className="w-4 h-4 text-amber-400" />
@@ -275,7 +286,6 @@ export const Header = ({
                       </span>
                     </button>
 
-                    {/* Quản lý bàn */}
                     <button
                       type="button"
                       onClick={() => {
@@ -283,7 +293,7 @@ export const Header = ({
                         else onOpenAuth('login');
                         setIsMoreMenuOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
+                      className="w-full px-4 py-2 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2.5">
                         <QrCode className="w-4 h-4 text-amber-400" />
@@ -293,36 +303,66 @@ export const Header = ({
                         Admin
                       </span>
                     </button>
-
-                    {/* Theo dõi tiến độ đơn */}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsOrderTrackerOpen(true);
-                        setIsMoreMenuOpen(false);
-                      }}
-                      className="w-full px-4 py-2.5 text-left text-stone-300 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Clock className="w-4 h-4 text-amber-400" />
-                        <span>Theo Dõi Tiến Độ Đơn</span>
-                      </div>
-                      <span className="text-[10px] text-stone-400">Trực tiếp</span>
-                    </button>
                   </div>
 
                   {/* Hotline */}
-                  <div className="pt-2 px-4 py-2.5 border-t border-[#3b1519] flex items-center justify-between text-[11px] text-stone-400">
+                  <div className="pt-2 px-4 py-2 border-t border-[#3b1519] flex items-center justify-between text-[11px] text-stone-400">
                     <span className="flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Hotline đặt tiệc:</span>
+                      <span>Hotline:</span>
                     </span>
-                    <a href="tel:02838889999" className="text-amber-400 font-bold">(028) 3888 9999</a>
+                    <a href="tel:02838889999" className="text-amber-400 font-bold hover:underline">(028) 3888 9999</a>
                   </div>
 
                 </div>
               )}
             </div>
+
+          </div>
+
+          {/* ========================================================
+              RIGHT: BÀN, GỌI BÀN, GIỎ MÓN, VÀ ICON NGƯỜI (GÓC PHẢI)
+             ======================================================== */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0 flex-nowrap">
+            
+            {/* Bàn {tableNumber} (QR Ordering) */}
+            <button
+              type="button"
+              onClick={() => setIsQRModalOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-amber-500/30 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs sm:text-sm font-semibold active:scale-95 whitespace-nowrap"
+              title="Đổi số bàn hoặc quét mã QR"
+            >
+              <QrCode className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 flex-shrink-0" />
+              <span className="hidden sm:inline">Bàn {tableNumber}</span>
+              <span className="sm:hidden font-mono font-bold">B{tableNumber}</span>
+            </button>
+
+            {/* Gọi Bàn (md+) */}
+            <button
+              type="button"
+              onClick={() => setIsCallStaffModalOpen(true)}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-full bg-[#1c0a0c] hover:bg-[#280f12] border border-amber-500/30 hover:border-amber-400/60 text-stone-200 hover:text-amber-200 transition-all text-xs font-semibold active:scale-95 whitespace-nowrap"
+              title="Gọi phục vụ / tiểu nhị"
+            >
+              <Bell className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <span>Gọi Bàn</span>
+            </button>
+
+            {/* Giỏ Món */}
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-red-700 via-red-800 to-red-900 hover:from-red-600 hover:to-red-800 border border-amber-400/60 text-white font-bold transition-all shadow-md active:scale-95 text-xs sm:text-sm whitespace-nowrap"
+              title="Xem giỏ món của bàn"
+            >
+              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 flex-shrink-0" />
+              <span className="hidden sm:inline">Giỏ Món</span>
+              {totalItemsCount > 0 && (
+                <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center shadow">
+                  {totalItemsCount}
+                </span>
+              )}
+            </button>
 
             {/* ========================================================
                 TOP-RIGHT: USER ICON BUTTON (LOGIN / REGISTER MODAL)
@@ -500,72 +540,10 @@ export const Header = ({
               )}
             </div>
 
-            {/* Mobile Hamburger Menu Toggle */}
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full bg-[#1c0a0c] border border-stone-700 text-stone-300 hover:text-white"
-            >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
-
           </div>
 
         </div>
       </div>
-
-      {/* Mobile Drawer */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#18080a] border-b border-[#3b1519] px-6 py-4 space-y-3 animate-fade-in text-xs font-semibold">
-          <div className="flex flex-col space-y-2 pb-3 border-b border-[#3b1519]">
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onExploreMenu();
-              }}
-              className="text-left py-1.5 text-amber-200 hover:text-amber-300"
-            >
-              🥟 Thực Đơn Gọi Món
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                scrollToSection('khuyen-mai');
-              }}
-              className="text-left py-1.5 text-stone-300 hover:text-white"
-            >
-              🎁 Mã Giảm Giá & Ưu Đãi
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenAbout();
-              }}
-              className="text-left py-1.5 text-stone-300 hover:text-white"
-            >
-              📜 Giới Thiệu Quán
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenReserve();
-              }}
-              className="text-left py-1.5 text-stone-300 hover:text-white"
-            >
-              🏮 Đặt Bàn Tiệc Trước
-            </button>
-          </div>
-
-          <div className="flex items-center justify-between pt-1 text-stone-400">
-            <span>Hotline: <a href="tel:02838889999" className="text-amber-400 font-bold">(028) 3888 9999</a></span>
-          </div>
-        </div>
-      )}
-
     </header>
   );
 };

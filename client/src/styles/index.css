@@ -31,18 +31,6 @@
       linear-gradient(to bottom, #0c0405 0%, #140809 50%, #0d0405 100%);
     background-attachment: fixed;
   }
-
-  button {
-    background-color: transparent;
-    background-image: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    font-family: inherit;
-    color: inherit;
-    outline: none;
-  }
 }
 
 /* Custom Scrollbars */
