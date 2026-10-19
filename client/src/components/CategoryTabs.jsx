@@ -1,13 +1,14 @@
 import React from 'react';
-import { Search, Flame, Star, Sparkles, Coffee, UtensilsCrossed } from 'lucide-react';
+import { Search, SlidersHorizontal, Flame, Star, X, QrCode } from 'lucide-react';
+import { useTable } from '../context/TableContext';
 
 export const CATEGORIES = [
-  { id: 'all', label: 'Tất Cả Món', hanzi: '全部佳肴', icon: Sparkles },
-  { id: 'dimsum', label: 'Dim Sum Điểm Tâm', hanzi: '港式点心', icon: null },
-  { id: 'roast', label: 'Quay & Nướng Cung Đình', hanzi: '宫廷烧腊', icon: null },
-  { id: 'hotpot', label: 'Lẩu & Xào Tứ Xuyên', hanzi: '川味佳肴', icon: Flame },
-  { id: 'noodles', label: 'Mì Kéo & Cơm Chiên', hanzi: '拉面炒饭', icon: UtensilsCrossed },
-  { id: 'tea_dessert', label: 'Trà & Tráng Miệng', hanzi: '名茶甜点', icon: Coffee }
+  { id: 'all', label: 'Tất Cả Món' },
+  { id: 'dimsum', label: 'Dim Sum Điểm Tâm' },
+  { id: 'roast', label: 'Món Quay Cung Đình' },
+  { id: 'hotpot', label: 'Lẩu Tứ Xuyên Cay Tê' },
+  { id: 'noodles', label: 'Mì Kéo & Cơm Chiên' },
+  { id: 'tea_dessert', label: 'Trà & Tráng Miệng' }
 ];
 
 export const CategoryTabs = ({
@@ -20,98 +21,100 @@ export const CategoryTabs = ({
   onlyBestSeller,
   onToggleBestSeller
 }) => {
+  const { tableNumber, setIsQRModalOpen } = useTable();
+
   return (
     <div className="space-y-4">
-      {/* Search & Quick Filters Bar */}
-      <div className="flex flex-col sm:flex-row gap-3 items-center justify-between bg-[#190a0d]/90 p-3 rounded-2xl border border-[#4d161a] shadow-xl backdrop-blur-sm">
-        
-        {/* Search Input */}
-        <div className="relative w-full sm:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-400" />
+      {/* Michelin Guide Search Bar Row */}
+      <div className="flex items-center gap-3">
+        {/* Large Pill Search Input */}
+        <div className="relative flex-1">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Tìm món ăn, vịt quay, dimsum, lẩu..."
-            className="w-full pl-10 pr-8 py-2.5 bg-[#0f0406] border border-[#521c21] rounded-xl text-xs sm:text-sm text-amber-100 placeholder-stone-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all shadow-inner"
+            placeholder="Tìm kiếm món ăn, dim sum, vịt quay, lẩu, mì kéo..."
+            className="w-full pl-11 pr-10 py-3 bg-[#18090b] border border-stone-700/80 rounded-full text-xs sm:text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 shadow-md transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-stone-400 hover:text-white w-5 h-5 flex items-center justify-center rounded-full bg-stone-800"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-800 text-stone-400 hover:text-white flex items-center justify-center text-xs"
             >
-              ✕
+              <X className="w-3 h-3" />
             </button>
           )}
         </div>
 
-        {/* Quick Filter Badges */}
-        <div className="flex items-center gap-2.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-          <button
-            onClick={onToggleBestSeller}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all whitespace-nowrap active:scale-95 ${
-              onlyBestSeller
-                ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 border-amber-300 shadow-md shadow-amber-900/40'
-                : 'bg-[#220d10] text-amber-300 border-amber-500/30 hover:border-amber-400/70 hover:bg-[#2e1216]'
-            }`}
-          >
-            <Star className={`w-3.5 h-3.5 ${onlyBestSeller ? 'fill-stone-950 text-stone-950' : 'text-amber-400'}`} />
-            <span>Món Bán Chạy (热卖)</span>
-          </button>
-
-          <button
-            onClick={onToggleSpicy}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all whitespace-nowrap active:scale-95 ${
-              onlySpicy
-                ? 'bg-gradient-to-r from-red-600 to-red-700 text-white border-red-400 shadow-md shadow-red-900/60 ring-1 ring-red-400'
-                : 'bg-[#220d10] text-red-300 border-red-800/40 hover:border-red-500/70 hover:bg-[#2e1216]'
-            }`}
-          >
-            <Flame className={`w-3.5 h-3.5 ${onlySpicy ? 'text-yellow-300 fill-yellow-300' : 'text-red-400'}`} />
-            <span>Món Cay Tê (麻辣)</span>
-          </button>
-        </div>
-
+        {/* Right QR Table Button (Similar to Map button in Michelin) */}
+        <button
+          onClick={() => setIsQRModalOpen(true)}
+          className="p-3 sm:px-4 sm:py-3 rounded-full bg-[#1e0a0d] border border-amber-500/50 hover:border-amber-400 text-amber-300 flex items-center gap-2 shadow-md transition-all active:scale-95 flex-shrink-0"
+          title="Quét hoặc chọn mã QR bàn"
+        >
+          <QrCode className="w-4 h-4 text-amber-400" />
+          <span className="hidden sm:inline text-xs font-bold text-white">Bàn {tableNumber}</span>
+        </button>
       </div>
 
-      {/* Categories Horizontal Tabs */}
-      <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-none">
+      {/* Michelin Guide Filter Chips Row */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
+        {/* Filter Slider Icon Button */}
+        <button
+          onClick={() => {
+            onSelectCategory('all');
+            onSearchChange('');
+          }}
+          className="p-2.5 rounded-full bg-[#1e0a0d] border border-stone-700 hover:border-stone-500 text-stone-300 flex items-center justify-center flex-shrink-0 transition-all"
+          title="Bộ lọc thực đơn"
+        >
+          <SlidersHorizontal className="w-3.5 h-3.5 text-stone-300" />
+        </button>
+
+        {/* Category Pills */}
         {CATEGORIES.map((cat) => {
           const isActive = activeCategory === cat.id;
-          const Icon = cat.icon;
-
           return (
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all text-left relative overflow-hidden group active:scale-95 ${
+              className={`px-3.5 py-2 rounded-full border whitespace-nowrap transition-all font-medium flex-shrink-0 ${
                 isActive
-                  ? 'bg-gradient-to-r from-[#8a141c] via-[#6e0c12] to-[#50080d] border-amber-400/90 text-white shadow-xl shadow-red-950/70 ring-1 ring-amber-400/60'
-                  : 'bg-[#18090b]/80 hover:bg-[#240e11] border-[#3e1418] text-stone-300 hover:text-amber-100 hover:border-amber-500/30'
+                  ? 'bg-amber-400 text-stone-950 border-amber-300 font-bold shadow-md'
+                  : 'bg-[#18090b] border-stone-800 text-stone-300 hover:border-stone-600 hover:text-white'
               }`}
             >
-              {/* Subtle gold accent corner on active */}
-              {isActive && (
-                <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-bl from-amber-400 to-transparent"></div>
-              )}
-
-              {Icon && (
-                <div className={`p-1.5 rounded-lg ${isActive ? 'bg-amber-400/20 text-amber-300' : 'bg-stone-900/60 text-stone-400'}`}>
-                  <Icon className="w-4 h-4" />
-                </div>
-              )}
-
-              <div>
-                <div className="text-xs sm:text-sm font-bold flex items-center gap-1.5 leading-tight">
-                  <span>{cat.label}</span>
-                </div>
-                <div className={`font-calligraphy text-xs leading-none mt-1 tracking-wider ${isActive ? 'text-amber-300 font-bold' : 'text-stone-400'}`}>
-                  {cat.hanzi}
-                </div>
-              </div>
+              {cat.label}
             </button>
           );
         })}
+
+        {/* Quick Filter: Bán Chạy */}
+        <button
+          onClick={onToggleBestSeller}
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full border whitespace-nowrap transition-all font-medium flex-shrink-0 ${
+            onlyBestSeller
+              ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 border-amber-300 font-bold shadow-md'
+              : 'bg-[#18090b] border-stone-800 text-stone-300 hover:border-amber-500/50 hover:text-amber-300'
+          }`}
+        >
+          <Star className={`w-3.5 h-3.5 ${onlyBestSeller ? 'fill-stone-950 text-stone-950' : 'text-amber-400'}`} />
+          <span>Bán Chạy Nhất</span>
+        </button>
+
+        {/* Quick Filter: Cay Tứ Xuyên */}
+        <button
+          onClick={onToggleSpicy}
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full border whitespace-nowrap transition-all font-medium flex-shrink-0 ${
+            onlySpicy
+              ? 'bg-red-600 text-white border-red-400 font-bold shadow-md'
+              : 'bg-[#18090b] border-stone-800 text-stone-300 hover:border-red-500/50 hover:text-red-400'
+          }`}
+        >
+          <Flame className={`w-3.5 h-3.5 ${onlySpicy ? 'text-white fill-white' : 'text-red-400'}`} />
+          <span>Món Cay Tứ Xuyên</span>
+        </button>
       </div>
     </div>
   );
