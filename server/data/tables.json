@@ -1,0 +1,82 @@
+[
+  {
+    "id": "tbl-01",
+    "tableNumber": "01",
+    "name": "Bàn 01 - Sảnh Rồng",
+    "capacity": 4,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-02",
+    "tableNumber": "02",
+    "name": "Bàn 02 - Sảnh Rồng",
+    "capacity": 4,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-03",
+    "tableNumber": "03",
+    "name": "Bàn 03 - Sảnh Phụng",
+    "capacity": 6,
+    "status": "occupied",
+    "currentOrderId": "ord-sample-01"
+  },
+  {
+    "id": "tbl-04",
+    "tableNumber": "04",
+    "name": "Bàn 04 - Sảnh Phụng",
+    "capacity": 4,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-05",
+    "tableNumber": "05",
+    "name": "Bàn 05 - Hoa Sen",
+    "capacity": 2,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-06",
+    "tableNumber": "06",
+    "name": "Bàn 06 - Hoa Sen",
+    "capacity": 2,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-07",
+    "tableNumber": "07",
+    "name": "Bàn 07 - Trúc Các",
+    "capacity": 6,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-08",
+    "tableNumber": "08",
+    "name": "Bàn 08 - Trúc Các",
+    "capacity": 4,
+    "status": "occupied",
+    "currentOrderId": "ord-1792395351304"
+  },
+  {
+    "id": "tbl-vip1",
+    "tableNumber": "VIP-01",
+    "name": "Phòng VIP 01 - Cửu Long",
+    "capacity": 12,
+    "status": "available",
+    "currentOrderId": null
+  },
+  {
+    "id": "tbl-vip2",
+    "tableNumber": "VIP-02",
+    "name": "Phòng VIP 02 - Phượng Hoàng",
+    "capacity": 10,
+    "status": "available",
+    "currentOrderId": null
+  }
+]

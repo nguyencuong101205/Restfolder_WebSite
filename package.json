@@ -1,0 +1,23 @@
+{
+  "name": "hoang-long-quan-chinese-restaurant",
+  "version": "1.0.0",
+  "description": "Hệ Thống Đặt Món Nhà Hàng Ẩm Thực Trung Hoa Qua Mã QR - Kiến Trúc MVC & Xác Thực JWT",
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "dev": "node start-dev.js"
+  },
+  "keywords": [
+    "chinese-restaurant",
+    "qr-code-ordering",
+    "jwt",
+    "mvc",
+    "react",
+    "express"
+  ],
+  "author": "Antigravity & Bear",
+  "license": "ISC"
+}

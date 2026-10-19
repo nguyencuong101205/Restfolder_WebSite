@@ -1,0 +1,76 @@
+[
+  {
+    "id": "ord-1792395351304",
+    "tableNumber": "08",
+    "customerName": "Kh�ch B�n 08",
+    "items": [
+      {
+        "id": "dish-01",
+        "name": "H� C?o Th?y Tinh T�m Tuoi",
+        "spiceLevel": "Kh�ng cay",
+        "selectedToppings": [
+          {
+            "price": 10000,
+            "name": "Th�m nu?c s?t sa t? d?c bi?t"
+          }
+        ],
+        "note": "H?p n�ng",
+        "quantity": 2,
+        "price": 68000
+      }
+    ],
+    "subTotal": 156000,
+    "vat": 12480,
+    "totalPrice": 168480,
+    "status": "pending",
+    "note": "Uu ti�n l�n nhanh",
+    "callStaffRequests": [],
+    "createdAt": "2026-10-19T07:35:51.304Z",
+    "updatedAt": "2026-10-19T07:35:51.304Z"
+  },
+  {
+    "id": "ord-sample-01",
+    "tableNumber": "03",
+    "customerName": "Khách Bàn 03",
+    "items": [
+      {
+        "id": "dish-01",
+        "name": "Há Cảo Thủy Tinh Tôm Tươi",
+        "price": 68000,
+        "quantity": 2,
+        "spiceLevel": "Không cay",
+        "toppings": [
+          "Thêm nước sốt sa tế đặc biệt"
+        ],
+        "note": "Hấp chín tới"
+      },
+      {
+        "id": "dish-06",
+        "name": "Vịt Quay Bắc Kinh Da Giòn Thượng Hạng (Nửa Con)",
+        "price": 380000,
+        "quantity": 1,
+        "spiceLevel": "Không cay",
+        "toppings": [
+          "Thêm 10 lá bánh tráng cuốn"
+        ],
+        "note": "Da giòn, nhiều dưa chuột"
+      },
+      {
+        "id": "dish-15",
+        "name": "Trà Long Tỉnh Tây Hồ Thượng Hạng (Ấm)",
+        "price": 75000,
+        "quantity": 1,
+        "spiceLevel": "Không cay",
+        "toppings": [],
+        "note": "Pha ấm nóng đầu tiên"
+      }
+    ],
+    "subTotal": 601000,
+    "vat": 60100,
+    "totalPrice": 661100,
+    "status": "preparing",
+    "note": "Khách ưu tiên mang trà lên trước",
+    "createdAt": "2026-10-19T14:10:00.000Z",
+    "updatedAt": "2026-10-19T14:15:00.000Z"
+  }
+]

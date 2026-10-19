@@ -1,0 +1,307 @@
+[
+  {
+    "id": "dish-01",
+    "name": "Há Cảo Thủy Tinh Tôm Tươi",
+    "hanzi": "水晶虾饺皇",
+    "pinyin": "Shuǐjīng Xiājiǎo Huáng",
+    "category": "dimsum",
+    "price": 68000,
+    "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=700&auto=format&fit=crop&q=80",
+    "description": "Lớp vỏ bột mờ trong suốt như pha lê bọc trọn 3 chú tôm tươi giòn ngọt tự nhiên, chấm cùng tương sa tế Triều Châu cay dịu.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm nước sốt sa tế đặc biệt", "price": 10000 },
+      { "name": "Rắc gạch tôm rang muối", "price": 15000 }
+    ]
+  },
+  {
+    "id": "dish-02",
+    "name": "Xíu Mại Tôm Thịt Gạch Cua",
+    "hanzi": "蟹黄蒸烧卖",
+    "pinyin": "Xièhuáng Zhēng Shāomài",
+    "category": "dimsum",
+    "price": 65000,
+    "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&auto=format&fit=crop&q=80",
+    "description": "Nhân thịt heo băm quết dẻo cùng tôm tươi ngọt thịt, phủ trên mặt gạch cua biển vàng ươm béo ngậy thơm lừng.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm gạch cua béo", "price": 20000 },
+      { "name": "Trứng cút lòng đào", "price": 12000 }
+    ]
+  },
+  {
+    "id": "dish-03",
+    "name": "Bánh Bao Kim Sa Trứng Muối Tan Chảy",
+    "hanzi": "黄金流沙包",
+    "pinyin": "Huángjīn Liúshābāo",
+    "category": "dimsum",
+    "price": 58000,
+    "image": "https://images.unsplash.com/photo-1625398407796-82650a8c135f?w=700&auto=format&fit=crop&q=80",
+    "description": "Vỏ bánh bao mềm xốp nóng hổi, khi cắn vào sốt trứng muối bơ sữa vàng óng sánh mịn tuôn trào đậm đà khó cưỡng.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm 1 bánh bao nhỏ", "price": 25000 }
+    ]
+  },
+  {
+    "id": "dish-04",
+    "name": "Chân Gà Hấp Tàu Xì Cung Đình",
+    "hanzi": "豉汁蒸凤爪",
+    "pinyin": "Chǐzhī Zhēng Fèngzhuǎ",
+    "category": "dimsum",
+    "price": 62000,
+    "image": "https://images.unsplash.com/photo-1576867757603-05b134ebc379?w=700&auto=format&fit=crop&q=80",
+    "description": "Chân gà om mềm róc xương thấm đẫm sốt tàu xì lên men truyền thống, ớt đỏ cay nhẹ và hoa hồi thơm nức mũi.",
+    "isSpicy": true,
+    "spiceLevel": 1,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-05",
+    "name": "Bánh Cuốn Tôm Tươi Quảng Đông (Cheung Fun)",
+    "hanzi": "广式鲜虾肠粉",
+    "pinyin": "Guǎngshì Xiānxiā Chángfěn",
+    "category": "dimsum",
+    "price": 69000,
+    "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&auto=format&fit=crop&q=80",
+    "description": "Bánh cuốn tráng hơi mỏng tang mướt mát cuộn tôm sú giòn ngọt, chan ngập nước tương ngọt hảo hạng pha bí truyền.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm tôm tươi xào", "price": 25000 }
+    ]
+  },
+  {
+    "id": "dish-06",
+    "name": "Vịt Quay Bắc Kinh Da Giòn Thượng Hạng (Nửa Con)",
+    "hanzi": "北京烤鸭 (半只)",
+    "pinyin": "Běijīng Kǎoyā",
+    "category": "roast",
+    "price": 380000,
+    "image": "https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=700&auto=format&fit=crop&q=80",
+    "description": "Món ăn hoàng gia lừng danh: da vịt quay lò gỗ phong nâu đỏ giòn rụm, cuốn cùng bánh tráng mỏng, hành boa-rô, dưa chuột và sốt tương ngọt đặc trưng.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm 10 lá bánh tráng cuốn", "price": 25000 },
+      { "name": "Chế biến xương vịt rang muối tiêu", "price": 50000 }
+    ]
+  },
+  {
+    "id": "dish-07",
+    "name": "Heo Sữa Quay Ma Cao Da Giòn Rụm",
+    "hanzi": "澳门脆皮乳猪",
+    "pinyin": "Àomén Cuìpí Rǔzhū",
+    "category": "roast",
+    "price": 290000,
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=700&auto=format&fit=crop&q=80",
+    "description": "Lớp da heo giòn tan nổ hạt li ti, thịt bên dưới mọng nước mềm tan không ngấy, chấm cùng tương ngọt hoặc mù tạt vàng bí truyền.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Bánh bao chiên ăn kèm (4 cái)", "price": 28000 }
+    ]
+  },
+  {
+    "id": "dish-08",
+    "name": "Xá Xíu Mật Ong Thượng Hải",
+    "hanzi": "秘制蜜汁叉烧",
+    "pinyin": "Mìzhì Mìzhī Chāshāo",
+    "category": "roast",
+    "price": 165000,
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&auto=format&fit=crop&q=80",
+    "description": "Thịt nạc dăm ướp ngũ vị hương và mật ong hoa rừng quay xém cạnh, sốt mật ong sánh đặc bóng bẩy ngọt mặn hài hòa.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-09",
+    "name": "Lẩu Tứ Xuyên Uyên Ương 2 Ngăn (Cay Tê & Gà Nấm Thảo Mộc)",
+    "hanzi": "四川麻辣鸳鸯火锅",
+    "pinyin": "Sìchuān Málà Yuānyāng Huǒguō",
+    "category": "hotpot",
+    "price": 395000,
+    "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=700&auto=format&fit=crop&q=80",
+    "description": "Nồi lẩu đồng chia hai ngăn: Một bên là nước lẩu cay tê ớt hoa tiêu Tứ Xuyên bùng nổ, một bên là nước cốt gà hầm sâm kỷ tử thanh tao bổ dưỡng.",
+    "isSpicy": true,
+    "spiceLevel": 3,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Đĩa bò Wagyu nhúng lẩu (150g)", "price": 160000 },
+      { "name": "Nấm tổng hợp thượng hạng", "price": 45000 },
+      { "name": "Váng đậu giòn chiên phồng", "price": 30000 },
+      { "name": "Viên tôm hùm phô mai chảy", "price": 55000 }
+    ]
+  },
+  {
+    "id": "dish-10",
+    "name": "Đậu Hũ Ma Bà Tứ Xuyên (Mapo Tofu)",
+    "hanzi": "正宗麻婆豆腐",
+    "pinyin": "Zhèngzōng Mápó Dòufu",
+    "category": "hotpot",
+    "price": 95000,
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&auto=format&fit=crop&q=80",
+    "description": "Đậu hũ non mềm mượt như lụa xào cùng thịt bò băm, ớt khô Tứ Xuyên và hoa tiêu rang thơm, phủ dầu ớt đỏ bóng bẩy cay nồng tê tái.",
+    "isSpicy": true,
+    "spiceLevel": 3,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm thịt bò băm", "price": 30000 },
+      { "name": "Tăng cấp độ cay Tứ Xuyên", "price": 5000 }
+    ]
+  },
+  {
+    "id": "dish-11",
+    "name": "Gà Xào Cung Bảo Hoàng Cung (Kung Pao Chicken)",
+    "hanzi": "宫保鸡丁",
+    "pinyin": "Gōngbǎo Jīdīng",
+    "category": "hotpot",
+    "price": 135000,
+    "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=700&auto=format&fit=crop&q=80",
+    "description": "Thịt gà xắt hạt lựu xào lửa lớn cùng đậu phộng rang giòn, ớt khô Tứ Xuyên và hành tây, hòa quyện trong nước sốt chua cay mặn ngọt chuẩn vị.",
+    "isSpicy": true,
+    "spiceLevel": 2,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Đậu phộng rang thơm thêm", "price": 10000 }
+    ]
+  },
+  {
+    "id": "dish-12",
+    "name": "Mì Kéo Bò Lan Châu Nước Trong",
+    "hanzi": "兰州传统牛肉拉面",
+    "pinyin": "Lánzhōu Niúròu Lāmiàn",
+    "category": "noodles",
+    "price": 89000,
+    "image": "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=700&auto=format&fit=crop&q=80",
+    "description": "Sợi mì được nghệ nhân kéo tay tại chỗ tươi mới, nước dùng trong vắt ngọt thanh ninh từ xương bò suốt 12 tiếng cùng 20 loại thảo mộc, điểm vài giọt dầu ớt đỏ.",
+    "isSpicy": true,
+    "spiceLevel": 1,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm bắp bò hoa thái lát", "price": 35000 },
+      { "name": "Trứng ngâm tương lòng đào", "price": 15000 },
+      { "name": "Thêm vắt mì kéo tươi", "price": 20000 }
+    ]
+  },
+  {
+    "id": "dish-13",
+    "name": "Mì Hoành Thánh Xá Xíu Cảng Thơm",
+    "hanzi": "港式云吞叉烧面",
+    "pinyin": "Gǎngshì Yúntūn Chāshāomiàn",
+    "category": "noodles",
+    "price": 85000,
+    "image": "https://images.unsplash.com/photo-1552611052-33e04de081de?w=700&auto=format&fit=crop&q=80",
+    "description": "Sợi mì trứng giòn dai ngập trong nước dùng tôm khô thanh mát, ăn kèm hoành thánh nhân tôm nguyên con giòn sần sật và vài lát xá xíu đỏ au.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm 3 viên hoành thánh tôm", "price": 30000 }
+    ]
+  },
+  {
+    "id": "dish-14",
+    "name": "Cơm Chiên Dương Châu Hoàng Kim",
+    "hanzi": "扬州黄金炒饭",
+    "pinyin": "Yángzhōu Chǎofàn",
+    "category": "noodles",
+    "price": 95000,
+    "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=700&auto=format&fit=crop&q=80",
+    "description": "Từng hạt cơm tơi xốp bọc đều lòng đỏ trứng vàng óng, chiên chảo gang lớn cùng tôm sú, xá xíu, lạp xưởng Mai Quế Lộ và đậu Hà Lan giòn ngọt.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": [
+      { "name": "Thêm tôm sú tươi", "price": 35000 }
+    ]
+  },
+  {
+    "id": "dish-15",
+    "name": "Trà Long Tỉnh Tây Hồ Thượng Hạng (Ấm)",
+    "hanzi": "西湖特级龙井茶",
+    "pinyin": "Xīhú Lóngjǐng Chá",
+    "category": "tea_dessert",
+    "price": 75000,
+    "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=700&auto=format&fit=crop&q=80",
+    "description": "Đệ nhất danh trà Trung Hoa hái đầu xuân, sắc trà xanh biếc thanh khiết, hương thơm thoang thoảng hạt dẻ bùi ngậy, vị ngọt hậu sâu lắng.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": true,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-16",
+    "name": "Chè Dương Chi Cam Lộ Xoài Bưởi",
+    "hanzi": "杨枝甘露",
+    "pinyin": "Yángzhī Gānlù",
+    "category": "tea_dessert",
+    "price": 52000,
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700&auto=format&fit=crop&q=80",
+    "description": "Món tráng miệng Hong Kong kinh điển: sốt xoài cát hòa quyện nước cốt dừa béo bùi, hạt trân châu báng dẻo dai và tép bưởi hồng thanh chua sảng khoái.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": true,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": []
+  },
+  {
+    "id": "dish-17",
+    "name": "Bánh Tart Trứng Nướng Hong Kong (3 Cái)",
+    "hanzi": "港式酥皮蛋挞",
+    "pinyin": "Gǎngshì Dàntà",
+    "category": "tea_dessert",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=700&auto=format&fit=crop&q=80",
+    "description": "Vỏ bánh ngàn lớp giòn xốp thơm lừng bơ Pháp, lòng nhân trứng sữa óng ánh núng nính mềm mịn tan ngay đầu lưỡi.",
+    "isSpicy": false,
+    "spiceLevel": 0,
+    "isBestSeller": false,
+    "isChefSpecial": false,
+    "inStock": true,
+    "toppings": []
+  }
+]

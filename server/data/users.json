@@ -1,0 +1,29 @@
+[
+  {
+    "id": "u-01",
+    "username": "admin",
+    "passwordHash": "$2a$10$7Z2v6/K5j5.VvL7q9d7o3eP9s8r6j4n3m2l1k0j9h8g7f6e5d4c3b",
+    "plainBackup": "admin123",
+    "name": "Chủ Quán - Hoàng Lão Bản",
+    "role": "admin",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+  },
+  {
+    "id": "u-02",
+    "username": "bep",
+    "passwordHash": "$2a$10$7Z2v6/K5j5.VvL7q9d7o3eP9s8r6j4n3m2l1k0j9h8g7f6e5d4c3b",
+    "plainBackup": "bep123",
+    "name": "Bếp Trưởng - Trương Đại Sư",
+    "role": "kitchen",
+    "avatar": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=150"
+  },
+  {
+    "id": "u-03",
+    "username": "phucvu",
+    "passwordHash": "$2a$10$7Z2v6/K5j5.VvL7q9d7o3eP9s8r6j4n3m2l1k0j9h8g7f6e5d4c3b",
+    "plainBackup": "phucvu123",
+    "name": "Tiểu Nhị - A Phúc",
+    "role": "waiter",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150"
+  }
+]
