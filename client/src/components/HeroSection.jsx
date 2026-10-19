@@ -1,71 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { ChineseSeal } from './ChineseSeal';
-import { Utensils, Calendar, QrCode, Crown, Sparkles, ChevronRight, ChevronLeft, ArrowRight, Flame, Clock } from 'lucide-react';
+import { Utensils, Calendar, QrCode, Crown, Sparkles, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 
 const HIGHLIGHTS = [
   {
     id: 'dimsum',
-    name: 'Dim Sum Thủ Công Hoàng Gia',
-    shortName: 'Dim Sum Thủ Công',
+    name: 'Dim Sum Thủ Công',
     hanzi: '皇家手工点心',
     pinyin: 'Shǒugōng Diǎnxīn',
     icon: '🥟',
     tag: 'Điểm Tâm Nghệ Nhân',
     slogan: 'Nặn Tươi Mới 100% Mỗi Sáng',
-    desc: 'Vỏ bột pha lê mỏng tang trong suốt ôm trọn tôm sú tươi giòn ngọt tự nhiên. Hấp chín tới trong xửng tre bốc khói nghi ngút, chấm cùng sa tế Triều Châu đậm vị.',
-    quote: '皮薄馅丰 · 鲜甜多汁',
-    badge: 'Bán chạy nhất ⭐',
-    price: 'Từ 58.000 đ',
-    image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=800&auto=format&fit=crop&q=80',
-    actionText: 'Xem Thực Đơn Dim Sum'
+    desc: 'Vỏ bột pha lê trong suốt mỏng tang ôm trọn tôm sú tươi giòn ngọt tự nhiên. Hấp chín tới trong xửng tre thơm nồng khói nghi ngút.',
+    badge: 'Bán Chạy Nhất',
+    image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800&auto=format&fit=crop&q=80'
   },
   {
     id: 'roast',
-    name: 'Vịt Quay Bắc Kinh Lò Gỗ',
-    shortName: 'Vịt Quay Lò Gỗ',
+    name: 'Vịt Quay Lò Gỗ',
     hanzi: '挂炉北京烤鸭',
     pinyin: 'Běijīng Kǎoyā',
     icon: '🦆',
     tag: 'Bí Truyền Cung Đình',
     slogan: 'Da Giòn Rụm Màu Hổ Phách',
-    desc: 'Vịt tơ hảo hạng ướp 18 vị thảo mộc bí truyền, quay than củi gỗ phong 2 giờ liên tục. Lớp da giòn tan nổ bọt khí óng ánh, thái lát mỏng cuốn bánh tráng & sốt tương ngọt.',
-    quote: '色泽红亮 · 外脆里嫩',
-    badge: 'Đặc sản hoàng gia 👑',
-    price: 'Từ 380.000 đ',
-    image: 'https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=800&auto=format&fit=crop&q=80',
-    actionText: 'Xem Món Vịt Quay'
+    desc: 'Ướp 18 vị thảo mộc bí truyền, quay than củi phong 2 giờ liên tục. Da giòn rụm bóng bẩy cuốn bánh tráng & tương ngọt.',
+    badge: 'Đặc Sản Hoàng Triều',
+    image: 'https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=800&auto=format&fit=crop&q=80'
   },
   {
     id: 'hotpot',
-    name: 'Lẩu Uyên Ương Tứ Xuyên 2 Ngăn',
-    shortName: 'Lẩu Uyên Ương',
+    name: 'Lẩu Uyên Ương',
     hanzi: '正宗四川鸳鸯火锅',
     pinyin: 'Yuānyāng Huǒguō',
     icon: '🍲',
     tag: 'Đệ Nhất Mỹ Vị',
     slogan: 'Nước Dùng Hầm Xương 36 Giờ',
-    desc: 'Nồi lẩu đồng chia hai ngăn tuyệt mỹ: Một bên cay tê nồng nàn hoa tiêu Tứ Xuyên ớt khô bùng nổ, một bên thanh ngọt bổ dưỡng từ nước cốt gà hầm nhân sâm & kỷ tử.',
-    quote: '麻辣鲜香 · 滋补养生',
-    badge: 'Hầm xương 36h ♨️',
-    price: 'Từ 395.000 đ',
-    image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&auto=format&fit=crop&q=80',
-    actionText: 'Khám Phá Vị Lẩu'
+    desc: 'Nồi lẩu đồng 2 ngăn: Một bên cay tê hoa tiêu Tứ Xuyên nồng nàn, một bên nước cốt gà hầm sâm kỷ tử thanh ngọt bổ dưỡng.',
+    badge: 'Hầm Xương 36h',
+    image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&auto=format&fit=crop&q=80'
   },
   {
     id: 'qr',
-    name: 'Gọi Món Thông Minh Quét Mã QR',
-    shortName: 'Gọi Món Quét QR',
+    name: 'Gọi Món Quét QR',
     hanzi: '智能扫码点餐系统',
     pinyin: 'Zhìnéng Diǎncān',
     icon: '⚡',
     tag: 'Tiện Ích Hiện Đại',
     slogan: 'Bếp Nhận Đơn Tức Thì 0 Giây',
-    desc: 'Trải nghiệm đỉnh cao với mã QR đặt tại từng bàn ăn. Quý khách trực tiếp chọn món, tùy biến gia vị, ghi chú gửi thẳng đến màn hình Bếp KDS Realtime không độ trễ.',
-    quote: '即扫即点 · 快捷便利',
-    badge: 'Realtime 0 giây 🚀',
-    price: 'Phục vụ tại bàn',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80',
-    actionText: 'Trải Nghiệm Gọi Món'
+    desc: 'Quét mã QR tại bàn để xem thực đơn hình ảnh sống động, tùy biến độ cay và gửi đơn trực tiếp vào màn hình Bếp KDS Realtime.',
+    badge: 'Realtime 0 Giây',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=80'
   }
 ];
 
@@ -73,18 +57,25 @@ export const HeroSection = ({ onExploreMenu, onOpenReserve, onOpenQR }) => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-switch animation every 3000ms (3 seconds)
+  // Auto-switch animation every 3000ms (3 seconds chuyển 1 lần)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
       setActiveIdx((prev) => (prev + 1) % HIGHLIGHTS.length);
     }, 3000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, activeIdx]);
 
-  const activeItem = HIGHLIGHTS[activeIdx];
+  const handlePrev = () => {
+    setActiveIdx((prev) => (prev - 1 + HIGHLIGHTS.length) % HIGHLIGHTS.length);
+  };
 
-  const handleAction = (item) => {
+  const handleNext = () => {
+    setActiveIdx((prev) => (prev + 1) % HIGHLIGHTS.length);
+  };
+
+  const handleCardClick = (item, idx) => {
+    setActiveIdx(idx);
     if (item.id === 'qr') {
       onOpenQR();
     } else {
@@ -167,148 +158,157 @@ export const HeroSection = ({ onExploreMenu, onOpenReserve, onOpenQR }) => {
         </div>
 
         {/* ========================================================
-            LUXURY SPOTLIGHT SHOWCASE CARD (Auto-animates every 3000ms)
+            4 ANIMATED CARDS (3000ms AUTO-TRANSITION / 3000 CHUYỂN 1)
            ======================================================== */}
-        <div
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="w-full max-w-4xl bg-gradient-to-r from-[#220c10] via-[#1a080a] to-[#140507] border-2 border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden text-left relative transition-all duration-500 group"
-        >
-          {/* Top Gold Border Glow */}
-          <div className="h-1 bg-gradient-to-r from-red-700 via-amber-400 to-red-700" />
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
-            {/* Left Photo Banner */}
-            <div className="md:col-span-5 relative h-56 md:h-72 overflow-hidden bg-stone-950">
-              <img
-                key={activeItem.id}
-                src={activeItem.image}
-                alt={activeItem.name}
-                className="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-105 animate-fade-scale"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-black/20 to-[#1a080a]/90 pointer-events-none" />
-
-              {/* Badge on Photo */}
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-gradient-to-r from-red-700 to-red-900 border border-amber-400/80 text-amber-200 text-[10px] font-bold shadow-lg flex items-center gap-1">
-                <span>{activeItem.icon}</span>
-                <span>{activeItem.badge}</span>
-              </div>
-
-              {/* Hanzi Watermark bottom */}
-              <div className="absolute bottom-2.5 left-3 font-calligraphy text-amber-300 text-sm sm:text-base drop-shadow-md">
-                {activeItem.hanzi}
-              </div>
+        <div className="w-full max-w-5xl mt-2">
+          
+          {/* Control Bar: Title & Next/Prev Controls */}
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#3b1216] text-xs">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span className="font-bold text-amber-200 tracking-wider uppercase font-mono">
+                ĐẶC SẮC HOÀNG LONG QUÁN
+              </span>
+              <span className="text-[10px] text-stone-400 hidden sm:inline">
+                · Tự động chuyển món sau mỗi 3 giây
+              </span>
             </div>
 
-            {/* Right Information Details */}
-            <div className="md:col-span-7 p-5 sm:p-6 flex flex-col justify-between space-y-3">
-              <div>
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                    <span>{activeItem.tag}</span>
-                  </span>
-
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-900 border border-amber-500/40 text-amber-300 font-mono flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-amber-400 animate-spin" />
-                    <span>Tự động chuyển mỗi 3s</span>
-                  </span>
-                </div>
-
-                <h3 className="text-lg sm:text-2xl font-black text-white mt-1 group-hover:text-amber-300 transition-colors">
-                  {activeItem.name}
-                </h3>
-
-                <p className="text-xs sm:text-sm font-semibold text-amber-300/90 mt-0.5">
-                  ★ {activeItem.slogan}
-                </p>
-
-                <p className="text-xs text-stone-300 mt-2 leading-relaxed">
-                  {activeItem.desc}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-[#3b1216] flex items-center justify-between gap-4">
-                <div>
-                  <span className="text-[10px] text-stone-400 block">Mức giá ẩm thực:</span>
-                  <span className="text-sm sm:text-base font-black text-amber-400">
-                    {activeItem.price}
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => handleAction(activeItem)}
-                  className="hl-hero-btn-primary py-2 px-4 text-xs font-bold rounded-xl flex items-center gap-1.5 active:scale-95 shadow-lg"
-                >
-                  <span>{activeItem.actionText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* 3000ms Live Countdown Progress Bar running along bottom */}
-          <div className="w-full h-1 bg-stone-900 overflow-hidden">
-            <div
-              key={activeIdx}
-              className="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-red-600 hl-progress-bar-fill"
-            />
-          </div>
-        </div>
-
-        {/* ========================================================
-            4 SYNCHRONIZED INTERACTIVE CARDS (3000ms Auto-Slide Tabs)
-           ======================================================== */}
-        <div
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="hl-features-grid"
-        >
-          {HIGHLIGHTS.map((item, idx) => {
-            const isActive = activeIdx === idx;
-            return (
-              <div
-                key={item.id}
-                onClick={() => setActiveIdx(idx)}
-                className={`hl-feature-card group cursor-pointer transition-all duration-300 relative ${
-                  isActive ? 'hl-card-active' : 'opacity-85 hover:opacity-100'
-                }`}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="w-7 h-7 rounded-full bg-[#1e0a0d] border border-amber-500/40 hover:border-amber-400 text-amber-300 flex items-center justify-center transition-all hover:scale-105"
+                title="Món trước"
               >
-                {/* Photo Thumbnail with circular badge */}
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden mb-2.5 border-2 border-amber-500/60 shadow-md group-hover:scale-105 transition-transform flex-shrink-0">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-black/20" />
-                  <span className="absolute bottom-0 inset-x-0 bg-black/75 text-center text-[10px] py-0.5">
-                    {item.icon}
-                  </span>
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="w-7 h-7 rounded-full bg-[#1e0a0d] border border-amber-500/40 hover:border-amber-400 text-amber-300 flex items-center justify-center transition-all hover:scale-105"
+                title="Món kế tiếp"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* The 4 Cards in Auto-Transition Animation */}
+          <div
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 w-full text-left"
+          >
+            {HIGHLIGHTS.map((item, idx) => {
+              const isActive = activeIdx === idx;
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => handleCardClick(item, idx)}
+                  className={`group relative rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between transition-all duration-500 ${
+                    isActive
+                      ? 'border-2 border-amber-400 bg-gradient-to-b from-[#2a0e12] via-[#1a080a] to-[#120406] shadow-2xl scale-[1.02] sm:scale-105 z-10 -translate-y-1.5 ring-2 ring-amber-400/40'
+                      : 'border border-amber-500/30 bg-[#160608]/90 hover:border-amber-400/70 hover:bg-[#200a0d] opacity-80 hover:opacity-100 hover:-translate-y-1'
+                  }`}
+                  style={{ minHeight: '340px' }}
+                >
+                  {/* Top Image Banner */}
+                  <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-stone-950 flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className={`w-full h-full object-cover object-center transition-transform duration-700 ${
+                        isActive ? 'scale-110' : 'group-hover:scale-105'
+                      }`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#160608] via-black/20 to-transparent pointer-events-none" />
+
+                    {/* Active Ribbon on Top-Left */}
+                    {isActive ? (
+                      <div className="absolute top-2.5 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 via-amber-600 to-yellow-500 text-stone-950 font-black text-[10px] shadow-lg flex items-center gap-1 animate-pulse">
+                        <span>⭐</span>
+                        <span>ĐANG GIỚI THIỆU</span>
+                      </div>
+                    ) : (
+                      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-sm border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+                        <span>{item.icon}</span>
+                        <span className="ml-1">{item.badge}</span>
+                      </div>
+                    )}
+
+                    {/* Hanzi on bottom-left of photo */}
+                    <div className="absolute bottom-2 left-3 font-calligraphy text-amber-300 text-sm drop-shadow-md z-10">
+                      {item.hanzi}
+                    </div>
+                  </div>
+
+                  {/* Card Content Details */}
+                  <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                      {/* Emoji + Title */}
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span className="text-base">{item.icon}</span>
+                        <h4 className={`font-bold text-xs sm:text-sm transition-colors ${
+                          isActive ? 'text-amber-300 font-black' : 'text-stone-100 group-hover:text-amber-200'
+                        }`}>
+                          {item.name}
+                        </h4>
+                      </div>
+
+                      {/* Slogan */}
+                      <p className="text-[11px] font-semibold text-amber-200/90 leading-tight">
+                        {item.slogan}
+                      </p>
+
+                      {/* Description */}
+                      <p className="text-[10px] sm:text-[11px] text-stone-400 mt-1.5 leading-relaxed line-clamp-2">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    {/* Chinese Hanzi & Action Hint */}
+                    <div className="pt-2 border-t border-[#3b1216] flex items-center justify-between text-[10px]">
+                      <span className="font-calligraphy text-amber-400/80">
+                        {item.hanzi}
+                      </span>
+                      <span className={`font-bold ${isActive ? 'text-amber-300' : 'text-stone-400'}`}>
+                        {item.id === 'qr' ? 'Mở QR →' : 'Xem món →'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 3000ms Live Progress Bar at the bottom of the active card */}
+                  {isActive && (
+                    <div className="w-full h-1.5 bg-black/60 overflow-hidden">
+                      <div
+                        key={activeIdx}
+                        className="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-red-500 hl-progress-bar-fill"
+                      />
+                    </div>
+                  )}
                 </div>
+              );
+            })}
+          </div>
 
-                <h4 className={`font-bold text-xs sm:text-sm tracking-wide transition-colors ${
-                  isActive ? 'text-amber-300 font-black' : 'text-stone-200 group-hover:text-amber-200'
-                }`}>
-                  {item.shortName}
-                </h4>
+          {/* Dots Indicator with 3s auto loop indicator */}
+          <div className="flex items-center justify-center gap-2 mt-4">
+            {HIGHLIGHTS.map((item, idx) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveIdx(idx)}
+                className={`transition-all rounded-full ${
+                  activeIdx === idx
+                    ? 'w-7 h-2 bg-gradient-to-r from-amber-400 to-yellow-500 shadow'
+                    : 'w-2 h-2 bg-stone-700 hover:bg-stone-500'
+                }`}
+                title={`Chuyển đến: ${item.name}`}
+              />
+            ))}
+          </div>
 
-                <p className="text-[10px] sm:text-[11px] text-stone-400 mt-0.5 leading-snug line-clamp-1">
-                  {item.slogan}
-                </p>
-
-                <span className="font-calligraphy text-amber-400/60 text-xs mt-1 block">
-                  {item.hanzi}
-                </span>
-
-                {/* Active Indicator Line inside card */}
-                {isActive && (
-                  <div className="absolute bottom-0 inset-x-0 h-1 bg-amber-400 rounded-b shadow-sm" />
-                )}
-              </div>
-            );
-          })}
         </div>
 
       </div>
