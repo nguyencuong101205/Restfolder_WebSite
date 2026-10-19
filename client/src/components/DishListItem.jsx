@@ -17,7 +17,8 @@ export const DishListItem = ({ dish, onOpenDetail }) => {
         <img
           src={dish.image}
           alt={dish.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+          style={{ objectPosition: 'center' }}
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

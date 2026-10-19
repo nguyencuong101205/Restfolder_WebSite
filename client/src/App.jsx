@@ -16,6 +16,7 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 const MainLayout = () => {
   const [currentView, setCurrentView] = useState('menu'); // 'menu' | 'kitchen' | 'tables'
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login'); // 'login' | 'register'
   const { isStaff, isAdmin } = useAuth();
 
   return (
@@ -23,7 +24,10 @@ const MainLayout = () => {
       
       {/* Top Header */}
       <Header
-        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onOpenAuth={(mode = 'login') => {
+          setAuthModalMode(mode);
+          setIsAuthModalOpen(true);
+        }}
         onOpenKitchen={() => setCurrentView('kitchen')}
         onOpenTableManager={() => setCurrentView('tables')}
         currentView={currentView}
@@ -58,12 +62,13 @@ const MainLayout = () => {
       <OrderTracker />
       <CallStaffModal />
 
-      {/* Staff Login Modal */}
+      {/* Staff & Customer Auth Modal (Login / Register) */}
       {isAuthModalOpen && (
         <AdminLoginPage
+          initialMode={authModalMode}
           onSuccess={() => {
             setIsAuthModalOpen(false);
-            setCurrentView('kitchen');
+            if (isStaff) setCurrentView('kitchen');
           }}
           onCancel={() => setIsAuthModalOpen(false)}
         />

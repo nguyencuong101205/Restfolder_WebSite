@@ -28,17 +28,20 @@ export const DishCard = ({ dish, onOpenDetail }) => {
         </div>
       )}
 
-      <div className="w-full">
-        {/* Product Image */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950" style={{ width: '100%' }}>
+      <div className="w-full flex-1 flex flex-col justify-between">
+        {/* Product Image - Căn giữa ảnh (object-center) */}
+        <div
+          className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950 flex items-center justify-center flex-shrink-0"
+          style={{ width: '100%' }}
+        >
           <img
             src={dish.image}
             alt={dish.name}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
           
           {/* Chinese Hanzi & Pinyin on bottom-left of photo */}
           <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2">
@@ -53,81 +56,83 @@ export const DishCard = ({ dish, onOpenDetail }) => {
           </div>
         </div>
 
-        {/* Product Details (Shopee home-product-item__name, price, rating) */}
-        <div className="p-3 sm:p-4 space-y-1.5">
-          {/* Title */}
-          <h3 className="font-bold text-xs sm:text-base text-stone-100 group-hover:text-amber-300 transition-colors line-clamp-1 sm:line-clamp-2 leading-snug">
-            {dish.name}
-          </h3>
+        {/* Product Details - Căn thẳng hàng đồng đều (Title & Description fixed heights) */}
+        <div className="p-3 sm:p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+          <div>
+            {/* Title - Fixed height h-12 để các thẻ luôn bắt đầu cùng hàng và thẳng nhau tuyệt đối */}
+            <h3 className="font-bold text-xs sm:text-base text-stone-100 group-hover:text-amber-300 transition-colors line-clamp-2 leading-snug h-12 block">
+              {dish.name}
+            </h3>
 
-          {/* Short description preview for 2-column view */}
-          {dish.description && (
-            <p className="text-[11px] sm:text-xs text-stone-400 line-clamp-1 sm:line-clamp-2 leading-relaxed">
+            {/* Description preview - Fixed height h-10 để chữ mô tả cả 2 thẻ bắt đầu và kết thúc cùng 1 hàng */}
+            <p className="text-[11px] sm:text-xs text-stone-400 line-clamp-2 leading-relaxed h-10 overflow-hidden mt-1 block">
               {dish.description}
             </p>
-          )}
-
-          {/* Price Row: Old price + Current red price */}
-          <div className="flex items-baseline gap-2 pt-0.5">
-            <span className="text-sm sm:text-base font-black text-red-500">
-              {formatVND(dish.price)}
-            </span>
-            <span className="text-[11px] text-stone-500 line-through">
-              {formatVND(oldPrice)}
-            </span>
           </div>
 
-          {/* Action Row: Heart Like, Rating 5 Stars, Order Count */}
-          <div className="flex items-center justify-between text-[11px] text-stone-400 pt-1">
-            {/* Like Heart */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsLiked(!isLiked);
-              }}
-              className="p-1 hover:text-red-400 transition-colors"
-              title="Yêu thích món này"
-            >
-              <Heart
-                className={`w-3.5 h-3.5 ${
-                  isLiked ? 'fill-red-500 text-red-500' : 'text-stone-400'
-                }`}
-              />
-            </button>
-
-            {/* Stars Rating & Sold Count */}
-            <div className="flex items-center gap-1.5">
-              <div className="flex items-center text-amber-400">
-                <Star className="w-2.5 h-2.5 fill-amber-400" />
-                <Star className="w-2.5 h-2.5 fill-amber-400" />
-                <Star className="w-2.5 h-2.5 fill-amber-400" />
-                <Star className="w-2.5 h-2.5 fill-amber-400" />
-                <Star className="w-2.5 h-2.5 fill-amber-400" />
-              </div>
-              <span className="text-[10px] text-stone-400">
-                Đã gọi {Math.floor(dish.price / 1000)} phần
+          <div className="space-y-1.5 pt-1">
+            {/* Price Row: Old price + Current red price */}
+            <div className="flex items-baseline gap-2 pt-0.5">
+              <span className="text-sm sm:text-base font-black text-red-500">
+                {formatVND(dish.price)}
+              </span>
+              <span className="text-[11px] text-stone-500 line-through">
+                {formatVND(oldPrice)}
               </span>
             </div>
-          </div>
 
-          {/* Origin / Category */}
-          <div className="text-[10px] text-stone-400 flex justify-between items-center pt-0.5 border-t border-[#2d1114]">
-            <span>{dish.isSpicy ? '🌶️ Vị Cay Tê' : '🥟 Vị Thanh Đạm'}</span>
-            <span className="text-amber-400 font-medium">Hoàng Long Quán</span>
+            {/* Action Row: Heart Like, Rating 5 Stars, Order Count */}
+            <div className="flex items-center justify-between text-[11px] text-stone-400 pt-1">
+              {/* Like Heart */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsLiked(!isLiked);
+                }}
+                className="p-1 hover:text-red-400 transition-colors"
+                title="Yêu thích món này"
+              >
+                <Heart
+                  className={`w-3.5 h-3.5 ${
+                    isLiked ? 'fill-red-500 text-red-500' : 'text-stone-400'
+                  }`}
+                />
+              </button>
+
+              {/* Stars Rating & Sold Count */}
+              <div className="flex items-center gap-1.5">
+                <div className="flex items-center text-amber-400">
+                  <Star className="w-2.5 h-2.5 fill-amber-400" />
+                  <Star className="w-2.5 h-2.5 fill-amber-400" />
+                  <Star className="w-2.5 h-2.5 fill-amber-400" />
+                  <Star className="w-2.5 h-2.5 fill-amber-400" />
+                  <Star className="w-2.5 h-2.5 fill-amber-400" />
+                </div>
+                <span className="text-[10px] text-stone-400">
+                  Đã gọi {Math.floor(dish.price / 1000)} phần
+                </span>
+              </div>
+            </div>
+
+            {/* Origin / Category */}
+            <div className="text-[10px] text-stone-400 flex justify-between items-center pt-0.5 border-t border-[#2d1114]">
+              <span>{dish.isSpicy ? '🌶️ Vị Cay Tê' : '🥟 Vị Thanh Đạm'}</span>
+              <span className="text-amber-400 font-medium">Hoàng Long Quán</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Button: Shopee Style Rectangular .shopee-btn */}
-      <div className="p-3 pt-0">
+      <div className="p-3 sm:p-4 pt-0 mt-auto">
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
             onOpenDetail(dish);
           }}
-          className="shopee-btn shopee-btn--primary w-full gap-1.5 text-xs font-bold"
+          className="shopee-btn shopee-btn--primary w-full gap-1.5 text-xs font-bold h-9"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           <span>Đặt Món Ngay</span>
