@@ -114,7 +114,7 @@ export const Header = ({
               </div>
             </div>
 
-            {/* Main Navigation Buttons (Desktop >= 1280px) */}
+            {/* Main Navigation Buttons (Responsive: shows Thực Đơn & Đặt Bàn, 2xl shows all) */}
             <nav className="hidden xl:flex items-center gap-1.5 text-xs sm:text-sm font-semibold flex-shrink-0">
               <button
                 type="button"
@@ -122,14 +122,6 @@ export const Header = ({
                 className="hl-btn-nav hl-btn-nav-active"
               >
                 Thực Đơn
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollToSection('khuyen-mai')}
-                className="hl-btn-nav"
-              >
-                <Gift className="w-3.5 h-3.5 text-amber-400" />
-                <span>Ưu Đãi</span>
               </button>
               <button
                 type="button"
@@ -141,8 +133,16 @@ export const Header = ({
               </button>
               <button
                 type="button"
+                onClick={() => scrollToSection('khuyen-mai')}
+                className="hl-btn-nav hidden 2xl:inline-flex"
+              >
+                <Gift className="w-3.5 h-3.5 text-amber-400" />
+                <span>Ưu Đãi</span>
+              </button>
+              <button
+                type="button"
                 onClick={onOpenAbout}
-                className="hl-btn-nav"
+                className="hl-btn-nav hidden 2xl:inline-flex"
               >
                 Giới Thiệu
               </button>
@@ -330,24 +330,24 @@ export const Header = ({
           {/* ========================================================
               RIGHT: BÀN, GỌI BÀN, GIỎ MÓN, VÀ ICON NGƯỜI (GÓC PHẢI)
              ======================================================== */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0 flex-nowrap">
+          <div className="hl-header-right">
             
             {/* Bàn {tableNumber} (QR Ordering) */}
             <button
               type="button"
               onClick={() => setIsQRModalOpen(true)}
-              className="hl-btn-action flex items-center gap-1.5 text-xs font-semibold"
+              className="hl-btn-action flex items-center gap-1.5 text-xs font-semibold flex-shrink-0"
               title="Đổi số bàn hoặc quét mã QR"
             >
               <QrCode className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
               <span>Bàn {tableNumber}</span>
             </button>
 
-            {/* Gọi Bàn */}
+            {/* Gọi Bàn (Visible on large screens, also in Menu dropdown) */}
             <button
               type="button"
               onClick={() => setIsCallStaffModalOpen(true)}
-              className="hl-btn-action hidden md:flex items-center gap-1.5 text-xs font-semibold"
+              className="hl-btn-action hidden lg:flex items-center gap-1.5 text-xs font-semibold flex-shrink-0"
               title="Gọi phục vụ / tiểu nhị"
             >
               <Bell className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
@@ -358,11 +358,11 @@ export const Header = ({
             <button
               type="button"
               onClick={() => setIsCartOpen(true)}
-              className="hl-btn-cart flex items-center gap-1.5 text-xs"
+              className="hl-btn-cart flex items-center gap-1.5 text-xs flex-shrink-0"
               title="Xem giỏ món của bàn"
             >
               <ShoppingBag className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
-              <span>Giỏ Món</span>
+              <span className="hidden sm:inline">Giỏ Món</span>
               {totalItemsCount > 0 && (
                 <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 text-xs font-black flex items-center justify-center shadow">
                   {totalItemsCount}
@@ -371,29 +371,30 @@ export const Header = ({
             </button>
 
             {/* ========================================================
-                TOP-RIGHT: USER ICON BUTTON (LOGIN / REGISTER MODAL)
+                TOP-RIGHT: ICON NGƯỜI (LOGIN / REGISTER MODAL)
                ======================================================== */}
-            <div className="relative" ref={userDropdownRef}>
+            <div className="relative flex-shrink-0" ref={userDropdownRef}>
               <button
                 type="button"
                 onClick={() => {
                   setIsUserDropdownOpen(!isUserDropdownOpen);
                   setIsMoreMenuOpen(false);
                 }}
-                className={`hl-btn-user flex items-center gap-2 ${
+                className={`hl-btn-user-circle ${
                   isUserDropdownOpen ? 'ring-2 ring-amber-400' : ''
                 }`}
-                title={user ? `Tài khoản: ${user.name}` : 'Đăng nhập / Đăng ký thành viên'}
+                title={user ? `Tài khoản VIP: ${user.name || user.username}` : 'Đăng nhập / Đăng ký thành viên VIP'}
               >
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
-                  user ? 'bg-amber-500 text-stone-950 shadow-inner' : 'bg-stone-800 text-amber-400'
-                }`}>
-                  <User className="w-3.5 h-3.5" />
-                </div>
-                <span className="hidden sm:inline text-xs font-bold whitespace-nowrap">
-                  {user ? (user.name || user.username) : 'Tài Khoản'}
-                </span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform hidden sm:inline ${isUserDropdownOpen ? 'rotate-180' : ''}`} />
+                {user ? (
+                  <span className="font-bold text-xs text-amber-300">
+                    {(user.name || user.username || 'U').charAt(0).toUpperCase()}
+                  </span>
+                ) : (
+                  <User className="w-4 h-4 text-amber-300" />
+                )}
+                {user && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-black" />
+                )}
               </button>
 
               {/* User Dropdown */}
