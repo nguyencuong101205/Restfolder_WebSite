@@ -142,7 +142,7 @@ export const CustomerMenuPage = () => {
               ) : (
                 <>
                   <LayoutGrid className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Dạng Lưới (4 món/hàng)</span>
+                  <span>Dạng Lưới (2 món/hàng)</span>
                 </>
               )}
             </button>
@@ -151,9 +151,9 @@ export const CustomerMenuPage = () => {
 
         {/* Product Grid / List */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[3/4] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
+              <div key={i} className="aspect-[4/3] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
             ))}
           </div>
         ) : dishes.length === 0 ? (
@@ -165,8 +165,8 @@ export const CustomerMenuPage = () => {
             </p>
           </div>
         ) : viewMode === 'grid' ? (
-          /* SHOPEE STYLE PRODUCT GRID: STRICTLY 4 DISHES PER ROW */
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-5">
+          /* SHOPEE STYLE PRODUCT GRID: 2 COLUMNS (2 DISHES PER ROW) */
+          <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
             {paginatedDishes.map((dish) => (
               <DishCard
                 key={dish.id}

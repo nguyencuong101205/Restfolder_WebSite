@@ -30,29 +30,41 @@ export const DishCard = ({ dish, onOpenDetail }) => {
 
       <div>
         {/* Product Image */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-950">
+        <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden bg-stone-950">
           <img
             src={dish.image}
             alt={dish.name}
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
           
-          {/* Chinese Hanzi on bottom-left of photo */}
-          <div className="absolute bottom-1.5 left-2.5 z-10">
+          {/* Chinese Hanzi & Pinyin on bottom-left of photo */}
+          <div className="absolute bottom-2 left-3 z-10 flex items-center gap-2">
             <span className="font-calligraphy text-amber-300 text-xs sm:text-sm drop-shadow">
               {dish.hanzi}
             </span>
+            {dish.pinyin && (
+              <span className="text-[10px] text-amber-200/80 italic font-mono hidden sm:inline drop-shadow">
+                ({dish.pinyin})
+              </span>
+            )}
           </div>
         </div>
 
         {/* Product Details (Shopee home-product-item__name, price, rating) */}
-        <div className="p-3 space-y-1.5">
-          {/* Title (2 lines clamp) */}
-          <h3 className="font-bold text-xs sm:text-sm text-stone-100 group-hover:text-amber-300 transition-colors line-clamp-2 leading-snug min-h-[36px]">
+        <div className="p-3 sm:p-4 space-y-1.5">
+          {/* Title */}
+          <h3 className="font-bold text-xs sm:text-base text-stone-100 group-hover:text-amber-300 transition-colors line-clamp-1 sm:line-clamp-2 leading-snug">
             {dish.name}
           </h3>
+
+          {/* Short description preview for 2-column view */}
+          {dish.description && (
+            <p className="text-[11px] sm:text-xs text-stone-400 line-clamp-1 sm:line-clamp-2 leading-relaxed">
+              {dish.description}
+            </p>
+          )}
 
           {/* Price Row: Old price + Current red price */}
           <div className="flex items-baseline gap-2 pt-0.5">
