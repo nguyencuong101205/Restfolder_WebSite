@@ -103,15 +103,10 @@ export const DishDetailModal = ({ dish, onClose }) => {
               {dish.name}
             </h2>
             <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-lg sm:text-xl font-black text-red-500">
+              <span className="text-lg sm:text-2xl font-black text-amber-300">
                 {formatVND(dish.price)}
               </span>
-              <span className="text-xs text-stone-400 line-through">
-                {formatVND(Math.round(dish.price * 1.15 / 1000) * 1000)}
-              </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-900/70 text-red-200 font-bold ml-1 border border-red-700/50">
-                Ưu đãi -15%
-              </span>
+              <span className="text-xs text-stone-300">/ phần</span>
             </div>
           </div>
         </div>
@@ -120,7 +115,7 @@ export const DishDetailModal = ({ dish, onClose }) => {
         <div className="p-4 sm:p-5 overflow-y-auto space-y-4 text-stone-200">
           
           {/* Detailed Description */}
-          <div className="bg-[#200a0d] p-3.5 rounded-sm border border-[#44181c] shadow-inner space-y-1.5">
+          <div className="bg-[#200a0d] p-3.5 rounded-xl border border-[#44181c] shadow-inner space-y-1.5">
             <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block">
               📖 Thông Tin & Hương Vị Món Ăn
             </span>

@@ -205,11 +205,11 @@ export const CustomerMenuPage = ({
             }}
           >
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] sm:aspect-[16/10] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
+              <div key={i} className="aspect-[4/3] sm:aspect-[16/10] bg-[#1a0a0c] rounded-2xl border border-[#3b1519] animate-pulse"></div>
             ))}
           </div>
         ) : dishes.length === 0 ? (
-          <div className="py-24 text-center bg-[#160709] border border-[#3b1216] rounded-sm p-8 max-w-md mx-auto shadow-xl">
+          <div className="py-24 text-center bg-[#160709] border border-[#3b1216] rounded-2xl p-8 max-w-md mx-auto shadow-xl">
             <span className="text-4xl block mb-3">🥟</span>
             <h3 className="font-bold text-lg text-white font-decorative">Không tìm thấy món ăn phù hợp</h3>
             <p className="text-xs text-stone-400 mt-1.5">
@@ -358,7 +358,7 @@ export const CustomerMenuPage = ({
           <button
             type="button"
             onClick={() => setIsCartOpen(true)}
-            className="w-full py-3.5 px-4 bg-gradient-to-r from-red-700 via-red-800 to-amber-700 text-white font-bold rounded-sm shadow-2xl flex items-center justify-between border border-amber-400 active:scale-95"
+            className="w-full py-3.5 px-4 bg-gradient-to-r from-red-700 via-red-800 to-amber-700 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-between border border-amber-400 active:scale-95"
           >
             <div className="flex items-center gap-2">
               <span className="w-5 h-5 rounded-full bg-amber-400 text-stone-950 font-black text-xs flex items-center justify-center shadow">

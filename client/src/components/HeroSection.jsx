@@ -201,36 +201,8 @@ export const HeroSection = ({ onExploreMenu, onOpenReserve, onOpenQR }) => {
 
       </div>
 
-      {/* 4 Quick Nav Tabs ngay bên dưới slider */}
-      <div className="max-w-5xl mx-auto px-4 py-4 sm:py-5">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
-          {SLIDES.map((slide, idx) => {
-            const isActive = curIndex === idx;
-            return (
-              <button
-                key={slide.id}
-                type="button"
-                onClick={() => setCurIndex(idx)}
-                className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all text-left ${
-                  isActive
-                    ? 'bg-gradient-to-r from-red-950 to-[#220c10] border-amber-400 text-amber-200 shadow-lg ring-1 ring-amber-400/50 -translate-y-0.5'
-                    : 'bg-[#150507] border-[#3b1216] text-stone-400 hover:text-stone-200 hover:border-stone-600'
-                }`}
-              >
-                <span className="text-xl flex-shrink-0">{slide.icon}</span>
-                <div className="min-w-0">
-                  <span className={`text-xs font-bold block truncate ${isActive ? 'text-amber-300' : 'text-stone-300'}`}>
-                    {slide.shortTitle}
-                  </span>
-                  <span className="text-[10px] text-stone-400 font-calligraphy block truncate">
-                    {slide.hanzi}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      {/* Decorative Gold Border Stripe */}
+      <div className="h-1 bg-gradient-to-r from-red-800 via-amber-400 to-red-800" />
 
     </section>
   );
