@@ -79,7 +79,7 @@ export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-red-500 flex-shrink-0 mt-0.5" />
-                <span>Chi nhánh 3: Số 08 Đỗ Đức Dục, Nam Từ Liêm, Hà Nội</span>
+                <span>Chi nhánh 3: Số 18 Phố Mã Mây, Quận Hoàn Kiếm, Hà Nội</span>
               </div>
             </div>
           </div>

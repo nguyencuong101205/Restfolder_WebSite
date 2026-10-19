@@ -3,15 +3,15 @@ import { Search, ChevronDown, ChevronLeft, ChevronRight, Flame, Star, X, QrCode 
 import { useTable } from '../context/TableContext';
 
 export const CATEGORIES = [
-  { id: 'all', label: 'All Menus / Tất Cả' },
-  { id: 'chef_special', label: 'Chef’s Recommendations' },
-  { id: 'dimsum', label: 'Handmade Dim Sum' },
-  { id: 'roast', label: 'BBQ & Roast (Vịt Quay)' },
-  { id: 'soup_abalone', label: 'Abalone & Bird’s Nest' },
-  { id: 'meat', label: 'Meat & Poultry' },
-  { id: 'hotpot', label: 'Hotpot & Broth' },
-  { id: 'noodles', label: 'Noodles & Congee' },
-  { id: 'tea_dessert', label: 'Desserts & Tea' }
+  { id: 'all', label: 'Tất Cả Món · 全部', icon: '🏮' },
+  { id: 'chef_special', label: 'Đặc Sản Quán · 招牌', icon: '⭐' },
+  { id: 'dimsum', label: 'Dim Sum Nặn Tay · 点心', icon: '🥟' },
+  { id: 'roast', label: 'Vịt Quay & Nướng · 烧腊', icon: '🦆' },
+  { id: 'soup_abalone', label: 'Bào Ngư & Tổ Yến · 鲍燕', icon: '🦪' },
+  { id: 'meat', label: 'Sơn Hào Hải Vị · 佳肴', icon: '🥩' },
+  { id: 'hotpot', label: 'Lẩu Tứ Xuyên · 火锅', icon: '🍲' },
+  { id: 'noodles', label: 'Mì Kéo & Hủ Tiếu · 面食', icon: '🍜' },
+  { id: 'tea_dessert', label: 'Danh Trà & Tráng Miệng · 甜品', icon: '🍵' }
 ];
 
 export const CategoryTabs = ({
@@ -76,9 +76,10 @@ export const CategoryTabs = ({
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                className={`shopee-btn ${isActive ? 'shopee-btn--primary' : ''}`}
+                className={`shopee-btn ${isActive ? 'shopee-btn--primary font-bold' : ''} gap-1.5`}
               >
-                {cat.label}
+                <span>{cat.icon}</span>
+                <span>{cat.label}</span>
               </button>
             );
           })}

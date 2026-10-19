@@ -465,3 +465,113 @@
   animation: subtleZoom 25s ease-in-out infinite alternate;
 }
 
+/* ==========================================================================
+   IMPERIAL CHINESE ORNAMENTS & BUTTON STYLES
+   ========================================================================== */
+
+/* Chinese Imperial Corner Carved Ornaments */
+.corner-ornament-tl,
+.corner-ornament-tr,
+.corner-ornament-bl,
+.corner-ornament-br {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #d4af37;
+  pointer-events: none;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.corner-ornament-tl {
+  top: 7px;
+  left: 7px;
+  border-top: 2px solid #d4af37;
+  border-left: 2px solid #d4af37;
+}
+
+.corner-ornament-tr {
+  top: 7px;
+  right: 7px;
+  border-top: 2px solid #d4af37;
+  border-right: 2px solid #d4af37;
+}
+
+.corner-ornament-bl {
+  bottom: 7px;
+  left: 7px;
+  border-bottom: 2px solid #d4af37;
+  border-left: 2px solid #d4af37;
+}
+
+.corner-ornament-br {
+  bottom: 7px;
+  right: 7px;
+  border-bottom: 2px solid #d4af37;
+  border-right: 2px solid #d4af37;
+}
+
+.group:hover .corner-ornament-tl {
+  transform: translate(-2px, -2px);
+  opacity: 1;
+}
+
+.group:hover .corner-ornament-tr {
+  transform: translate(2px, -2px);
+  opacity: 1;
+}
+
+.group:hover .corner-ornament-bl {
+  transform: translate(-2px, 2px);
+  opacity: 1;
+}
+
+.group:hover .corner-ornament-br {
+  transform: translate(2px, 2px);
+  opacity: 1;
+}
+
+/* Imperial Chinese Buttons & Cards */
+.btn-chinese-primary {
+  background: linear-gradient(135deg, #a8131e 0%, #7d0d15 50%, #59090f 100%);
+  color: #fff8ee;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 4px 15px rgba(168, 19, 30, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-chinese-primary:hover {
+  background: linear-gradient(135deg, #c8102e 0%, #8f1019 50%, #680b11 100%);
+  border-color: #f7d774;
+  box-shadow: 0 6px 20px rgba(200, 16, 46, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-chinese-gold {
+  background: linear-gradient(135deg, #f7d774 0%, #d4af37 50%, #aa841c 100%);
+  color: #120406;
+  border: 1px solid #ffd700;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+.btn-chinese-gold:hover {
+  background: linear-gradient(135deg, #ffea9f 0%, #f7d774 50%, #d4af37 100%);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+  transform: translateY(-1px);
+}
+
+.chinese-card {
+  background: linear-gradient(180deg, #1c0a0d 0%, #130507 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+}
+
+.chinese-card:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 12px 35px rgba(139, 17, 23, 0.25), 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
