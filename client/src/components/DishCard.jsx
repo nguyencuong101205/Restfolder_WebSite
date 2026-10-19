@@ -11,8 +11,8 @@ export const DishCard = ({ dish, onOpenDetail }) => {
   return (
     <div
       onClick={() => onOpenDetail(dish)}
-      className="group flex flex-col justify-between bg-[#19090b] rounded-sm border border-[#3d1519] hover:border-amber-400 shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden cursor-pointer relative"
-      style={{ willChange: 'transform' }}
+      className="group flex flex-col justify-between bg-[#19090b] rounded-sm border border-[#3d1519] hover:border-amber-400 shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden cursor-pointer relative w-full"
+      style={{ willChange: 'transform', width: '100%' }}
     >
       {/* Shopee Style 3D Ribbon: "Yêu Thích" on top-left */}
       <div className="shopee-favourite-badge flex items-center gap-1">
@@ -28,13 +28,14 @@ export const DishCard = ({ dish, onOpenDetail }) => {
         </div>
       )}
 
-      <div>
+      <div className="w-full">
         {/* Product Image */}
-        <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full overflow-hidden bg-stone-950">
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950" style={{ width: '100%' }}>
           <img
             src={dish.image}
             alt={dish.name}
             className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>

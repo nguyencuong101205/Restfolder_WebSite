@@ -151,9 +151,17 @@ export const CustomerMenuPage = () => {
 
         {/* Product Grid / List */}
         {loading ? (
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
+          <div
+            className="chinese-menu-grid-2col grid grid-cols-2 gap-3.5 sm:gap-6 w-full"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+              gap: '20px',
+              width: '100%'
+            }}
+          >
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-[4/3] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
+              <div key={i} className="aspect-[4/3] sm:aspect-[16/10] bg-[#1a0a0c] rounded-sm border border-[#3b1519] animate-pulse"></div>
             ))}
           </div>
         ) : dishes.length === 0 ? (
@@ -165,8 +173,16 @@ export const CustomerMenuPage = () => {
             </p>
           </div>
         ) : viewMode === 'grid' ? (
-          /* SHOPEE STYLE PRODUCT GRID: 2 COLUMNS (2 DISHES PER ROW) */
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-6">
+          /* SHOPEE STYLE PRODUCT GRID: STRICTLY 2 DISHES PER ROW */
+          <div
+            className="chinese-menu-grid-2col grid grid-cols-2 gap-3.5 sm:gap-6 w-full"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+              gap: '20px',
+              width: '100%'
+            }}
+          >
             {paginatedDishes.map((dish) => (
               <DishCard
                 key={dish.id}
