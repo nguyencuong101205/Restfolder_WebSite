@@ -54,7 +54,6 @@ const MainLayout = () => {
         onOpenTableManager={() => setCurrentView('tables')}
         onOpenReserve={() => setIsReservationModalOpen(true)}
         onOpenAbout={() => setIsAboutModalOpen(true)}
-        onOpenTests={() => setIsTestModalOpen(true)}
         onExploreMenu={scrollToMenu}
         currentView={currentView}
       />
@@ -88,7 +87,6 @@ const MainLayout = () => {
           onOpenAbout={() => setIsAboutModalOpen(true)}
           onExploreMenu={scrollToMenu}
           onOpenReserve={() => setIsReservationModalOpen(true)}
-          onOpenTests={() => setIsTestModalOpen(true)}
         />
       )}
 

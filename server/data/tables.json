@@ -20,8 +20,8 @@
     "tableNumber": "03",
     "name": "Bàn 03 - Sảnh Phụng",
     "capacity": 6,
-    "status": "occupied",
-    "currentOrderId": "ord-sample-01"
+    "status": "available",
+    "currentOrderId": null
   },
   {
     "id": "tbl-04",
@@ -60,8 +60,8 @@
     "tableNumber": "08",
     "name": "Bàn 08 - Trúc Các",
     "capacity": 4,
-    "status": "occupied",
-    "currentOrderId": "ord-1792395351304"
+    "status": "available",
+    "currentOrderId": null
   },
   {
     "id": "tbl-vip1",

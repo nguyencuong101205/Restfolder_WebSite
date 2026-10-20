@@ -22,7 +22,7 @@
     "subTotal": 156000,
     "vat": 12480,
     "totalPrice": 168480,
-    "status": "pending",
+    "status": "completed",
     "note": "Ưu tiên lên nhanh",
     "callStaffRequests": [
       {
@@ -31,10 +31,17 @@
         "note": "",
         "status": "pending",
         "createdAt": "2026-10-20T06:45:37.299Z"
+      },
+      {
+        "id": "req-1792486225190",
+        "requestType": "payment",
+        "note": "",
+        "status": "pending",
+        "createdAt": "2026-10-20T08:50:25.190Z"
       }
     ],
     "createdAt": "2026-10-19T07:35:51.304Z",
-    "updatedAt": "2026-10-19T07:35:51.304Z"
+    "updatedAt": "2026-10-20T08:50:44.164Z"
   },
   {
     "id": "ord-sample-01",
@@ -76,9 +83,9 @@
     "subTotal": 601000,
     "vat": 60100,
     "totalPrice": 661100,
-    "status": "preparing",
+    "status": "completed",
     "note": "Khách ưu tiên mang trà lên trước",
     "createdAt": "2026-10-19T14:10:00.000Z",
-    "updatedAt": "2026-10-19T14:15:00.000Z"
+    "updatedAt": "2026-10-20T08:50:44.898Z"
   }
 ]

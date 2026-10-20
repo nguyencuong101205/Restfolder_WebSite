@@ -2,7 +2,7 @@ import React from 'react';
 import { ChineseSeal } from './ChineseSeal';
 import { MapPin, Phone, Clock, Award, ShieldCheck, ArrowUp, Sparkles, Heart } from 'lucide-react';
 
-export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve, onOpenTests }) => {
+export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -110,36 +110,31 @@ export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve, onOpenTests 
             </div>
           </div>
 
-          {/* Col 4: Công Nghệ Nhà Hàng Thông Minh */}
+          {/* Col 4: Dịch Vụ & Tiện Ích Nhà Hàng */}
           <div className="space-y-2.5">
             <h4 className="font-bold text-amber-200 uppercase tracking-wider text-xs">
-              Tiện Ích Công Nghệ
+              Dịch Vụ & Tiện Ích
             </h4>
-            <ul className="space-y-1.5 text-stone-400 text-[11px]">
+            <ul className="space-y-1.5 text-stone-300 text-[11px]">
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span>Mô hình <strong>MVC RESTful API</strong> hiện đại</span>
+                <span>Hệ thống phòng VIP tiệc riêng tư & hội nghị</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span>Bảo mật phân quyền <strong>JWT Token</strong></span>
+                <span>Thực đơn Dim Sum nặn thủ công tươi mỗi ngày</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span>Gọi món tại bàn qua <strong>Mã QR trực tiếp</strong></span>
+                <span>Bãi đỗ xe ô tô và xe máy rộng rãi, an toàn</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span>Màn hình bếp <strong>KDS Realtime</strong> không độ trễ</span>
+                <span>Xuất hóa đơn điện tử VAT đầy đủ theo yêu cầu</span>
               </li>
-              <li className="pt-2">
-                <button
-                  type="button"
-                  onClick={onOpenTests}
-                  className="px-3 py-1.5 bg-[#250d11] hover:bg-amber-950 text-amber-300 border border-amber-500/40 hover:border-amber-400 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-md active:scale-95"
-                >
-                  <span>🧪 Kiểm Thử Hệ Thống (API & Postman)</span>
-                </button>
+              <li className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <span>Ưu đãi tri ân thành viên Hoàng Long VIP</span>
               </li>
             </ul>
           </div>
