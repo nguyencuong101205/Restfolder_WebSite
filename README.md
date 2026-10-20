@@ -209,14 +209,125 @@ Sau khi chạy lệnh:
 
 ## 📬 7. Kiểm Thử API Bằng Postman
 
-Dựa trên các bài học Postman trong `Study_FE-main/postman`, bạn có thể kiểm thử các API sau:
+Hệ thống cung cấp trọn bộ Postman Collection & Environment chuẩn v2.1 trong thư mục `postman/`:
+- `postman/HoangLongQuan_API.postman_collection.json`
+- `postman/HoangLongQuan_Environment.postman_environment.json`
 
 | Phương thức | Endpoint | Chức năng | Quyền hạn (JWT) |
 |:---|:---|:---|:---|
 | **POST** | `/api/auth/login` | Đăng nhập lấy JWT Bearer Token | Public |
 | **GET** | `/api/auth/me` | Xem thông tin tài khoản đăng nhập | Cần Token Bearer |
-| **GET** | `/api/menu` | Lấy danh sách món ăn (`?category=dimsum`) | Public |
-| **POST** | `/api/orders` | Khách gửi đơn đặt món từ bàn | Public |
+| **GET** | `/api/menu` | Lấy danh sách món ăn (`?category=dimsum&search=vịt`) | Public |
+| **POST** | `/api/orders` | Khách gửi đơn đặt món từ bàn (tự tính VAT 8%) | Public |
 | **GET** | `/api/orders/table/:num/active` | Xem tiến độ món đang nấu của bàn | Public |
 | **PATCH** | `/api/orders/:id/status` | Cập nhật tiến độ: pending ➔ preparing ➔ served ➔ completed | Staff / Kitchen |
+| **POST** | `/api/orders/:id/call-staff` | Bấm chuông gọi phục vụ tại bàn | Public |
 | **GET** | `/api/tables/all/with-qr` | Lấy danh sách mã QR ảnh base64 của tất cả các bàn | Public / Staff |
+
+---
+
+## 🧪 8. Hệ Thống Kiểm Thử Hoàn Chỉnh (Testing Suite)
+
+Dự án trang bị đầy đủ 2 hình thức kiểm thử:
+
+### A. Kiểm Thử Thủ Công (Manual Testing):
+* **Tài liệu ca kiểm thử**: [TEST_CASES_MANUAL.md](file:///c:/Users/Bear/Documents/Study/Restfolder_WebSite/TEST_CASES_MANUAL.md) (40 ca kiểm thử chi tiết).
+* **Bảng tính Excel nghiệm thu**: [BANG_KIEM_THU_THU_CONG.csv](file:///c:/Users/Bear/Documents/Study/Restfolder_WebSite/BANG_KIEM_THU_THU_CONG.csv) (UTF-8 BOM không lỗi font).
+* **Trang in ấn báo cáo nghiệm thu**: Mở trình duyệt tại 👉 `http://localhost:5173/kiem-thu-thu-cong.html` (có nút in PDF).
+* **Sổ tay tương tác trong Web**: Bấm nút **Menu** $\rightarrow$ chọn **"Kiểm Thử API & Postman"** để tự tay đánh dấu [✓ Đạt] / [✗ Lỗi].
+
+### B. Kiểm Thử Tự Động (Automated Testing):
+```powershell
+# 1. Chạy 26 ca kiểm thử Backend REST API (Node.js Test Runner)
+npm run test:api
+
+# 2. Chạy 10 ca kiểm thử Frontend UI Component (Vitest)
+npm run test:ui
+
+# 3. Chạy toàn bộ hệ thống kiểm thử
+npm test
+```
+
+---
+
+## 🗄️ 9. Sơ Đồ Cơ Sở Dữ Liệu Thực Thể (ERD - Entity Relationship Diagram)
+
+Cơ sở dữ liệu MySQL chuẩn hóa UTF-8 (`utf8mb4_unicode_ci`) được lưu tại `database.sql`:
+
+```mermaid
+erDiagram
+    users {
+        string id PK
+        string username UK
+        string password_hash
+        string name
+        string role "admin | kitchen | waiter | customer"
+        string avatar
+        datetime created_at
+    }
+
+    tables {
+        string id PK
+        string table_number UK
+        string name
+        int capacity
+        string status "available | occupied | reserved"
+        string current_order_id FK
+    }
+
+    menu_items {
+        string id PK
+        string name
+        string hanzi
+        string pinyin
+        string category
+        decimal price
+        string image
+        text description
+        boolean is_spicy
+        int spice_level
+        boolean is_best_seller
+        boolean in_stock
+    }
+
+    orders {
+        string id PK
+        string table_number
+        string customer_name
+        string status "pending | preparing | served | completed"
+        decimal subtotal
+        decimal vat
+        decimal total
+        string payment_method
+        text note
+        datetime created_at
+    }
+
+    order_items {
+        int id PK
+        string order_id FK
+        string dish_id FK
+        string dish_name
+        decimal price
+        int quantity
+        string spice_level
+        text selected_toppings
+        text note
+    }
+
+    reservations {
+        int id PK
+        string code UK
+        string customer_name
+        string phone
+        date date
+        string time
+        int guests
+        string area
+        string status
+    }
+
+    tables ||--o| orders : "chứa đơn hiện tại"
+    orders ||--|{ order_items : "bao gồm các món"
+    menu_items ||--o{ order_items : "định nghĩa món"
+```

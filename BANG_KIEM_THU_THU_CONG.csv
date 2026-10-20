@@ -1,4 +1,4 @@
-﻿Mã Ca Test,Phân Hệ / Chức Năng,Tên Ca Kiểm Thử,Tiền Điều Kiện,Các Bước Thực Hiện Bằng Tay,Dữ Liệu Đầu Vào,Kết Quả Mong Đợi,Loại Kiểm Thử,Kết Quả Nghiệm Thu,Người Thực Hiện,Ngày Kiểm Thử
+Mã Ca Test,Phân Hệ / Chức Năng,Tên Ca Kiểm Thử,Tiền Điều Kiện,Các Bước Thực Hiện Bằng Tay,Dữ Liệu Đầu Vào,Kết Quả Mong Đợi,Loại Kiểm Thử,Kết Quả Nghiệm Thu,Người Thực Hiện,Ngày Kiểm Thử
 "TC_AUTH_01","Xác Thực & Phân Quyền","Đăng nhập thành công với tài khoản Chủ Quán (Admin)","Người dùng đang ở trang chủ web http://localhost:5173","1. Bấm vào icon Người ở góc trên bên phải thanh Header.
 2. Chọn tab Đăng Nhập.
 3. Nhập Tên đăng nhập: ""admin"", Mật khẩu: ""admin123"".
