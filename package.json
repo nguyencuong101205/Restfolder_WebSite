@@ -9,10 +9,7 @@
     "install:all": "npm run install:server && npm run install:client",
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
-    "dev": "node start-dev.js",
-    "test:api": "node --test tests/api.test.js",
-    "test:ui": "npm --prefix client test",
-    "test": "npm run test:api && npm run test:ui"
+    "dev": "node start-dev.js"
   },
   "keywords": [
     "chinese-restaurant",

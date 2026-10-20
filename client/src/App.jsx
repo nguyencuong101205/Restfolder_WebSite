@@ -10,7 +10,6 @@ import { OrderTracker } from './components/OrderTracker';
 import { CallStaffModal } from './components/CallStaffModal';
 import { ReservationModal } from './components/ReservationModal';
 import { AboutModal } from './components/AboutModal';
-import { TestRunnerModal } from './components/TestRunnerModal';
 import { CustomerMenuPage } from './pages/CustomerMenuPage';
 import { KitchenDashboard } from './pages/KitchenDashboard';
 import { TableManagerPage } from './pages/TableManagerPage';
@@ -24,7 +23,6 @@ const MainLayout = () => {
   // Imperial Modals
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
-  const [isTestModalOpen, setIsTestModalOpen] = useState(false);
 
   const { isStaff, isAdmin } = useAuth();
 
@@ -106,12 +104,6 @@ const MainLayout = () => {
         isOpen={isAboutModalOpen}
         onClose={() => setIsAboutModalOpen(false)}
         onOpenReserve={() => setIsReservationModalOpen(true)}
-      />
-
-      {/* Test Suite & Postman Center Modal */}
-      <TestRunnerModal
-        isOpen={isTestModalOpen}
-        onClose={() => setIsTestModalOpen(false)}
       />
 
       {/* Staff & Customer Auth Modal (Login / Register) */}
