@@ -117,7 +117,10 @@ export const AuthController = {
     try {
       return res.status(200).json({
         success: true,
-        data: req.user
+        data: {
+          user: req.user,
+          ...req.user
+        }
       });
     } catch (err) {
       next(err);
@@ -130,14 +133,17 @@ export const AuthController = {
    */
   async getDemoAccounts(req, res, next) {
     try {
+      const accounts = [
+        { username: 'admin', password: '123', role: 'admin', title: 'Tổng Quản / Chủ Quán' },
+        { username: 'bep', password: '123', role: 'kitchen', title: 'Bếp Trưởng' },
+        { username: 'phucvu', password: '123', role: 'waiter', title: 'Nhân Viên Phục Vụ' }
+      ];
+
       return res.status(200).json({
         success: true,
         message: 'Tài khoản mẫu để kiểm thử',
-        accounts: [
-          { username: 'admin', password: '123', role: 'admin', title: 'Tổng Quản / Chủ Quán' },
-          { username: 'bep', password: '123', role: 'kitchen', title: 'Bếp Trưởng' },
-          { username: 'phucvu', password: '123', role: 'waiter', title: 'Nhân Viên Phục Vụ' }
-        ]
+        data: accounts,
+        accounts
       });
     } catch (err) {
       next(err);

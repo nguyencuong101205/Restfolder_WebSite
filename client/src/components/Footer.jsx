@@ -2,7 +2,7 @@ import React from 'react';
 import { ChineseSeal } from './ChineseSeal';
 import { MapPin, Phone, Clock, Award, ShieldCheck, ArrowUp, Sparkles, Heart } from 'lucide-react';
 
-export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
+export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve, onOpenTests }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -131,6 +131,15 @@ export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
               <li className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 <span>Màn hình bếp <strong>KDS Realtime</strong> không độ trễ</span>
+              </li>
+              <li className="pt-2">
+                <button
+                  type="button"
+                  onClick={onOpenTests}
+                  className="px-3 py-1.5 bg-[#250d11] hover:bg-amber-950 text-amber-300 border border-amber-500/40 hover:border-amber-400 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-md active:scale-95"
+                >
+                  <span>🧪 Kiểm Thử Hệ Thống (API & Postman)</span>
+                </button>
               </li>
             </ul>
           </div>

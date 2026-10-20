@@ -14,8 +14,14 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm nước sốt sa tế đặc biệt", "price": 10000 },
-      { "name": "Rắc gạch tôm rang muối", "price": 15000 }
+      {
+        "name": "Thêm nước sốt sa tế đặc biệt",
+        "price": 10000
+      },
+      {
+        "name": "Rắc gạch tôm rang muối",
+        "price": 15000
+      }
     ]
   },
   {
@@ -33,8 +39,14 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm gạch cua béo", "price": 20000 },
-      { "name": "Trứng cút lòng đào", "price": 12000 }
+      {
+        "name": "Thêm gạch cua béo",
+        "price": 20000
+      },
+      {
+        "name": "Trứng cút lòng đào",
+        "price": 12000
+      }
     ]
   },
   {
@@ -52,7 +64,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm 1 bánh bao nhỏ", "price": 25000 }
+      {
+        "name": "Thêm 1 bánh bao nhỏ",
+        "price": 25000
+      }
     ]
   },
   {
@@ -86,7 +101,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm tôm tươi xào", "price": 25000 }
+      {
+        "name": "Thêm tôm tươi xào",
+        "price": 25000
+      }
     ]
   },
   {
@@ -104,8 +122,14 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm 10 lá bánh tráng cuốn", "price": 25000 },
-      { "name": "Chế biến xương vịt rang muối tiêu", "price": 50000 }
+      {
+        "name": "Thêm 10 lá bánh tráng cuốn",
+        "price": 25000
+      },
+      {
+        "name": "Chế biến xương vịt rang muối tiêu",
+        "price": 50000
+      }
     ]
   },
   {
@@ -123,7 +147,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Bánh bao chiên ăn kèm (4 cái)", "price": 28000 }
+      {
+        "name": "Bánh bao chiên ăn kèm (4 cái)",
+        "price": 28000
+      }
     ]
   },
   {
@@ -157,10 +184,22 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Đĩa bò Wagyu nhúng lẩu (150g)", "price": 160000 },
-      { "name": "Nấm tổng hợp thượng hạng", "price": 45000 },
-      { "name": "Váng đậu giòn chiên phồng", "price": 30000 },
-      { "name": "Viên tôm hùm phô mai chảy", "price": 55000 }
+      {
+        "name": "Đĩa bò Wagyu nhúng lẩu (150g)",
+        "price": 160000
+      },
+      {
+        "name": "Nấm tổng hợp thượng hạng",
+        "price": 45000
+      },
+      {
+        "name": "Váng đậu giòn chiên phồng",
+        "price": 30000
+      },
+      {
+        "name": "Viên tôm hùm phô mai chảy",
+        "price": 55000
+      }
     ]
   },
   {
@@ -178,8 +217,14 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm thịt bò băm", "price": 30000 },
-      { "name": "Tăng cấp độ cay Tứ Xuyên", "price": 5000 }
+      {
+        "name": "Thêm thịt bò băm",
+        "price": 30000
+      },
+      {
+        "name": "Tăng cấp độ cay Tứ Xuyên",
+        "price": 5000
+      }
     ]
   },
   {
@@ -197,7 +242,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Đậu phộng rang thơm thêm", "price": 10000 }
+      {
+        "name": "Đậu phộng rang thơm thêm",
+        "price": 10000
+      }
     ]
   },
   {
@@ -215,9 +263,18 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm bắp bò hoa thái lát", "price": 35000 },
-      { "name": "Trứng ngâm tương lòng đào", "price": 15000 },
-      { "name": "Thêm vắt mì kéo tươi", "price": 20000 }
+      {
+        "name": "Thêm bắp bò hoa thái lát",
+        "price": 35000
+      },
+      {
+        "name": "Trứng ngâm tương lòng đào",
+        "price": 15000
+      },
+      {
+        "name": "Thêm vắt mì kéo tươi",
+        "price": 20000
+      }
     ]
   },
   {
@@ -235,7 +292,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm 3 viên hoành thánh tôm", "price": 30000 }
+      {
+        "name": "Thêm 3 viên hoành thánh tôm",
+        "price": 30000
+      }
     ]
   },
   {
@@ -253,7 +313,10 @@
     "isChefSpecial": false,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm tôm sú tươi", "price": 35000 }
+      {
+        "name": "Thêm tôm sú tươi",
+        "price": 35000
+      }
     ]
   },
   {
@@ -319,7 +382,10 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm xốt X.O sò điệp thượng hạng", "price": 45000 }
+      {
+        "name": "Thêm xốt X.O sò điệp thượng hạng",
+        "price": 45000
+      }
     ]
   },
   {
@@ -337,7 +403,10 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Thêm lát bào ngư Nam Phi", "price": 250000 }
+      {
+        "name": "Thêm lát bào ngư Nam Phi",
+        "price": 250000
+      }
     ]
   },
   {
@@ -355,7 +424,10 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Bánh bao chiên ăn kèm (4 cái)", "price": 35000 }
+      {
+        "name": "Bánh bao chiên ăn kèm (4 cái)",
+        "price": 35000
+      }
     ]
   },
   {
@@ -421,7 +493,10 @@
     "isChefSpecial": true,
     "inStock": true,
     "toppings": [
-      { "name": "Bánh phồng tôm giòn ăn kèm", "price": 20000 }
+      {
+        "name": "Bánh phồng tôm giòn ăn kèm",
+        "price": 20000
+      }
     ]
   }
 ]

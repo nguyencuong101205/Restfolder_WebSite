@@ -19,7 +19,8 @@ import {
   ChevronDown,
   Calendar,
   Gift,
-  Phone
+  Phone,
+  Terminal
 } from 'lucide-react';
 
 export const Header = ({
@@ -28,6 +29,7 @@ export const Header = ({
   onOpenTableManager,
   onOpenReserve,
   onOpenAbout,
+  onOpenTests,
   onExploreMenu,
   currentView
 }) => {
@@ -315,6 +317,23 @@ export const Header = ({
                       </div>
                       <span className="text-[10px] text-amber-400 font-mono font-bold bg-stone-900 px-1.5 py-0.5 rounded border border-stone-800">
                         Admin
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onOpenTests && onOpenTests();
+                        setIsMoreMenuOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-amber-200 hover:text-white hover:bg-[#291013] transition-colors flex items-center justify-between border-t border-[#3b1519]"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Terminal className="w-4 h-4 text-emerald-400" />
+                        <span className="font-bold">Kiểm Thử API & Postman</span>
+                      </div>
+                      <span className="text-[10px] text-emerald-300 font-mono font-bold bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-500/40">
+                        TEST
                       </span>
                     </button>
                   </div>
