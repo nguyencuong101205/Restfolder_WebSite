@@ -48,11 +48,11 @@ export const DishDetailModal = ({ dish, onClose }) => {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay-blur animate-fade-in"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-lg bg-[#18080a] border border-amber-500/40 rounded-2xl shadow-2xl overflow-hidden animate-fade-scale flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-lg bg-[#18080a] border-2 border-amber-500/70 rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden animate-fade-in flex flex-col max-h-[90vh]"
       >
         
         {/* Header Close Button */}

@@ -98,29 +98,25 @@ export const Header = ({
           <div className="hl-nav-group flex items-center gap-2 sm:gap-4 min-w-0">
             {/* Brand Logo */}
             <div
-              className="flex items-center gap-2 cursor-pointer select-none group flex-shrink-0"
+              className="flex items-center gap-2.5 cursor-pointer select-none group flex-shrink-0"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               title="Về đầu trang Hoàng Long Quán"
             >
               <ChineseSeal text="皇龍" subtext="御膳" className="hidden sm:inline-flex" />
-              <div className="flex items-baseline">
-                <span
-                  className="font-extrabold tracking-tight text-lg sm:text-2xl font-sans uppercase transition-colors"
-                  style={{ color: '#ef4444' }}
-                >
-                  HOÀNG LONG
-                </span>
-                <span
-                  className="font-bold tracking-widest text-base sm:text-2xl ml-1.5 uppercase font-decorative transition-colors"
-                  style={{ color: '#fbbf24' }}
-                >
-                  QUÁN
-                </span>
-                <span
-                  className="font-calligraphy text-xs sm:text-base ml-2 hidden lg:inline"
-                  style={{ color: 'rgba(252, 211, 77, 0.8)' }}
-                >
-                  皇龍樓
+              <div className="flex flex-col justify-center">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="font-decorative font-black text-lg sm:text-2xl uppercase tracking-wider bg-gradient-to-r from-red-500 via-amber-300 to-yellow-400 bg-clip-text text-transparent group-hover:brightness-110 transition-all">
+                    HOÀNG LONG
+                  </span>
+                  <span className="font-decorative font-bold text-base sm:text-xl uppercase tracking-widest text-amber-300">
+                    QUÁN
+                  </span>
+                  <span className="font-calligraphy text-xs sm:text-sm text-amber-400/90 ml-1 hidden lg:inline tracking-widest">
+                    皇龍樓
+                  </span>
+                </div>
+                <span className="text-[9px] text-amber-400/70 font-sans tracking-widest uppercase hidden sm:block -mt-1 font-medium">
+                  Ẩm Thực Cung Đình · Di Sản 30 Năm
                 </span>
               </div>
             </div>
@@ -350,6 +346,7 @@ export const Header = ({
               className="hl-btn-action flex items-center gap-1.5 text-xs font-semibold flex-shrink-0"
               title="Đổi số bàn hoặc quét mã QR"
             >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse flex-shrink-0" />
               <QrCode className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
               <span>Bàn {tableNumber}</span>
             </button>

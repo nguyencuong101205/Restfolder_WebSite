@@ -51,17 +51,22 @@ export const PromoSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-7">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Gift className="w-5 h-5 text-amber-400" />
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest font-mono">
+              <Gift className="w-4 h-4 text-amber-400" />
+              <span className="text-xs font-bold text-amber-300 uppercase tracking-widest font-mono">
                 MÃ GIẢM GIÁ & QUÀ TẶNG BÀN ĂN
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold font-decorative text-amber-100 uppercase">
-              Ưu Đãi Hoàng Triều Hôm Nay
-            </h2>
+            <div className="flex items-baseline gap-3">
+              <h2 className="text-xl sm:text-2xl font-bold font-decorative text-amber-100 uppercase tracking-wide">
+                Ưu Đãi Hoàng Triều Hôm Nay
+              </h2>
+              <span className="font-calligraphy text-amber-400/80 text-sm hidden sm:inline tracking-widest">
+                皇龍特惠 · Phúc Lộc Đong Đầy
+              </span>
+            </div>
           </div>
           <span className="text-xs text-stone-400">
             * Bấm <strong className="text-amber-300">"Dùng Ngay"</strong> để tự động áp dụng mã vào bàn ăn của bạn

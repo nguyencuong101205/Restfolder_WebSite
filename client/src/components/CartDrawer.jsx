@@ -101,11 +101,11 @@ export const CartDrawer = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden modal-overlay-blur">
-      <div className="absolute inset-0 bg-black/60" onClick={() => setIsCartOpen(false)} />
+    <div className="fixed inset-0 z-50 overflow-hidden modal-overlay-blur animate-fade-in">
+      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
 
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#160709] border-l border-[#4a181c] shadow-2xl flex flex-col justify-between">
+        <div className="w-screen max-w-md bg-[#160709] border-l-2 border-amber-500/60 shadow-[0_0_80px_rgba(0,0,0,0.95)] flex flex-col justify-between animate-fade-in">
           
           {/* Drawer Header */}
           <div className="p-4 sm:p-5 border-b border-[#3b1519] bg-[#1e0a0d] flex items-center justify-between">
@@ -283,7 +283,7 @@ export const CartDrawer = () => {
                     />
                     <button
                       type="submit"
-                      className="px-3 py-1.5 shopee-btn shopee-btn--gold text-xs font-bold rounded-xl whitespace-nowrap"
+                      className="px-4 py-1.5 bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-stone-950 text-xs font-black rounded-xl whitespace-nowrap shadow-md active:scale-95 transition-all"
                     >
                       Áp Dụng
                     </button>
@@ -403,7 +403,7 @@ export const CartDrawer = () => {
                   type="button"
                   onClick={handleSendOrder}
                   disabled={isSubmitting}
-                  className="flex-1 flex items-center justify-center gap-2 py-3 btn-chinese-primary rounded-xl text-sm font-bold shadow-xl disabled:opacity-50"
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 hl-hero-btn-primary rounded-xl text-sm font-black tracking-wider shadow-2xl disabled:opacity-50 active:scale-95 transition-all"
                 >
                   {isSubmitting ? (
                     <span>Đang chuyển đơn vào bếp...</span>

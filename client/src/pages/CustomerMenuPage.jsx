@@ -125,16 +125,29 @@ export const CustomerMenuPage = ({
       <main id="menu-dish-list" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-28">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-8 space-y-2">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest font-mono">
-            ẨM THỰC TRUNG HOA CUNG ĐÌNH
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold font-decorative text-amber-100 uppercase">
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-2.5">
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-400/80" />
+            <span className="text-xs font-bold text-amber-300 uppercase tracking-[0.25em] font-mono flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>ẨM THỰC TRUNG HOA CUNG ĐÌNH</span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            </span>
+            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-400/80" />
+          </div>
+
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black font-decorative text-amber-100 uppercase tracking-wide drop-shadow-md">
             Thực Đơn Hoàng Long Quán
           </h2>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-red-600 via-amber-400 to-red-600 mx-auto my-2" />
-          <p className="text-xs sm:text-sm text-stone-400">
-            Hơn 20 món ăn đặc sắc từ Dim Sum nặn tay thủ công, Vịt quay lò gỗ giòn rụm đến Lẩu Tứ Xuyên thảo mộc cay tê trứ danh.
+
+          <p className="font-calligraphy text-amber-400/90 text-sm sm:text-base tracking-[0.2em]">
+            皇龍御膳 · Tinh Hoa Mỹ Vị Hội Tụ
+          </p>
+
+          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2" />
+          
+          <p className="text-xs sm:text-sm text-stone-300/80 max-w-xl mx-auto leading-relaxed">
+            Hơn 20 món ăn đặc sắc từ Dim Sum nặn tay thủ công, Vịt quay lò than phong giòn rụm đến Lẩu Tứ Xuyên thảo mộc hầm xương 36 giờ.
           </p>
         </div>
 

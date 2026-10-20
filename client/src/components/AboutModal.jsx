@@ -6,17 +6,23 @@ export const AboutModal = ({ isOpen, onClose, onOpenReserve }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-overlay-blur overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#18090b] border-2 border-amber-500/50 rounded-2xl shadow-2xl overflow-hidden my-8 text-stone-200 animate-fade-scale">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 modal-overlay-blur overflow-y-auto animate-fade-in"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-2xl bg-[#18090b] border-2 border-amber-500/70 rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden my-8 text-stone-200 animate-fade-in"
+      >
         
         {/* Chinese Top Banner */}
         <div className="p-5 sm:p-6 bg-gradient-to-b from-[#2d1115] to-[#1e0a0d] border-b border-[#4d161a] text-center relative">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-stone-400 hover:text-white text-xs bg-stone-900/60 hover:bg-red-800 px-2 py-1 rounded-lg transition-colors"
-            title="Đóng"
+            className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/70 hover:bg-red-700 text-stone-200 hover:text-white flex items-center justify-center transition-all border border-amber-500/30 shadow-lg"
+            title="Đóng cửa sổ"
           >
-            Đóng ✕
+            <X className="w-4 h-4 stroke-[2.5]" />
           </button>
 
           <div className="flex justify-center mb-1.5">

@@ -19,7 +19,7 @@ export const Footer = ({ onOpenAbout, onExploreMenu, onOpenReserve }) => {
           <div className="flex items-center gap-3">
             <ChineseSeal text="皇龍" subtext="御膳" />
             <div>
-              <h3 className="font-decorative text-xl sm:text-2xl text-amber-300 font-bold tracking-wider">
+              <h3 className="font-decorative text-xl sm:text-2xl font-black tracking-wider bg-gradient-to-r from-red-500 via-amber-300 to-yellow-400 bg-clip-text text-transparent">
                 HOÀNG LONG QUÁN
               </h3>
               <span className="font-calligraphy text-amber-400 text-sm sm:text-base">

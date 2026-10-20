@@ -8,7 +8,7 @@ export const DishCard = ({ dish, onOpenDetail }) => {
   return (
     <div
       onClick={() => onOpenDetail(dish)}
-      className="group flex flex-col justify-between bg-gradient-to-b from-[#1c0a0d] via-[#150709] to-[#100406] rounded-2xl border border-amber-500/30 hover:border-amber-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer relative w-full hover:-translate-y-1"
+      className="group flex flex-col justify-between bg-gradient-to-b from-[#1c0a0d] via-[#150709] to-[#100406] rounded-2xl border border-amber-500/30 hover:border-amber-400 shadow-xl hover:shadow-[0_15px_35px_rgba(0,0,0,0.8),0_0_20px_rgba(212,175,55,0.25)] transition-all duration-300 overflow-hidden cursor-pointer relative w-full hover:-translate-y-1"
       style={{ willChange: 'transform', width: '100%' }}
     >
       {/* Imperial Seal Badge on top-left */}

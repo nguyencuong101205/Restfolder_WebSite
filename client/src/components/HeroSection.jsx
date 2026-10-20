@@ -134,12 +134,12 @@ export const HeroSection = ({ onExploreMenu, onOpenReserve, onOpenQR }) => {
                 </div>
 
                 {/* Main Heading */}
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black font-sans uppercase tracking-tight text-white leading-tight drop-shadow-2xl">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black font-decorative uppercase tracking-wide bg-gradient-to-r from-amber-100 via-amber-200 to-yellow-400 bg-clip-text text-transparent leading-tight drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)]">
                   {slide.heading}
                 </h2>
 
                 {/* Description */}
-                <p className="text-xs sm:text-base font-medium text-stone-200 mt-2 max-w-2xl mx-auto drop-shadow leading-relaxed">
+                <p className="text-xs sm:text-base font-normal text-stone-200/90 mt-2.5 max-w-2xl mx-auto drop-shadow-md leading-relaxed tracking-wide">
                   {slide.description}
                 </p>
 
