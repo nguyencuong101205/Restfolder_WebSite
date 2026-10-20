@@ -212,6 +212,10 @@ CREATE TABLE `orders` (
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `orders` (`id`, `table_number`, `customer_name`, `status`, `subtotal`, `discount`, `vat`, `total`, `note`) VALUES
+('ord-1792395351304', '08', 'Khách Bàn 08', 'pending', 156000.00, 0.00, 12480.00, 168480.00, 'Ưu tiên lên nhanh'),
+('ord-sample-01', '03', 'Khách Bàn 03', 'cooking', 601000.00, 0.00, 60100.00, 661100.00, 'Khách ưu tiên mang trà lên trước');
+
 -- ============================================================
 -- BẢNG 8: order_items (Chi tiết món ăn trong từng đơn)
 -- ============================================================
@@ -229,6 +233,12 @@ CREATE TABLE `order_items` (
   KEY `fk_order_items_order` (`order_id`),
   CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `order_items` (`order_id`, `dish_id`, `dish_name`, `price`, `quantity`, `spice_level`, `selected_toppings`, `note`) VALUES
+('ord-1792395351304', 'dish-01', 'Há Cảo Thủy Tinh Tôm Tươi', 68000.00, 2, 'Không cay', '[{"price":10000,"name":"Thêm nước sốt sa tế đặc biệt"}]', 'Hấp nóng'),
+('ord-sample-01', 'dish-01', 'Há Cảo Thủy Tinh Tôm Tươi', 68000.00, 2, 'Không cay', '["Thêm nước sốt sa tế đặc biệt"]', 'Hấp chín tới'),
+('ord-sample-01', 'dish-06', 'Vịt Quay Bắc Kinh Da Giòn Thượng Hạng (Nửa Con)', 380000.00, 1, 'Không cay', '["Thêm 10 lá bánh tráng cuốn"]', 'Da giòn, nhiều dưa chuột'),
+('ord-sample-01', 'dish-15', 'Trà Long Tỉnh Tây Hồ Thượng Hạng (Ấm)', 75000.00, 1, 'Không cay', '[]', 'Pha ấm nóng đầu tiên');
 
 -- ============================================================
 -- BẢNG 9: reservations (Danh sách đặt bàn tiệc trước)

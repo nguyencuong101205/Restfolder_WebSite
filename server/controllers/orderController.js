@@ -1,5 +1,6 @@
 import { OrderModel } from '../models/orderModel.js';
 import { TableModel } from '../models/tableModel.js';
+import { MenuItemModel } from '../models/menuItemModel.js';
 
 export const OrderController = {
   /**
@@ -8,7 +9,7 @@ export const OrderController = {
    */
   async createOrder(req, res, next) {
     try {
-      const { tableNumber, items, note, customerName } = req.body;
+      const { tableNumber, items, note, customerName, voucher, discount, paymentMethod } = req.body;
 
       if (!tableNumber) {
         return res.status(400).json({
@@ -24,27 +25,53 @@ export const OrderController = {
         });
       }
 
+      // Fetch canonical menu items to guarantee correct Vietnamese names & accurate pricing
+      const allMenuItems = await MenuItemModel.getAll();
+      const menuMap = new Map(allMenuItems.map(m => [m.id, m]));
+
+      // Enrich and normalize item data
+      const normalizedItems = items.map(item => {
+        const canonical = menuMap.get(item.id);
+        const name = canonical ? canonical.name : (item.name || 'Món ăn');
+        const price = canonical ? canonical.price : (Number(item.price) || 0);
+
+        return {
+          id: item.id,
+          name: name,
+          price: price,
+          quantity: Number(item.quantity) || 1,
+          spiceLevel: item.spiceLevel || 'Không cay',
+          selectedToppings: Array.isArray(item.selectedToppings) ? item.selectedToppings : [],
+          toppings: Array.isArray(item.toppings) ? item.toppings : (Array.isArray(item.selectedToppings) ? item.selectedToppings.map(t => t.name) : []),
+          note: item.note || ''
+        };
+      });
+
       // Calculate totals
       let subTotal = 0;
-      items.forEach(item => {
+      normalizedItems.forEach(item => {
         let itemTotal = item.price;
         if (item.selectedToppings && Array.isArray(item.selectedToppings)) {
           itemTotal += item.selectedToppings.reduce((sum, top) => sum + (top.price || 0), 0);
         }
-        subTotal += itemTotal * (item.quantity || 1);
+        subTotal += itemTotal * item.quantity;
       });
 
       const vat = Math.round(subTotal * 0.08); // 8% VAT
-      const totalPrice = subTotal + vat;
+      const discountVal = Number(discount) || 0;
+      const totalPrice = Math.max(0, subTotal + vat - discountVal);
 
       const newOrder = await OrderModel.create({
-        tableNumber,
+        tableNumber: String(tableNumber).trim(),
         customerName: customerName || `Khách Bàn ${tableNumber}`,
-        items,
+        items: normalizedItems,
         subTotal,
+        discount: discountVal,
+        voucher: voucher || null,
+        paymentMethod: paymentMethod || 'cash',
         vat,
         totalPrice,
-        note: note || ''
+        note: note ? String(note).trim() : ''
       });
 
       // Update table status to occupied

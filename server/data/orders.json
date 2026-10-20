@@ -2,19 +2,19 @@
   {
     "id": "ord-1792395351304",
     "tableNumber": "08",
-    "customerName": "Kh�ch B�n 08",
+    "customerName": "Khách Bàn 08",
     "items": [
       {
         "id": "dish-01",
-        "name": "H� C?o Th?y Tinh T�m Tuoi",
-        "spiceLevel": "Kh�ng cay",
+        "name": "Há Cảo Thủy Tinh Tôm Tươi",
+        "spiceLevel": "Không cay",
         "selectedToppings": [
           {
             "price": 10000,
-            "name": "Th�m nu?c s?t sa t? d?c bi?t"
+            "name": "Thêm nước sốt sa tế đặc biệt"
           }
         ],
-        "note": "H?p n�ng",
+        "note": "Hấp nóng",
         "quantity": 2,
         "price": 68000
       }
@@ -23,8 +23,16 @@
     "vat": 12480,
     "totalPrice": 168480,
     "status": "pending",
-    "note": "Uu ti�n l�n nhanh",
-    "callStaffRequests": [],
+    "note": "Ưu tiên lên nhanh",
+    "callStaffRequests": [
+      {
+        "id": "req-1792478737299",
+        "requestType": "water",
+        "note": "",
+        "status": "pending",
+        "createdAt": "2026-10-20T06:45:37.299Z"
+      }
+    ],
     "createdAt": "2026-10-19T07:35:51.304Z",
     "updatedAt": "2026-10-19T07:35:51.304Z"
   },

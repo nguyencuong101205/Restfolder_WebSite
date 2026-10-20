@@ -1,3 +1,4 @@
+// Express Server for Chinese Restaurant QR Ordering System - MVC Architecture
 import express from 'express';
 import cors from 'cors';
 import path from 'path';

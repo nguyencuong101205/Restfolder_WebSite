@@ -9,7 +9,8 @@ export const apiClient = async (endpoint, options = {}) => {
   const token = localStorage.getItem('hoanglong_jwt_token');
 
   const headers = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
+    'Accept': 'application/json; charset=utf-8',
     ...(options.headers || {})
   };
 
