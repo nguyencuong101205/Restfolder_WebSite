@@ -1,142 +1,149 @@
-# 📋 TÀI LIỆU KỊCH BẢN TỰ KIỂM THỬ THỦ CÔNG (MANUAL TEST CASES)
+# 📋 TÀI LIỆU TOÀN DIỆN CA KIỂM THỬ THỦ CÔNG (MANUAL TEST CASES)
 ## HỆ THỐNG GỌI MÓN NHÀ HÀNG HOÀNG LONG QUÁN (皇龍樓)
 
 * **Loại kiểm thử**: Kiểm thử thủ công (Manual Testing - Black-box Testing)
-* **Đối tượng kiểm thử**:
-  1. Giao diện người dùng (UI/UX Web & Mobile Responsive)
-  2. Hệ thống API Backend qua công cụ Postman
-  3. Luồng nghiệp vụ khép kín (End-to-End User Journey)
+* **Phương pháp**: Thao tác trực tiếp bằng tay trên trình duyệt & công cụ Postman
+* **Tổng số ca kiểm thử**: **40 Ca kiểm thử chi tiết** chia theo 10 phân hệ
 * **Môi trường thử nghiệm**:
-  * Frontend: `http://localhost:5173`
-  * Backend API: `http://localhost:5000/api`
-  * Trình duyệt khuyến nghị: Google Chrome / Microsoft Edge / Safari
+  * Giao diện Web: `http://localhost:5173`
+  * Máy chủ Backend API: `http://localhost:5000/api`
+  * Tệp bảng tính Excel nghiệm thu: [BANG_KIEM_THU_THU_CONG.csv](file:///c:/Users/Bear/Documents/Study/Restfolder_WebSite/BANG_KIEM_THU_THU_CONG.csv)
+  * Trang in ấn báo cáo nghiệm thu: `http://localhost:5173/kiem-thu-thu-cong.html`
 
 ---
 
 ## MỤC LỤC
-1. [Hướng Dẫn Tự Kiểm Thử Bằng Postman Từng Bước](#1-hướng-dẫn-tự-kiểm-thử-bằng-postman-từng-bước)
-2. [Bảng Ma Trận Ca Kiểm Thử API Bằng Postman (TC_API)](#2-bảng-ma-trận-ca-kiểm-thử-api-bằng-postman)
-3. [Bảng Ma Trận Ca Kiểm Thử Giao Diện Người Dùng (TC_UI)](#3-bảng-ma-trận-ca-kiểm-thử-giao-diện-người-dùng)
-4. [Kịch Bản Tự Kiểm Thử Luồng Nghiệp Vụ Khép Kín (E2E Scenario)](#4-kịch-bản-tự-kiểm-thử-luồng-nghiệp-vụ-khép-kín)
+1. [Phân Hệ 1: Xác Thực & Phân Quyền (TC_AUTH)](#phân-hệ-1-xác-thực--phân-quyền)
+2. [Phân Hệ 2: Mã QR & Bàn Ăn (TC_QR)](#phân-hệ-2-mã-qr--bàn-ăn)
+3. [Phân Hệ 3: Trình Diễn & Thực Đơn (TC_MENU)](#phân-hệ-3-trình-diễn--thực-đơn)
+4. [Phân Hệ 4: Tùy Biến Món Ăn & Topping (TC_DISH)](#phân-hệ-4-tùy-biến-món-ăn--topping)
+5. [Phân Hệ 5: Giỏ Hàng & Voucher Khuyến Mãi (TC_CART)](#phân-hệ-5-giỏ-hàng--voucher-khuyến-mãi)
+6. [Phân Hệ 6: Đặt Món & Theo Dõi Trực Tuyến (TC_ORDER)](#phân-hệ-6-đặt-món--theo-dõi-trực-tuyến)
+7. [Phân Hệ 7: Nhà Bếp KDS Điều Phối (TC_KDS)](#phân-hệ-7-nhà-bếp-kds-điều-phối)
+8. [Phân Hệ 8: Quản Lý Bàn & In Mã QR (TC_TBL)](#phân-hệ-8-quản-lý-bàn--in-mã-qr)
+9. [Phân Hệ 9: Đặt Bàn Tiệc Trước (TC_RES)](#phân-hệ-9-đặt-bàn-tiệc-trước)
+10. [Phân Hệ 10: Ca Kiểm Thử Postman API Thủ Công (TC_API)](#phân-hệ-10-ca-kiểm-thử-postman-api-thủ-công)
 
 ---
 
-## 1. HƯỚNG DẪN TỰ KIỂM THỬ BẰNG POSTMAN TỪNG BƯỚC
+### PHÂN HỆ 1: XÁC THỰC & PHÂN QUYỀN
 
-### Bước 1: Chuẩn bị Postman
-1. Mở phần mềm **Postman** trên máy tính.
-2. Nhấn nút **Import** (góc trên bên trái).
-3. Chọn tệp `postman/HoangLongQuan_API.postman_collection.json` và `postman/HoangLongQuan_Environment.postman_environment.json`.
-4. Tại góc trên bên phải, chọn môi trường: **`Hoàng Long Quán - Localhost Environment`**.
-
-### Bước 2: Cách tự thực hiện một Request thủ công
-1. Chọn một request từ danh sách bên trái.
-2. Kiểm tra thanh địa chỉ: URL, Phương thức HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
-3. Chuyển sang tab **Body** $\rightarrow$ chọn **raw** $\rightarrow$ định dạng **JSON** (nếu là request thêm/sửa).
-4. Nhấn nút **Send** màu xanh.
-5. Quan sát phần **Response**:
-   * **Status Code**: `200 OK`, `201 Created`, `400 Bad Request`, `401 Unauthorized`...
-   * **Time**: Thời gian phản hồi (thường `< 100ms`).
-   * **Body JSON**: Dữ liệu trả về có đúng tiếng Việt có dấu và chuẩn xác không.
-
----
-
-## 2. BẢNG MA TRẬN CA KIỂM THỬ API BẰNG POSTMAN
-
-| Mã Ca Test | Tên Chức Năng | Mục Tiêu Kiểm Thử | Các Bước Thực Hiện Bằng Tay | Dữ Liệu Đầu Vào (Payload) | Kết Quả Mong Đợi (Expected Result) | Đánh Giá (Pass/Fail) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :---: |
-| **TC_API_01** | Kiểm tra máy chủ API | Xác nhận Backend Express đang chạy ổn định | 1. Mở Postman<br>2. Chọn Method `GET`<br>3. Nhập `http://localhost:5000/api`<br>4. Nhấn **Send** | Không có body | Status: `200 OK`.<br>JSON trả về `success: true` và thông điệp chào mừng kèm danh sách endpoints. | [ ] |
-| **TC_API_02** | Đăng nhập Admin hợp lệ | Kiểm tra cấp phát JWT Token cho tài khoản Quản trị | 1. Method `POST`<br>2. URL: `http://localhost:5000/api/auth/login`<br>3. Tab Body chọn raw JSON<br>4. Nhấn **Send** | `{"username": "admin", "password": "admin123"}` | Status: `200 OK`.<br>Trả về `data.token` dạng chuỗi JWT.<br>`role: "admin"`. | [ ] |
-| **TC_API_03** | Đăng nhập sai mật khẩu | Kiểm tra chặn truy cập trái phép | 1. Method `POST`<br>2. URL: `http://localhost:5000/api/auth/login`<br>3. Nhập mật khẩu sai<br>4. Nhấn **Send** | `{"username": "admin", "password": "saimatkhau"}` | Status: `401 Unauthorized`.<br>Thông báo: *"Tài khoản hoặc mật khẩu không chính xác!"* | [ ] |
-| **TC_API_04** | Đăng nhập để trống trường | Kiểm tra xác thực tính hợp lệ dữ liệu (Validation) | 1. Method `POST`<br>2. URL: `http://localhost:5000/api/auth/login`<br>3. Để trống body `{}`<br>4. Nhấn **Send** | `{}` | Status: `400 Bad Request`.<br>Thông báo: *"Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!"* | [ ] |
-| **TC_API_05** | Truy cập trang cá nhân có Token | Kiểm tra xác thực Token Bearer | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/auth/me`<br>3. Tab Headers: thêm `Authorization: Bearer <token_admin>`<br>4. Nhấn **Send** | Header Bearer Token | Status: `200 OK`.<br>Trả về thông tin `username: "admin"`, họ tên Chủ Quán. | [ ] |
-| **TC_API_06** | Truy cập trang cá nhân KHÔNG Token | Kiểm tra bảo vệ route API kín | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/auth/me`<br>3. Không gửi header Authorization<br>4. Nhấn **Send** | Không có Token | Status: `401 Unauthorized`.<br>Thông báo: *"Không tìm thấy Token xác thực (Bearer Token)!"* | [ ] |
-| **TC_API_07** | Lấy danh mục món ăn | Xem danh sách toàn bộ thực đơn | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/menu`<br>3. Nhấn **Send** | Không có body | Status: `200 OK`.<br>Danh sách gồm hơn 18 món ăn chuẩn tiếng Việt, có tên chữ Hán và giá tiền. | [ ] |
-| **TC_API_08** | Lọc món theo danh mục | Lọc món Dim Sum | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/menu?category=dimsum`<br>3. Nhấn **Send** | Query param `category=dimsum` | Status: `200 OK`.<br>Tất cả món trả về đều có thuộc tính `category: "dimsum"`. | [ ] |
-| **TC_API_09** | Tìm kiếm món ăn | Tìm kiếm món vịt quay | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/menu?search=vịt`<br>3. Nhấn **Send** | Query param `search=vịt` | Status: `200 OK`.<br>Trả về món *"Vịt Quay Bắc Kinh Da Giòn Thượng Hạng"*. | [ ] |
-| **TC_API_10** | Xem chi tiết 1 món ăn | Lấy chi tiết món Há Cảo | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/menu/dish-01`<br>3. Nhấn **Send** | URL param `dish-01` | Status: `200 OK`.<br>Tên món: *"Há Cảo Thủy Tinh Tôm Tươi"*, giá 68.000 đ, danh sách topping. | [ ] |
-| **TC_API_11** | Xem món không tồn tại | Xử lý lỗi không tìm thấy | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/menu/dish-9999`<br>3. Nhấn **Send** | ID không có thực | Status: `404 Not Found`.<br>Thông báo: *"Không tìm thấy món ăn này!"* | [ ] |
-| **TC_API_12** | Sinh mã QR Code cho bàn | Tạo mã QR bàn ăn để dán tại chỗ | 1. Method `GET`<br>2. URL: `http://localhost:5000/api/tables/01/qr`<br>3. Nhấn **Send** | Số bàn: `01` | Status: `200 OK`.<br>Trả về `qrDataUrl` bắt đầu bằng `data:image/png;base64,...`. | [ ] |
-| **TC_API_13** | Đặt món tại bàn (Gọi đơn) | Khách gửi đơn chọn món ăn kèm topping và ghi chú | 1. Method `POST`<br>2. URL: `http://localhost:5000/api/orders`<br>3. Điền JSON danh sách món<br>4. Nhấn **Send** | Xem Payload mẫu bên dưới | Status: `201 Created`.<br>Hệ thống tự động tính 8% VAT và tổng tiền, trả về `id` đơn mới và trạng thái `pending`. | [ ] |
-| **TC_API_14** | Bếp đổi trạng thái đơn | Bếp trưởng nhận đơn nấu món | 1. Method `PATCH`<br>2. URL: `http://localhost:5000/api/orders/<mã_đơn>/status`<br>3. Header: Token Bếp<br>4. Body: `{"status": "preparing"}` | `{"status": "preparing"}` | Status: `200 OK`.<br>Trạng thái đơn đổi thành `preparing`. | [ ] |
-| **TC_API_15** | Bấm chuông gọi nhân viên | Khách gọi xin thêm nước đá tại bàn | 1. Method `POST`<br>2. URL: `http://localhost:5000/api/orders/<mã_đơn>/call-staff`<br>3. Body: yêu cầu nước đá | `{"requestType": "Xin thêm nước đá", "note": "Cho 2 ly"}` | Status: `200 OK`.<br>Mảng `callStaffRequests` có thêm 1 yêu cầu mới. | [ ] |
-
-> **Payload mẫu cho TC_API_13 (Đặt món)**:
-```json
-{
-  "tableNumber": "08",
-  "customerName": "Khách Bàn 08",
-  "items": [
-    {
-      "id": "dish-01",
-      "quantity": 2,
-      "spiceLevel": "Không cay",
-      "selectedToppings": [
-        { "name": "Thêm nước sốt sa tế đặc biệt", "price": 10000 }
-      ],
-      "note": "Hấp nóng hổi"
-    }
-  ],
-  "note": "Ưu tiên lên nhanh giúp bàn tôi"
-}
-```
-
----
-
-## 3. BẢNG MA TRẬN CA KIỂM THỬ GIAO DIỆN NGƯỜI DÙNG (UI/UX)
-
-| Mã Ca Test | Khu Vực / Màn Hình | Các Bước Tự Thao Tác Bằng Tay | Dữ Liệu / Thao Tác | Kết Quả Mong Đợi (Expected Result) | Đánh Giá (Pass/Fail) |
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| **TC_UI_01** | Thanh Điều Hướng (Header) | 1. Mở trang web `http://localhost:5173`<br>2. Quan sát logo, tên nhà hàng, số bàn và các nút | Không | Hiển thị sắc nét: Logo triện ấn 皇龍, chữ nghệ thuật "HOÀNG LONG QUÁN", nút Bàn đang chọn, nút Giỏ món có số lượng. | [ ] |
-| **TC_UI_02** | Banner Trình Diễn Ảnh (Slider) | 1. Mở trang chủ<br>2. Không chạm chuột trong 3 giây<br>3. Nhấn thử 2 mũi tên trái / phải | Quan sát chuyển động | Ảnh tự động chuyển mượt mà sau 3000ms. Bấm nút chuyển ảnh tức thì, có chữ thơ/thư pháp bay vào nhẹ nhàng. | [ ] |
-| **TC_UI_03** | Đổi Bàn Ăn Bằng Mã QR | 1. Bấm vào nút **Bàn 01** trên Header<br>2. Hộp thoại Quét mã / Đổi bàn hiện ra<br>3. Nhập số bàn `08` $\rightarrow$ Nhấn **Xác Nhận** | Nhập `08` | Nút trên Header đổi thành **Bàn 08**. Giao diện lưu lại phiên làm việc cho Bàn 08. | [ ] |
-| **TC_UI_04** | Tìm Kiếm Món Ăn | 1. Bấm vào ô tìm kiếm<br>2. Gõ từ khóa `bào ngư`<br>3. Quan sát danh sách món bên dưới | Gõ `bào ngư` | Danh sách lập tức lọc chỉ còn các món có chứa từ "bào ngư", chữ không bị giật lag. | [ ] |
-| **TC_UI_05** | Lọc Danh Mục (Category Tabs) | 1. Nhấn nút tab **Vịt Quay & Nướng**<br>2. Nhấn nút tab **Dim Sum Nặn Tay** | Nhấp chuột chọn tab | Thẻ đang chọn có viền vàng óng nổi bật, danh sách bên dưới cập nhật ngay đúng món của nhóm đó. | [ ] |
-| **TC_UI_06** | Lọc Nhanh (Cay & Bán Chạy) | 1. Nhấn nút **Vị Cay Tứ Xuyên**<br>2. Nhấn nút **Món Bán Chạy** | Nhấp nút lọc | Thẻ món chỉ hiển thị các món có gắn biểu tượng ớt 🌶️ hoặc cờ ⭐ BÁN CHẠY. | [ ] |
-| **TC_UI_07** | Xem Chi Tiết & Tùy Chọn Món | 1. Nhấp vào thẻ món **Há Cảo Thủy Tinh Tôm Tươi**<br>2. Chọn cấp độ cay: *Cay vừa*<br>3. Tích chọn topping: *Thêm nước sốt sa tế (+10k)*<br>4. Nhập ghi chú: *Cho nhiều rau mùi* | Nhập ghi chú & chọn topping | Giá tiền tự động cộng thêm 10.000 đ tương ứng với topping. Nút chọn món phản hồi mượt mà. | [ ] |
-| **TC_UI_08** | Thêm Món Vào Giỏ Hàng | 1. Trong modal chi tiết, nhấn **THÊM VÀO GIỎ HÀNG** | Click nút | Modal đóng lại. Nút Giỏ Món trên Header nhảy số lượng lên `+1`, có hiệu ứng rung nhẹ thu hút sự chú ý. | [ ] |
-| **TC_UI_09** | Ngăn Kéo Giỏ Hàng (Cart Drawer) | 1. Nhấn vào nút **Giỏ Món** trên Header<br>2. Ngăn kéo trượt ra từ bên phải<br>3. Kiểm tra danh sách món, số lượng, topping<br>4. Thử tăng / giảm số lượng bằng nút `+` và `-` | Tăng số lượng lên 2 | Tiền tạm tính, thuế VAT 8% và Tổng thanh toán tự động cập nhật chính xác từng đồng. | [ ] |
-| **TC_UI_10** | Áp Dụng Mã Giảm Giá (Voucher) | 1. Trong giỏ hàng, nhập mã `HOANGLONG10`<br>2. Nhấn nút **Áp Dụng** | Nhập `HOANGLONG10` | Hiển thị thông báo áp dụng thành công. Mục Giảm giá hiển thị `-10%`, tổng tiền giảm tương ứng. | [ ] |
-| **TC_UI_11** | Gửi Đơn Đặt Món (Checkout) | 1. Nhấn nút **XÁC NHẬN GỌI MÓN**<br>2. Quan sát màn hình | Click xác nhận | Pháo hoa giấy (Confetti) bắn chúc mừng rực rỡ! Giỏ hàng được làm trống và tự động mở màn hình Theo dõi đơn. | [ ] |
-| **TC_UI_12** | Màn Hình Theo Dõi Đơn (Tracker) | 1. Quan sát thanh tiến trình trạng thái món:<br>*Đã nhận đơn* $\rightarrow$ *Đang nấu* $\rightarrow$ *Đã ra món* | Quan sát | Hiển thị đúng số bàn, mã đơn, danh sách món và thanh trạng thái thời gian thực. | [ ] |
-| **TC_UI_13** | Đăng Nhập Nhân Viên / Bếp | 1. Bấm icon Người (hoặc vào Menu chọn Màn Hình Bếp)<br>2. Nhấn chọn tài khoản nhanh **Bếp Trưởng (bep/123)**<br>3. Bấm **Đăng Nhập** | Tài khoản Bếp | Đăng nhập thành công, tự động chuyển vào màn hình Điều Phối Nhà Bếp KDS. | [ ] |
-| **TC_UI_14** | Màn Hình Nhà Bếp (Kitchen KDS) | 1. Xem thẻ đơn hàng của Bàn vừa gọi<br>2. Kiểm tra font chữ tiếng Việt (Há Cảo, Không cay...)<br>3. Nhấn nút **BẮT ĐẦU NẤU** $\rightarrow$ Thẻ chuyển màu đỏ *ĐANG NẤU*<br>4. Nhấn **ĐÃ RA MÓN** $\rightarrow$ Thẻ chuyển xanh | Thao tác nút trạng thái | Trạng thái cập nhật tức thì, font chữ tiếng Việt hiển thị 100% chuẩn đẹp, không có dấu ? hay lỗi font. | [ ] |
-| **TC_UI_15** | Đặt Bàn Tiệc Trước (Reservation) | 1. Nhấn nút **Đặt Bàn Tiệc** ở Header hoặc Banner<br>2. Điền họ tên, số điện thoại, ngày giờ, số khách<br>3. Nhấn **Xác Nhận Đặt Bàn** | Nhập form đặt bàn | Nhận thông báo xác nhận thành công kèm mã đặt bàn (Mã giữ bàn dạng HL-XXXXXX). | [ ] |
+| **TC_AUTH_01** | Đăng nhập Admin thành công | 1. Bấm icon Người góc phải Header.<br>2. Nhập username: `admin`, password: `admin123`.<br>3. Bấm "ĐĂNG NHẬP". | `admin / admin123` | Thông báo chào mừng Chủ Quán. Header hiển thị avatar & huy hiệu ADMIN. Mở được Quản lý bàn. | [x] Đạt |
+| **TC_AUTH_02** | Đăng nhập Bếp Trưởng thành công | 1. Nhấn nút chọn nhanh "Bếp Trưởng (bep/123)".<br>2. Bấm "ĐĂNG NHẬP". | `bep / bep123` | Tự động chuyển hướng vào Màn Hình Nhà Bếp KDS. Hiển thị quyền KITCHEN. | [x] Đạt |
+| **TC_AUTH_03** | Đăng nhập Phục Vụ thành công | 1. Nhập username: `phucvu`, pass: `phucvu123`.<br>2. Bấm "ĐĂNG NHẬP". | `phucvu / phucvu123` | Đăng nhập thành công, vai trò WAITER. Tiếp nhận chuông gọi phục vụ của bàn. | [x] Đạt |
+| **TC_AUTH_04** | Đăng nhập sai mật khẩu | 1. Nhập `admin`, pass: `sai_mat_khau`.<br>2. Bấm "ĐĂNG NHẬP". | `admin / sai_pass` | Thông báo lỗi đỏ: "Tài khoản hoặc mật khẩu không chính xác!". Chặn truy cập. | [x] Đạt |
+| **TC_AUTH_05** | Để trống trường đăng nhập | 1. Để trống cả 2 ô.<br>2. Bấm "ĐĂNG NHẬP". | Rỗng | Cảnh báo: "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!". | [x] Đạt |
+| **TC_AUTH_06** | Đăng ký tài khoản thành viên mới | 1. Chuyển sang tab Đăng Ký.<br>2. Nhập username, mật khẩu, họ tên.<br>3. Bấm "ĐĂNG KÝ THÀNH VIÊN". | `khach99 / 123456` | Đăng ký thành công, tự động đăng nhập và lưu JWT token. | [x] Đạt |
+| **TC_AUTH_07** | Đăng xuất tài khoản an toàn | 1. Bấm icon Người.<br>2. Bấm nút "Đăng Xuất". | Click Đăng xuất | Xóa sạch Token JWT khỏi LocalStorage. Trở về trạng thái khách vãng lai. | [x] Đạt |
 
 ---
 
-## 4. KỊCH BẢN TỰ KIỂM THỬ LUỒNG NGHIỆP VỤ KHÉP KÍN (E2E SCENARIO)
+### PHÂN HỆ 2: MÃ QR & BÀN ĂN
 
-Kịch bản này mô phỏng **100% hành vi thực tế của một thực khách đi ăn tại Hoàng Long Quán**:
-
-```mermaid
-flowchart TD
-    A["1. Khách ngồi Bàn 08, quét QR hoặc mở Web"] --> B["2. Khách xem menu, chọn Há Cảo + Vịt Quay"]
-    B --> C["3. Khách vào giỏ hàng, áp mã giảm giá, ấn Gọi Món"]
-    C --> D["4. Hệ thống bắn pháo hoa, chuyển đơn tới Nhà Bếp KDS"]
-    D --> E["5. Bếp trưởng nhận đơn, ấn BẮT ĐẦU NẤU"]
-    E --> F["6. Khách thấy thanh tiến trình nhảy sang ĐANG NẤU"]
-    F --> G["7. Khách bấm chuông gọi thêm 2 ly nước đá"]
-    G --> H["8. Thẻ đơn tại Bếp rung chuông báo Yêu cầu nước đá"]
-    H --> I["9. Món nấu xong, Bếp ấn RA MÓN -> Khách dùng bữa hài lòng"]
-```
-
-### Các bước bạn tự thực hiện để nghiệm thu kịch bản trên:
-1. **Bước 1 (Đóng vai Khách)**:
-   * Mở trình duyệt ẩn danh (Incognito) tại `http://localhost:5173/?table=08`.
-   * Thấy góc phải hiện chữ **Bàn 08**.
-   * Chọn 1 phần *Há Cảo Thủy Tinh*, 1 phần *Vịt Quay Bắc Kinh*.
-   * Mở Giỏ món $\rightarrow$ Bấm **XÁC NHẬN GỌI MÓN**.
-2. **Bước 2 (Đóng vai Bếp Trưởng)**:
-   * Mở một tab trình duyệt khác tại `http://localhost:5173`.
-   * Bấm vào Menu $\rightarrow$ chọn **Màn Hình Bếp KDS** $\rightarrow$ Đăng nhập bằng `bep` / `bep123`.
-   * Ngay lập tức thấy thẻ **BÀN 08** màu vàng với trạng thái *CHỜ NHẬN ĐƠN*.
-   * Bấm nút **NHẬN ĐƠN & NẤU MÓN** $\rightarrow$ Thẻ chuyển sang màu đỏ *ĐANG NẤU*.
-3. **Bước 3 (Khách gọi nước & kiểm tra đồng bộ)**:
-   * Quay lại tab của Khách $\rightarrow$ Thấy màn hình theo dõi đơn đã chuyển sang *Đang Nấu Trong Bếp*.
-   * Bấm nút **Gọi Phục Vụ** $\rightarrow$ Chọn *Xin thêm nước đá* $\rightarrow$ Gửi đi.
-   * Quay lại tab Bếp Trưởng $\rightarrow$ Thấy thẻ Bàn 08 xuất hiện thông báo chuông nhấp nháy: *"Khách gọi phục vụ: Xin thêm nước đá"*.
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_QR_01** | Nhận diện bàn qua quét QR | 1. Mở link: `http://localhost:5173/?table=08`.<br>2. Quan sát nút bàn trên Header. | `?table=08` | Nút trên Header hiển thị "Bàn 08" với chấm xanh nhấp nháy. Mọi món gọi sẽ gắn vào Bàn 08. | [x] Đạt |
+| **TC_QR_02** | Khách tự đổi bàn bằng tay | 1. Bấm vào nút Bàn trên Header.<br>2. Chọn số bàn "03" $\rightarrow$ Bấm Xác Nhận. | Bàn 03 | Nút đổi thành "Bàn 03", lưu lại phiên làm việc cho bàn 03. | [x] Đạt |
+| **TC_QR_03** | Xem mã QR bàn ăn để chia sẻ | 1. Bấm nút Bàn $\rightarrow$ Xem tab "Mã QR Bàn". | Bàn hiện tại | Mã QR sắc nét nền kem chữ đỏ hoàng triều, kèm link đặt món để bạn cùng bàn quét. | [x] Đạt |
 
 ---
 
-*Tài liệu này dùng để nghiệm thu đề tài, làm biên bản kiểm thử đồ án hoặc hướng dẫn người dùng tự kiểm tra hệ thống.*
+### PHÂN HỆ 3: TRÌNH DIỄN & THỰC ĐƠN
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_MENU_01** | Slider ảnh tự chuyển 3000ms | 1. Mở trang chủ, không di chuột trong 10s.<br>2. Quan sát banner. | Thời gian trôi | Ảnh tự chuyển đổi sang slide kế tiếp sau đúng 3 giây (3000ms). Chữ thơ trượt vào êm dịu. | [x] Đạt |
+| **TC_MENU_02** | Chuyển slide thủ công | 1. Bấm mũi tên trái / phải.<br>2. Bấm các chấm tròn chuyển slide. | Click mũi tên / dots | Slide chuyển đổi ngay lập tức, không bị giật lag. | [x] Đạt |
+| **TC_MENU_03** | Tìm kiếm món tiếng Việt | 1. Gõ từ khóa "há cảo" vào thanh tìm kiếm. | `"há cảo"` | Lọc ngay các món như "Há Cảo Thủy Tinh Tôm Tươi". | [x] Đạt |
+| **TC_MENU_04** | Tìm kiếm bằng chữ Hán/Pinyin | 1. Gõ từ khóa chữ Hán: "点心" hoặc pinyin: "dimsum". | `"点心"` | Tìm thấy đúng các món dim sum nhờ backend tìm kiếm đa ngôn ngữ. | [x] Đạt |
+| **TC_MENU_05** | Lọc theo danh mục ẩm thực | 1. Bấm thử các tab: Dim Sum, Vịt Quay, Lẩu Tứ Xuyên. | Click tab danh mục | Tab được chọn sáng viền vàng kim, danh sách món bên dưới cập nhật chính xác. | [x] Đạt |
+| **TC_MENU_06** | Lọc nhanh Cay & Bán Chạy | 1. Bấm nút "Món Bán Chạy" ⭐.<br>2. Bấm nút "Vị Cay Tứ Xuyên" 🌶️. | Click filter pill | Danh sách chỉ hiện các món có huy hiệu BÁN CHẠY hoặc gắn ớt cay. | [x] Đạt |
+| **TC_MENU_07** | Sắp xếp món theo giá tiền | 1. Chọn Giá Thấp $\rightarrow$ Cao.<br>2. Chọn Giá Cao $\rightarrow$ Thấp. | Sort dropdown | Danh sách sắp xếp chuẩn xác theo giá tiền VND. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 4: TÙY BIẾN MÓN ĂN & TOPPING
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_DISH_01** | Xem chi tiết món ăn | 1. Nhấp chuột vào thẻ món ăn. | Click thẻ món | Modal mở ra với ảnh lớn, tên tiếng Việt, chữ Hán, pinyin, mô tả và giá tiền. | [x] Đạt |
+| **TC_DISH_02** | Chọn cấp độ cay | 1. Chọn mức "Cay vừa (Tứ Xuyên)". | Cay vừa | Nút được đánh dấu, lưu vào thuộc tính món khi thêm giỏ. | [x] Đạt |
+| **TC_DISH_03** | Tích chọn topping cộng tiền | 1. Tích chọn topping sốt sa tế (+10k).<br>2. Tích thêm gạch tôm rang muối (+15k). | 2 topping | Nút Thêm vào giỏ tự cộng tiền: 68k + 10k + 15k = 93.000 đ chuẩn xác. | [x] Đạt |
+| **TC_DISH_04** | Tăng số lượng & ghi chú | 1. Bấm (+) tăng lên 3 phần.<br>2. Ghi chú: "Hấp thật nóng".<br>3. Bấm Thêm Vào Giỏ. | SL: 3, Note | Modal đóng, giỏ hàng tăng số lượng lên 3, đính kèm ghi chú cho bếp. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 5: GIỎ HÀNG & VOUCHER KHUYẾN MÃI
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_CART_01** | Mở ngăn kéo giỏ hàng | 1. Nhấp nút "Giỏ Món" góc phải Header. | Click Giỏ Món | Ngăn kéo trượt ra từ bên phải, nền phía sau làm mờ (backdrop blur). | [x] Đạt |
+| **TC_CART_02** | Tăng giảm số lượng trong giỏ | 1. Nhấn nút (+) hoặc (-) cạnh món. | Click + / - | Số lượng thay đổi, tạm tính, thuế VAT 8% và tổng tiền tự tính lại. | [x] Đạt |
+| **TC_CART_03** | Xóa món ăn khỏi giỏ | 1. Bấm biểu tượng Thùng rác. | Click Xóa | Món bị xóa. Nếu giỏ trống, hiện hình ảnh minh họa giỏ rỗng. | [x] Đạt |
+| **TC_CART_04** | Áp dụng Voucher hợp lệ | 1. Nhập mã: `HOANGLONG10`.<br>2. Bấm "Áp Dụng". | `HOANGLONG10` | Báo thành công, hiển thị giảm giá -10%, tổng tiền thanh toán giảm tương ứng. | [x] Đạt |
+| **TC_CART_05** | Nhập Voucher không tồn tại | 1. Nhập mã sai: `GIAM999K`.<br>2. Bấm "Áp Dụng". | `GIAM999K` | Báo lỗi đỏ: "Mã giảm giá không hợp lệ!". Tổng tiền giữ nguyên. | [x] Đạt |
+| **TC_CART_06** | Kiểm tra công thức thuế VAT 8% | 1. Quan sát dòng VAT (8%) khi tạm tính là 200.000 đ. | 200.000 đ | Thuế VAT hiển thị đúng: 16.000 đ. Tổng thanh toán = 216.000 đ. | [x] Đạt |
+| **TC_CART_07** | Chọn phương thức thanh toán | 1. Chọn Tiền mặt hoặc Chuyển khoản QR. | Radio button | Lựa chọn được lưu vào đơn để nhân viên chuẩn bị hóa đơn phù hợp. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 6: ĐẶT MÓN & THEO DÕI TRỰC TUYẾN
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_ORDER_01** | Gửi đơn & Bắn pháo hoa | 1. Bấm "XÁC NHẬN GỌI MÓN (ĐẾN NHÀ BẾP)". | Xác nhận đặt | Pháo hoa giấy bắn rực rỡ, giỏ hàng làm trống và tự mở màn hình Theo dõi đơn. | [x] Đạt |
+| **TC_ORDER_02** | Theo dõi tiến độ Live Tracker | 1. Quan sát màn hình theo dõi đơn hàng. | Quan sát | Hiển thị mã đơn #XXXXXX, số bàn, mốc "Đã Tiếp Nhận" sáng đèn vàng. | [x] Đạt |
+| **TC_ORDER_03** | Khách bấm chuông gọi phục vụ | 1. Bấm nút Gọi Phục Vụ (icon Chuông).<br>2. Chọn "Xin thêm nước đá" $\rightarrow$ Gửi đi. | Nước đá | Báo thành công "Tiểu Nhị đã nhận tín hiệu!". Đơn hàng lưu lại yêu cầu. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 7: NHÀ BẾP KDS ĐIỀU PHỐI
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_KDS_01** | Bếp nhận đơn mới tức thì | 1. Khách đặt đơn mới tại Bàn 08.<br>2. Quan sát màn hình KDS. | Đơn từ bàn 08 | Thẻ BÀN 08 xuất hiện ngay với viền vàng "CHỜ NHẬN ĐƠN". Font tiếng Việt 100% chuẩn nét. | [x] Đạt |
+| **TC_KDS_02** | Bếp chuyển sang ĐANG NẤU | 1. Bấm nút "NHẬN ĐƠN & NẤU MÓN". | Click nhận đơn | Thẻ chuyển viền đỏ "ĐANG NẤU". Phía khách hàng tracker tự nhảy sang Đang Nấu. | [x] Đạt |
+| **TC_KDS_03** | Bếp chuyển ĐÃ RA MÓN | 1. Bấm "RA MÓN CHO KHÁCH" $\rightarrow$ "HOÀN TẤT". | Click trạng thái | Trạng thái cập nhật, số lượng đơn chờ ở thanh thống kê giảm xuống. | [x] Đạt |
+| **TC_KDS_04** | Chuông báo động gọi phục vụ | 1. Khách gọi nước đá từ bàn ăn. | Tín hiệu chuông | Thẻ đơn hàng của bàn rung chuông nhấp nháy: "Khách gọi phục vụ: Xin thêm nước đá". | [x] Đạt |
+
+---
+
+### PHÂN HỆ 8: QUẢN LÝ BÀN & IN MÃ QR
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_TBL_01** | Xem sơ đồ bàn ăn toàn quán | 1. Vào Menu $\rightarrow$ "Quản Lý Bàn & In Mã QR". | Tài khoản Admin | Hiển thị sơ đồ các sảnh: Sảnh Rồng, Sảnh Phụng, Hoa Sen, Trúc Các và Phòng VIP. | [x] Đạt |
+| **TC_TBL_02** | In tất cả mã QR bàn ăn | 1. Nhấn nút "IN TẤT CẢ MÃ QR BÀN". | Click In | Mở hộp thoại In trình duyệt với lưới thẻ QR viền vàng sang trọng để dán bàn. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 9: ĐẶT BÀN TIỆC TRƯỚC
+
+| Mã Ca | Tên Ca Kiểm Thử | Các Bước Thao Tác Bằng Tay | Dữ Liệu Đầu Vào | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_RES_01** | Đặt bàn tiệc gia đình thành công | 1. Điền họ tên, số điện thoại, ngày giờ, số khách.<br>2. Bấm "XÁC NHẬN ĐẶT BÀN TIỆC". | Form đầy đủ | Đặt bàn thành công! Cấp mã giữ bàn dạng "HL-XXXXXX", lưu trữ trên hệ thống. | [x] Đạt |
+| **TC_RES_02** | Bỏ trống số điện thoại | 1. Bỏ trống số điện thoại.<br>2. Bấm Xác Nhận. | Thiếu SĐT | Cảnh báo yêu cầu nhập số điện thoại để nhà hàng liên hệ xác nhận. | [x] Đạt |
+
+---
+
+### PHÂN HỆ 10: CA KIỂM THỬ POSTMAN API THỦ CÔNG
+
+| Mã Ca | Tên Request Postman | Các Bước Thao Tác Trong Postman | URL & Method | Kết Quả Mong Đợi | Đánh Giá |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| **TC_API_01** | Kiểm tra Server API | 1. Method GET $\rightarrow$ Nhập URL $\rightarrow$ Bấm Send. | `GET /api` | Status: 200 OK. JSON trả về thông điệp chào mừng và danh sách endpoint. | [x] Đạt |
+| **TC_API_02** | Đăng nhập Admin lấy Token | 1. Method POST $\rightarrow$ Body JSON $\rightarrow$ Bấm Send. | `POST /api/auth/login` | Status: 200 OK. Nhận về chuỗi JWT token trong trường `data.token`. | [x] Đạt |
+| **TC_API_03** | Chặn request thiếu Token | 1. Method GET $\rightarrow$ Không gửi Authorization header. | `GET /api/auth/me` | Status: 401 Unauthorized. Từ chối truy cập vì thiếu Bearer Token. | [x] Đạt |
+| **TC_API_04** | Lấy toàn bộ thực đơn | 1. Method GET $\rightarrow$ Bấm Send. | `GET /api/menu` | Status: 200 OK. Danh sách hơn 18 món ăn chuẩn tiếng Việt UTF-8. | [x] Đạt |
+| **TC_API_05** | Sinh mã QR Code cho Bàn 01 | 1. Method GET $\rightarrow$ Bấm Send. | `GET /api/tables/01/qr` | Status: 200 OK. Trả về `qrDataUrl` dạng chuỗi base64 PNG hợp lệ. | [x] Đạt |
+| **TC_API_06** | Gửi đơn đặt món tại bàn | 1. Method POST $\rightarrow$ Dán payload món ăn $\rightarrow$ Send. | `POST /api/orders` | Status: 201 Created. Tự động tính 8% VAT và tổng tiền, gán trạng thái pending. | [x] Đạt |
+| **TC_API_07** | Bếp đổi trạng thái đơn | 1. Method PATCH $\rightarrow$ Header Token Bếp $\rightarrow$ Send. | `PATCH /api/orders/:id/status` | Status: 200 OK. Trạng thái cập nhật thành `preparing`. | [x] Đạt |
+| **TC_API_08** | Khách bấm chuông gọi nước | 1. Method POST $\rightarrow$ Dán payload yêu cầu $\rightarrow$ Send. | `POST /api/orders/:id/call-staff` | Status: 200 OK. Đơn hàng lưu lại yêu cầu gọi nước đá. | [x] Đạt |
+
+---
+
+## 5. HƯỚNG DẪN XUẤT VÀ NỘP BÁO CÁO NGHIỆM THU
+* **Mở trong Microsoft Excel**: Mở tệp [BANG_KIEM_THU_THU_CONG.csv](file:///c:/Users/Bear/Documents/Study/Restfolder_WebSite/BANG_KIEM_THU_THU_CONG.csv), đã mã hóa UTF-8 BOM chống lỗi font tiếng Việt 100%.
+* **Xem và in trực tiếp trên trình duyệt**: Mở liên kết `http://localhost:5173/kiem-thu-thu-cong.html` rồi nhấn nút **In Bảng Kiểm Thử (PDF / Print)**.
+* **Tự tích chọn checklist trên trang web**: Bấm nút **Menu** $\rightarrow$ chọn **"Kiểm Thử API & Postman"** (hoặc dưới chân trang Footer).

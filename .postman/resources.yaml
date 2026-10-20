@@ -4,7 +4,6 @@ workspace:
 
 localResources:
   collections:
-    - ../client/public/postman/HoangLongQuan_API.postman_collection.json
     - ../client/public/postman/🏮 Hoàng Long Quán (皇龍樓) - REST API Collection
   environments:
     - ../client/public/postman/Hoàng Long Quán - Localhost
